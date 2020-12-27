@@ -23,7 +23,7 @@ struct Company{
 class Stock{
 public:
     Stock();
-    Stock(string, double);
+    Stock(string, string, double);
 
     // Get
     string GetName();
@@ -53,7 +53,7 @@ protected:
     string stockName;
     string stockSymbol;
     Company* ownedCompany;
-    vector<Transaction> transactionHistory();
+    vector<Transaction> transactionHistory(); // Neead fix
 
     friend ostream& operator<<(ostream& strm, const Stock& s);
 };

@@ -9,7 +9,6 @@ Transaction::Transaction(int t, double c){
 };
 
 /* Company */
-
 Company::Company(string n, double p, double v){
     companyName = n;
     companyPrice = p;
@@ -22,8 +21,9 @@ Company::Company(string n, double p, double v){
 Stock::Stock(){
     cout << "Stock Info\n\n" << endl;
 };
-Stock::Stock(string n, double p){
+Stock::Stock(string n, string s, double p){
     stockName = n;
+    stockSymbol = s;
     stockCurrentPrice = p;
 };
 
