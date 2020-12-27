@@ -1,7 +1,6 @@
-#include <iostream>
-#include <string.h>
-using namespace std;
+#include "../include/public_header.hpp"
 
 int main(){
-  return 0;
+    cout << "Hello World" << endl;
+    return 0;
 }
