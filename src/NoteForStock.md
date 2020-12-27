@@ -22,7 +22,6 @@
         - []
     - Percentage of ownership
 
-
 - [] StockArray & CompanyArray
     - [] Generate arrays all-stock & all-company at the begging of the game (Instead of DB)
         - Enhanced version: Read txt files and automatically generate.
