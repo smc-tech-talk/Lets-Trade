@@ -12,7 +12,7 @@ This is a fancy stock-trading game.
   > ex) Ben <comments here>
 6. Make sure git pull origin master before you start to work on the local project
 7. If you want to make any changes on the directory or files which are not in your working directory, always let others know and discuss it through. Otherwise the change will be dismissed.
-
+8. Nothing
 
 ## Things to decide
 - Single Player vs Multiplayer (Turn-based)
