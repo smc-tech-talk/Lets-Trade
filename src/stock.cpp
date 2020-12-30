@@ -15,24 +15,19 @@ Company::Company(string n, double p, double v)
     companyValue(v){};
 
 /* Stock */
-
-// Constructors
 Stock::Stock(){
     cout << "Stock Info\n\n" << endl;
 };
-Stock::Stock(string n, string s, double p)
-    :stockName(n),
-    stockSymbol(s),
+Stock::Stock(string s, double p)
+    :stockSymbol(s),
     stockCurrentPrice(p){};
 
 // Get
-string Stock::GetName(){ return stockName; };
 double Stock::GetPrice(){ return stockCurrentPrice; };
 vector<Transaction> Stock::GetTransactionHistory(){ return transactionHistory; };
 Company Stock::GetOwnedCompany(){ return *ownedCompany; };
 
 // Set
-void Stock::SetName(string n){ stockName = n; };
 void Stock::SetPrice(double p){ stockCurrentPrice = p; };
 void Stock::SetCompany(Company* c){ ownedCompany =  c; };
 
@@ -47,21 +42,21 @@ string Stock::UpOrDown(){
     }else if(stockPrevPrice == stockCurrentPrice){
         symbol = "=";
     }else{
-        bool margin = ((stockCurrentPrice - stockPrevPrice) > 0) ? true : false;
-        switch(margin){
-            case(true):
-                symbol = "+";
-                break;
-            case(false):
-                symbol = "=";
-                break;
-            default:
-                symbol = "Error";
-                break;
-        }
+        bool margin = ((stockCurrentPrice - stockPrevPrice) > 0);
+        if(margin)
+            return "+";
+        else
+            return "-";
     }
     return symbol;
 };
+
+/*template <class T>
+void Stock::AddTransactionHistory(T t, <transactionHistory> --> Edit later!!){
+    T t;
+    <>.push_back(t);
+};*/
+
 void Stock::AddTransactionHistory(int type,  double cost){
     Transaction t(type, cost);
     transactionHistory.push_back(t);
@@ -79,9 +74,7 @@ void Stock::PrintTransactionHistory(){
 // Destructor
 Stock::~Stock(){
     delete ownedCompany;
-    //delete transactionHistory;
     ownedCompany = NULL;
-    //transactionHistory = NULL;
 };
 
 // String Representation of the object

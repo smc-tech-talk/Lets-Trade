@@ -1,9 +1,11 @@
 #ifndef STOCK_H
 #define STOCK_H
+
 #include <time.h>
 #include <conio.h>
 #include <ctime>
 #include <vector>
+
 enum TRANSACTION_TYPE { SELL, BUY };
 
 struct Transaction{
@@ -27,7 +29,7 @@ struct Company{
 class Stock{
 public:
     Stock();
-    Stock(string, string, double);
+    Stock(string, double);
 
     // Get
     string GetName();
@@ -36,7 +38,6 @@ public:
     Company GetOwnedCompany();
 
     // Set
-    void SetName(string);
     void SetPrice(double);
     void SetCompany(Company*); // Just passing pointer
 
@@ -52,11 +53,9 @@ public:
     // Dectructor
     ~Stock();
 
-
 protected:
     double stockCurrentPrice;
     double stockPrevPrice;
-    string stockName;
     string stockSymbol;
     Company* ownedCompany;
     vector<Transaction> transactionHistory; // Neead fix
