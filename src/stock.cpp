@@ -9,18 +9,23 @@ Transaction::Transaction(int t, double c){
 };
 
 /* Company */
-Company::Company(string n, double p, double v)
+Company::Company(string n)
+    :companyName(n){};
+
+Company::Company(string n, string t, double p, double v)
     :companyName(n),
+    companyType(t),
     companyPrice(p),
     companyValue(v){};
 
 /* Stock */
-Stock::Stock(){
-    cout << "Stock Info\n\n" << endl;
-};
-Stock::Stock(string s, double p)
+Stock::Stock(string s)
+    :stockSymbol(s){};
+
+Stock::Stock(string s, double p, Company* c)
     :stockSymbol(s),
-    stockCurrentPrice(p){};
+    stockCurrentPrice(p),
+    ownedCompany(c){};
 
 // Get
 double Stock::GetPrice(){ return stockCurrentPrice; };
