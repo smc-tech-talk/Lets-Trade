@@ -13,17 +13,17 @@
 - [] Transaction struct
     - [x] Constructor
 
-- [] Stock struct
+- [] Stock class
     - [x] Constructor
-    - [] Transaction history vector array
+        - [] Need to change the constructor to only can be created when Company struct is given. (Every stock needs company)
+    - [x] Transaction history vector array
     - Methods
-        - [] AddTransactionHistory(int type, double cost)
+        - [x] AddTransactionHistory(int type, double cost)
+            -[] Need to enhance AddTransactionHistory to a generic type function so that in can vbe used in Company as well
         - [] RenewStockPrice()
-        - []
     - Percentage of ownership
 
-
-- [] StockArray & CompanyArray
+- [] StockArray & CompanyArray (Randomly Create)
     - [] Generate arrays all-stock & all-company at the begging of the game (Instead of DB)
-        - Enhanced version: Read txt files and automatically generate.
-    - [] Use the arrays for player's stocksArray & companiesArray
+        - [] Read txt files and automatically generate.
+        - [] Enhanced: Fetch data from real database
