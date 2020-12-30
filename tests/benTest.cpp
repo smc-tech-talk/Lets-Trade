@@ -18,8 +18,10 @@ int main(){
     s = NULL;
     c = NULL;
     a = NULL;*/
+    vector<tuple<string, string, string>> t;
     StockList s;
-    s.GenerateStocks("../src/companys.csv");
+    t = s.ExtractData("../src/companys.csv");
+    cout << get<1>(t.at(1)) << endl;
 
 
     return 0;

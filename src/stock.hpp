@@ -18,8 +18,10 @@ struct Transaction{
 };
 
 struct Company{
-    Company(string, double, double);
+    Company(string);
+    Company(string, string, double, double);
     string companyName;
+    string companyType;
     double companyPrice;
     double companyValue;
 
@@ -28,8 +30,8 @@ struct Company{
 
 class Stock{
 public:
-    Stock();
-    Stock(string, double);
+    Stock(string);
+    Stock(string, double, Company*);
 
     // Get
     string GetName();
