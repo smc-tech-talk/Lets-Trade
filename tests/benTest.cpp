@@ -1,7 +1,7 @@
 /* Every header files working in progress here */
 #include "../include/public_header.hpp"
 #include "../src/stock.cpp"
-#include "../src/stockList.cpp"
+#include "../src/objectList.cpp"
 
 int main(){
     /*Stock* s = new Stock("Ben", "BNWGY", 200.00);
@@ -18,10 +18,13 @@ int main(){
     s = NULL;
     c = NULL;
     a = NULL;*/
-    vector<tuple<string, string, string>> t;
-    StockList s;
-    t = s.ExtractData("../src/companys.csv");
-    cout << get<1>(t.at(1)) << endl;
+    //vector<tuple<string, string, string>> t;
+    StockList* s = new StockList("../src/companies.csv");
+    cout << *(s->GetList().at(3)) << endl;
+    delete s;
+    s = NULL;
+    //t = s->ExtractData("../src/companys.csv");
+    //cout << get<1>(t.at(1)) << endl;
 
 
     return 0;

@@ -25,3 +25,4 @@
 
 - [] StockArray
     - [] Finish GenerateStocks()
+        - [x] ExtractData()

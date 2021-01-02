@@ -19,7 +19,7 @@ struct Transaction{
 
 struct Company{
     Company(string);
-    Company(string, string, double, double);
+    Company(string, string);
     string companyName;
     string companyType;
     double companyPrice;
@@ -34,13 +34,16 @@ public:
     Stock(string, double, Company*);
 
     // Get
-    string GetName();
-    double GetPrice();
-    vector<Transaction> GetTransactionHistory();
+    double GetCurrentPrice();
+    double GetPrevPrice();
+    string GetSymbol();
     Company GetOwnedCompany();
+    vector<Transaction> GetTransactionHistory();
 
     // Set
-    void SetPrice(double);
+    void SetCurrentPrice(double);
+    void SetPrevPrice(double);
+    void SetSymbol(string);
     void SetCompany(Company*); // Just passing pointer
 
     // Methods
