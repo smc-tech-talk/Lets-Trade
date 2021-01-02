@@ -9,26 +9,34 @@ Transaction::Transaction(int t, double c){
 };
 
 /* Company */
-Company::Company(string n, double p, double v)
+Company::Company(string n)
+    :companyName(n){};
+Company::Company(string n, string t)
     :companyName(n),
-    companyPrice(p),
-    companyValue(v){};
+    companyType(t),
+    companyPrice(0.00),
+    companyValue(0.00){};
 
 /* Stock */
-Stock::Stock(){
-    cout << "Stock Info\n\n" << endl;
-};
-Stock::Stock(string s, double p)
+Stock::Stock(string s)
+    :stockSymbol(s){};
+
+Stock::Stock(string s, double p, Company* c)
     :stockSymbol(s),
-    stockCurrentPrice(p){};
+    stockCurrentPrice(p),
+    ownedCompany(c){};
 
 // Get
-double Stock::GetPrice(){ return stockCurrentPrice; };
+double Stock::GetCurrentPrice(){ return stockCurrentPrice; };
+double Stock::GetPrevPrice(){ return stockPrevPrice; };
+string Stock::GetSymbol(){ return stockSymbol; };
 vector<Transaction> Stock::GetTransactionHistory(){ return transactionHistory; };
 Company Stock::GetOwnedCompany(){ return *ownedCompany; };
 
 // Set
-void Stock::SetPrice(double p){ stockCurrentPrice = p; };
+void Stock::SetCurrentPrice(double cp){ stockCurrentPrice = cp; };
+void Stock::SetPrevPrice(double pp){ stockPrevPrice = pp; };
+void Stock::SetSymbol(string s){ stockSymbol = s; };
 void Stock::SetCompany(Company* c){ ownedCompany =  c; };
 
 // Methods
@@ -79,7 +87,7 @@ Stock::~Stock(){
 
 // String Representation of the object
 ostream& operator<<(ostream& strm, const Stock& s) {
-    return strm << "String Representation of Stock Object: \n\n";
+    return strm << "\n\n" << "Stock Symbol: " << s.stockSymbol << "\n\nCurrent Price: " << s.stockCurrentPrice << "\n\nOwned Company:\n\n" << *(s.ownedCompany);
 };
 ostream& operator<<(ostream& strm, const Transaction& t) {
     string type = (t.type) ? ("+") : ("-");
@@ -87,5 +95,5 @@ ostream& operator<<(ostream& strm, const Transaction& t) {
     return strm;
 };
 ostream& operator<<(ostream& strm, const Company& c) {
-    return strm << "String Representation of Company Object: \n\n";
+    return strm << "\tName: " << c.companyName << "\n\n\tType: " << c.companyType << "\n\n";
 };
