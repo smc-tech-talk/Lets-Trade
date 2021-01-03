@@ -58,7 +58,7 @@ void Stock::AddTransactionHistory(int type,  double cost){
     transactionHistory.push_back(t);
 };
 double Stock::GetRandomStockPrice(int start, int end){
-    
+
 };
 
 
