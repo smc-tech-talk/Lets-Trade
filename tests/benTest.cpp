@@ -1,6 +1,17 @@
 /* Every header files working in progress here */
 #include "../include/public_header.hpp"
 #include "../src/stock.cpp"
+<<<<<<< HEAD
+#include "../src/objectList.cpp"
+
+int main(){
+    /* StockList* s = new StockList("../src/companies.csv");
+    cout << *(s->GetList().at(3)) << endl;
+    delete s;
+    s = NULL; */
+    Stock* s = new Stock();
+
+=======
 #include "../src/stockList.cpp"
 
 int main(){
@@ -24,5 +35,6 @@ int main(){
     cout << get<1>(t.at(1)) << endl;
 
 
+>>>>>>> f74235d33762878935d0ffcaa5e2b521b94a0332
     return 0;
 }
