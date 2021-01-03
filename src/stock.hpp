@@ -20,6 +20,7 @@ struct Transaction{
 struct Company{
     Company(string);
     Company(string, string);
+    Company(string, string, double, double);
     string companyName;
     string companyType;
     double companyPrice;
