@@ -50,7 +50,9 @@ public:
     // Methods
     void AddTransactionHistory(int, double);
     double GetRandomStockPrice(int, int);
+    int GetRandomNumber(int);
     string UpOrDown();
+    void UpdateStockPrice(double);
 
     // Tests
     void PrintCompany();

@@ -1,4 +1,6 @@
+/* Include */
 #include "stock.hpp"
+
 time_t NOW = time(0); // current system date/time
 
 /* Transaction */
@@ -21,7 +23,7 @@ Company::Company(string n, string t, double p, double v)
     companyType(t),
     companyPrice(p),
     companyValue(v){};
-    
+
 /* Stock */
 Stock::Stock(string s)
     :stockSymbol(s){};
@@ -42,7 +44,6 @@ Company Stock::GetOwnedCompany(){ return *ownedCompany; };
 void Stock::SetCurrentPrice(double cp){ stockCurrentPrice = cp; };
 void Stock::SetPrevPrice(double pp){ stockPrevPrice = pp; };
 void Stock::SetSymbol(string s){ stockSymbol = s; };
-void Stock::SetPrice(double p){ stockCurrentPrice = p; };
 void Stock::SetCompany(Company* c){ ownedCompany =  c; };
 
 // Methods
@@ -56,30 +57,21 @@ string Stock::UpOrDown(){
         bool margin = ((stockCurrentPrice - stockPrevPrice) > 0);
         if(margin) symbol = "+";
         else symbol = "-";
-    }else{
-        bool margin = ((stockCurrentPrice - stockPrevPrice) > 0);
-        if(margin)
-            return "+";
-        else
-            return "-";
     }
     return symbol;
 };
-
-/*template <class T>
-void Stock::AddTransactionHistory(T t, <transactionHistory> --> Edit later!!){
-    T t;
-    <>.push_back(t);
-};*/
 
 void Stock::AddTransactionHistory(int type,  double cost){
     Transaction t(type, cost);
     transactionHistory.push_back(t);
 };
 double Stock::GetRandomStockPrice(int start, int end){
-
+    /* Initialize random seed: */
+    srand(time(NULL));
+    double result = (rand() % end - start) + start;
+    return result;
 };
-
+int Stock::GetRandomNumber(int num){ srand(time(NULL)); return (rand() % num); };
 
 // Tests
 void Stock::PrintCompany(){
