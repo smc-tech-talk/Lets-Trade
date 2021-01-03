@@ -48,7 +48,7 @@ public:
 
     // Methods
     void AddTransactionHistory(int, double);
-    //double PriceChangeRate();
+    double GetRandomStockPrice(int, int);
     string UpOrDown();
 
     // Tests

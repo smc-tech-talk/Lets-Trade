@@ -4,28 +4,11 @@
 #include "../src/objectList.cpp"
 
 int main(){
-    /*Stock* s = new Stock("Ben", "BNWGY", 200.00);
-    Company* c = new Company("Ben's", 100.00, 150.00);
-    Company* a = new Company("Anna's", 90.00, 70.00);
-
-    //s->SetCompany(c);
-    //s->SetCompany(a);
-    delete s;
-    delete c;
-    delete a;
-
-
-    s = NULL;
-    c = NULL;
-    a = NULL;*/
-    //vector<tuple<string, string, string>> t;
-    StockList* s = new StockList("../src/companies.csv");
+    /* StockList* s = new StockList("../src/companies.csv");
     cout << *(s->GetList().at(3)) << endl;
     delete s;
-    s = NULL;
-    //t = s->ExtractData("../src/companys.csv");
-    //cout << get<1>(t.at(1)) << endl;
-
+    s = NULL; */
+    Stock* s = new Stock();
 
     return 0;
 }

@@ -40,35 +40,27 @@ void Stock::SetSymbol(string s){ stockSymbol = s; };
 void Stock::SetCompany(Company* c){ ownedCompany =  c; };
 
 // Methods
-/*double Stock::PriceChangeRate(){
-
-};*/
 string Stock::UpOrDown(){
     string symbol;
-    if(!stockPrevPrice){
+    if(!stockPrevPrice)
         return "No previous price of the stock";
-    }else if(stockPrevPrice == stockCurrentPrice){
+    else if(stockPrevPrice == stockCurrentPrice)
         symbol = "=";
-    }else{
+    else{
         bool margin = ((stockCurrentPrice - stockPrevPrice) > 0);
-        if(margin)
-            return "+";
-        else
-            return "-";
+        if(margin) symbol = "+";
+        else symbol = "-";
     }
     return symbol;
 };
-
-/*template <class T>
-void Stock::AddTransactionHistory(T t, <transactionHistory> --> Edit later!!){
-    T t;
-    <>.push_back(t);
-};*/
-
 void Stock::AddTransactionHistory(int type,  double cost){
     Transaction t(type, cost);
     transactionHistory.push_back(t);
 };
+double Stock::GetRandomStockPrice(int start, int end){
+    
+};
+
 
 // Tests
 void Stock::PrintCompany(){
