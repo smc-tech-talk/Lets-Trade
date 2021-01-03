@@ -8,7 +8,9 @@ int main(){
     cout << *(s->GetList().at(3)) << endl;
     delete s;
     s = NULL; */
-    Stock* s = new Stock();
-
+    Stock* s = new Stock("ben");
+    cout << s->GetRandomStockPrice(1,1) << endl;
+    delete s;
+    s = NULL;
     return 0;
 }
