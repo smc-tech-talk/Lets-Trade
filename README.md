@@ -1,10 +1,16 @@
 # 🎉Welcome🎉
 
 ## Installation
-- ...
+```bash
+git clone https://github.com/smc-tech-talk/Lets-Trade.git
+cd Lets-Trade/src
+g++ ./main.cpp -o start.exe
+./start.exe
+
+```
 
 
-## Project Structure 
+## Project Structure
 
 ```bash
 Project_name
