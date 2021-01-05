@@ -26,3 +26,14 @@
 - [] StockArray
     - [] Finish GenerateStocks()
         - [x] ExtractData()
+
+
+## Main Loop
+- Everytime player makes a transaction, then every stock price will change
+- Day 1 -> Day2
+- Between those two days
+    - while -> ask us (are you gonna buy?, Just printout whole information, )
+    - while (are you gonna sell?, Just printout whole information, )
+    - while (are you gonna buy?, Just printout whole information, )
+
+## Player class

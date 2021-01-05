@@ -18,5 +18,6 @@ class StockList: public ObjectList<Stock>{
 public:
     StockList(string);
     vector<Stock*> GenerateStocks(string);
-    void UpdateStockPrice();
+    void UpdateStockPrice(); // one
+    void UpdateEveryStockPrice(); // whole
 };

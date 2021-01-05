@@ -4,13 +4,13 @@
 #include "../src/objectList.cpp"
 
 int main(){
-    /* StockList* s = new StockList("../src/companies.csv");
-    cout << *(s->GetList().at(3)) << endl;
-    delete s;
-    s = NULL; */
-    Stock* s = new Stock("ben");
-    cout << s->GetRandomStockPrice(1,1) << endl;
-    delete s;
-    s = NULL;
+
+    StockList* slist = new StockList("../src/companies.csv");
+    //s = slist->at(3); //3rd element of the list
+
+    cout << *(slist->GetList().at(3)) << endl; // Gives us 3rd element of stock array
+
+    delete slist;
+    slist = NULL;
     return 0;
 }
