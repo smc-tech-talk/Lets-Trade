@@ -14,18 +14,19 @@ struct Transaction{
     int type;
     double cost;
 
+    // ToString
     friend ostream& operator<<(ostream& strm, const Transaction& t);
 };
 
 struct Company{
     Company(string);
     Company(string, string);
-    Company(string, string, double, double);
     string companyName;
     string companyType;
     double companyPrice;
     double companyValue;
 
+    // ToString
     friend ostream& operator<<(ostream& strm, const Company& c);
 };
 
@@ -55,7 +56,6 @@ public:
     void UpdateStockPrice(double);
 
     // Tests
-    void PrintCompany();
     void PrintTransactionHistory();
 
     // Dectructor
@@ -65,9 +65,10 @@ protected:
     double stockCurrentPrice;
     double stockPrevPrice;
     string stockSymbol;
-    Company* ownedCompany;
+    Company* stockIssuer; // Stock Issuer
     vector<Transaction> transactionHistory; // Neead fix
 
+    // ToString
     friend ostream& operator<<(ostream& strm, const Stock& s);
 };
 

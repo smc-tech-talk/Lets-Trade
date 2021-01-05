@@ -53,6 +53,7 @@ StockList::StockList(string filePath){
     this->GenerateStocks(filePath);
 };
 
+//
 vector<Stock*> StockList::GenerateStocks(string filePath){
     string symbol, name, type;
     double stockPrice = 0;
