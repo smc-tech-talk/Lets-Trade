@@ -31,13 +31,13 @@ double Stock::GetCurrentPrice(){ return stockCurrentPrice; };
 double Stock::GetPrevPrice(){ return stockPrevPrice; };
 string Stock::GetSymbol(){ return stockSymbol; };
 vector<Transaction> Stock::GetTransactionHistory(){ return transactionHistory; };
-Company Stock::GetOwnedCompany(){ return *stockIssuer; };
+Company Stock::GetStockIssuer(){ return *stockIssuer; }; // Return Object(Not pointer)
 
 // Set
 void Stock::SetCurrentPrice(double cp){ stockCurrentPrice = cp; };
 void Stock::SetPrevPrice(double pp){ stockPrevPrice = pp; };
 void Stock::SetSymbol(string s){ stockSymbol = s; };
-void Stock::SetCompany(Company* c){ stockIssuer =  c; };
+void Stock::SetStockIssuer(Company* c){ stockIssuer =  c; };
 
 // Methods
 string Stock::UpOrDown(){
@@ -74,13 +74,13 @@ void Stock::PrintTransactionHistory(){
 
 // Destructor
 Stock::~Stock(){
-    delete ownedCompany;
-    ownedCompany = NULL;
+    delete stockIssuer;
+    stockIssuer = NULL;
 };
 
 // String Representation of the object
 ostream& operator<<(ostream& strm, const Stock& s) {
-    return strm << "\n\n" << "Stock Symbol: " << s.stockSymbol << "\n\nCurrent Price: " << s.stockCurrentPrice << "\n\nOwned Company:\n\n" << *(s.stockIssuer);
+    return strm << "\n\n" << "Stock Symbol: " << s.stockSymbol << "\n\nCurrent Price: $" << s.stockCurrentPrice << "\n\nOwned Company:\n\n" << *(s.stockIssuer);
 };
 ostream& operator<<(ostream& strm, const Transaction& t) {
     string type = (t.type) ? ("+") : ("-");

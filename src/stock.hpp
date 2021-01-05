@@ -39,14 +39,14 @@ public:
     double GetCurrentPrice();
     double GetPrevPrice();
     string GetSymbol();
-    Company GetOwnedCompany();
+    Company GetStockIssuer();
     vector<Transaction> GetTransactionHistory();
 
     // Set
     void SetCurrentPrice(double);
     void SetPrevPrice(double);
     void SetSymbol(string);
-    void SetCompany(Company*); // Just passing pointer
+    void SetStockIssuer(Company*); // Just passing pointer
 
     // Methods
     void AddTransactionHistory(int, double);
