@@ -53,7 +53,48 @@ StockList::StockList(string filePath){
     this->GenerateStocks(filePath);
 };
 
-//
+// Methods
+vector<int> StockList::GetRandomIndexes(int start, int end, int size){
+    srand(time(NULL));
+    vector<int> v;
+    vector<int> result;
+    int random;
+    int count = 0;
+    bool redundance = true;
+
+    // Configure range_list
+    for(int i = start; i < end; i++)
+        v.push_back(i);
+
+    // Need Enhancement //
+    while(count != size){
+        random = GenerateRandomWithRange(start, end);
+        while(redundance){
+            random = GenerateRandomWithRange(start, end);
+            redundance = CheckReundance(v, random);
+        }
+        result.push_back(random);
+        redundance = true;
+        count ++;
+    }
+    return result;
+};
+
+bool StockList::CheckReundance(vector<int> v, int random){
+
+    // If didn't find from the range_list, means it's already used.
+    if (find(v.begin(), v.end(), random) == v.end())
+        return true;
+
+    // Otherwise, just use the given random
+    else
+        return false;
+};
+
+int StockList::GenerateRandomWithRange(int start, int end){
+    return start + (rand()%(end - start + 1));
+};
+
 vector<Stock*> StockList::GenerateStocks(string filePath){
     string symbol, name, type;
     double stockPrice = 0;
@@ -62,6 +103,8 @@ vector<Stock*> StockList::GenerateStocks(string filePath){
 
     data = this->ExtractData(filePath);
 
+    /* Pick 15 Stocks */
+    // => Pick 15 random numbers between 1 to 500 without overlapping
     for(int i = 0; i < data.size(); i++){
 
         // Create Company Object
@@ -75,6 +118,6 @@ vector<Stock*> StockList::GenerateStocks(string filePath){
 
         list.push_back(s);
     }
-
+    data.clear();
     return result;
 };

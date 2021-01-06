@@ -18,6 +18,12 @@ class StockList: public ObjectList<Stock>{
 public:
     StockList(string);
     vector<Stock*> GenerateStocks(string);
+    vector<int> GetRandomIndexes(int, int, int);
+    bool CheckReundance(vector<int>, int);
+    int GenerateRandomWithRange(int, int);
+
+    /* Working on */
     void UpdateStockPrice(); // one
     void UpdateEveryStockPrice(); // whole
+
 };
