@@ -59,12 +59,10 @@ void Stock::AddTransactionHistory(int type,  double cost){
     // ChangeStockPrice
 };
 double Stock::GetRandomStockPrice(int start, int end){
-    /* Initialize random seed: */
-    srand(time(NULL));
     double result = (rand() % end - start) + start;
     return result;
 };
-int Stock::GetRandomNumber(int num){ srand(time(NULL)); return (rand() % num); };
+int Stock::GetRandomNumber(int num){ return (rand() % num); };
 
 // Tests
 void Stock::PrintTransactionHistory(){

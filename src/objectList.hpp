@@ -17,7 +17,7 @@ protected:
 class StockList: public ObjectList<Stock>{
 public:
     StockList(string);
-    vector<Stock*> GenerateStocks(string);
+    vector<Stock*> GenerateStocks(string, int = 15); // int is default to 15
     vector<int> GetRandomIndexes(int, int, int);
     bool CheckReundance(vector<int>, int);
     int GenerateRandomWithRange(int, int);
