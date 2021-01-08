@@ -9,7 +9,7 @@ ObjectList<T>::~ObjectList(){
 
 // Get
 template<typename T>
-vector<T*> ObjectList<T>::GetList(){ return list; };
+vector<T> ObjectList<T>::GetList(){ return list; };
 
 // Methods
 template<typename T>
@@ -55,69 +55,91 @@ StockList::StockList(string filePath){
 
 // Methods
 vector<int> StockList::GetRandomIndexes(int start, int end, int size){
-    srand(time(NULL));
+
     vector<int> v;
     vector<int> result;
     int random;
     int count = 0;
-    bool redundance = true;
+    bool isRepeated = false; // First number will always non-repeated
 
     // Configure range_list
-    for(int i = start; i < end; i++)
+    for(int i = start; i < end; i++){
         v.push_back(i);
+    }
 
     // Need Enhancement //
     while(count != size){
         random = GenerateRandomWithRange(start, end);
-        while(redundance){
+        isRepeated = CheckRedundance(v, random);
+
+        // if random number repeated, then get another until it is not.
+        while(isRepeated){
             random = GenerateRandomWithRange(start, end);
-            redundance = CheckReundance(v, random);
+            isRepeated = CheckRedundance(v, random);
         }
+
+        // Then push it to result
         result.push_back(random);
-        redundance = true;
+
+        // Reset values
+        isRepeated = true;
         count ++;
     }
     return result;
 };
 
-bool StockList::CheckReundance(vector<int> v, int random){
+bool StockList::CheckRedundance(vector<int>& v, int random){
 
-    // If didn't find from the range_list, means it's already used.
-    if (find(v.begin(), v.end(), random) == v.end())
-        return true;
+    // If the element found in the range_list, it means it is not used yet.
+    if (find(v.begin(), v.end(), random) != v.end()){
 
-    // Otherwise, just use the given random
-    else
+        // Pop out the element and break while loop
+        remove(v.begin(), v.end(), random);
+        v.pop_back();
         return false;
+    }
+    // Otherwise, the number has been used. So return true and pick another one.
+    else{
+        //cout << random << " Has been repeated" << endl;
+        return true;
+    }
 };
 
 int StockList::GenerateRandomWithRange(int start, int end){
     return start + (rand()%(end - start + 1));
 };
 
-vector<Stock*> StockList::GenerateStocks(string filePath){
+vector<Stock*> StockList::GenerateStocks(string filePath, int numberOfStocks){
     string symbol, name, type;
     double stockPrice = 0;
     vector<Stock*> result;
     vector<tuple<string, string, string>> data;
 
+    // Get random number vector
+    vector<int> v = GetRandomIndexes(1, 500, numberOfStocks);
+
+    // Extract whole data from csv file
     data = this->ExtractData(filePath);
 
-    /* Pick 15 Stocks */
-    // => Pick 15 random numbers between 1 to 500 without overlapping
-    for(int i = 0; i < data.size(); i++){
+    for(int i = 0; i < v.size(); i++){
+
+        // Get random number from the number vector
+        int INDEX = v.at(i);
 
         // Create Company Object
-        name = get<1>(data.at(i));
-        type = get<2>(data.at(i));
+        name = get<1>(data.at(INDEX));
+        type = get<2>(data.at(INDEX));
         Company* c = new Company(name, type);
 
         // Create Stocks Object
-        symbol = get<0>(data.at(i));
+        symbol = get<0>(data.at(INDEX));
         Stock* s = new Stock(symbol, stockPrice, c);
 
+        // Add to vector
         list.push_back(s);
     }
+
+    // Delete extracted data
     data.clear();
     return result;
 };
