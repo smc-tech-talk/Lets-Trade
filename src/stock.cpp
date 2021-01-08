@@ -1,6 +1,7 @@
 /* Include */
 #include "stock.hpp"
 time_t NOW = time(0); // current system date/time
+double INITIAL_STOCK_PRICE = -10000;
 
 /* Transaction */
 Transaction::Transaction(int t, double c){
@@ -20,10 +21,15 @@ Company::Company(string n, string t)
 
 /* Stock */
 Stock::Stock(string s)
-    :stockSymbol(s){};
+    :stockSymbol(s),
+    stockCurrentPrice(),
+    stockPrevPrice(INITIAL_STOCK_PRICE),
+    stockIssuer(NULL) // Stock Issuer
+    {};
 Stock::Stock(string s, double p, Company* c)
     :stockSymbol(s),
     stockCurrentPrice(p),
+    stockPrevPrice(INITIAL_STOCK_PRICE),
     stockIssuer(c){};
 
 // Get
@@ -40,29 +46,29 @@ void Stock::SetSymbol(string s){ stockSymbol = s; };
 void Stock::SetStockIssuer(Company* c){ stockIssuer =  c; };
 
 // Methods
-string Stock::UpOrDown(){
-    string symbol;
-    if(!stockPrevPrice)
-        return "No previous price of the stock";
-    else if(stockPrevPrice == stockCurrentPrice)
-        symbol = "=";
-    else{
-        bool margin = ((stockCurrentPrice - stockPrevPrice) > 0);
-        if(margin) symbol = "+";
-        else symbol = "-";
-    }
-    return symbol;
-};
 void Stock::AddTransactionHistory(int type,  double cost){
     Transaction t(type, cost);
     transactionHistory.push_back(t);
     // ChangeStockPrice
 };
-double Stock::GetRandomStockPrice(int start, int end){
-    double result = (rand() % end - start) + start;
+int Stock::GetRandomNumber(int num){ return (rand() % num); };
+double Stock::GetChangedPercentage(){
+    if(stockPrevPrice == INITIAL_STOCK_PRICE)
+        return 0.00;
+    else
+        return ( 100 * (stockPrevPrice - stockCurrentPrice) ) / stockCurrentPrice;
+};
+
+// In Progress
+double Stock::GetRandomStockPrice(int i){
+    int r = GetRandomNumber(i);
+    double result = (rand() % r);
     return result;
 };
-int Stock::GetRandomNumber(int num){ return (rand() % num); };
+void Stock::UpdateStockPrice(double){
+
+    // codes here
+};
 
 // Tests
 void Stock::PrintTransactionHistory(){

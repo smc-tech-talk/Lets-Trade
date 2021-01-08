@@ -49,10 +49,13 @@ public:
 
     // Methods
     void AddTransactionHistory(int, double);
-    double GetRandomStockPrice(int, int);
     int GetRandomNumber(int);
-    string UpOrDown();
-    void UpdateStockPrice(double);
+    double GetChangedPercentage();
+
+    // In Progress
+    double GetRandomStockPrice(int);
+    void UpdateStockPrice(double); // Update both stockCurrentPrice & stockPrevPrice
+                                   // Add Transaction History
 
     // Tests
     void PrintTransactionHistory();
