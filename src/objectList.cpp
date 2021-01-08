@@ -9,7 +9,7 @@ ObjectList<T>::~ObjectList(){
 
 // Get
 template<typename T>
-vector<T*> ObjectList<T>::GetList(){ return list; };
+vector<T> ObjectList<T>::GetList(){ return list; };
 
 // Methods
 template<typename T>
@@ -60,20 +60,22 @@ vector<int> StockList::GetRandomIndexes(int start, int end, int size){
     vector<int> result;
     int random;
     int count = 0;
-    bool isRepeated = true; // true if there is redundancy
+    bool isRepeated = false; // First number will always non-repeated
 
     // Configure range_list
-    for(int i = start; i < end; i++)
+    for(int i = start; i < end; i++){
         v.push_back(i);
+    }
 
     // Need Enhancement //
     while(count != size){
         random = GenerateRandomWithRange(start, end);
+        isRepeated = CheckRedundance(v, random);
 
         // if random number repeated, then get another until it is not.
         while(isRepeated){
             random = GenerateRandomWithRange(start, end);
-            isRepeated = CheckReundance(v, random);
+            isRepeated = CheckRedundance(v, random);
         }
 
         // Then push it to result
@@ -86,16 +88,20 @@ vector<int> StockList::GetRandomIndexes(int start, int end, int size){
     return result;
 };
 
-bool StockList::CheckReundance(vector<int> v, int random){
+bool StockList::CheckRedundance(vector<int>& v, int random){
 
-    // If didn't find from the range_list, means it's already used.
-    if (find(v.begin(), v.end(), random) == v.end()){
-        return true;
-    }
-    // Otherwise, just use the given random and delete the element from the vector
-    else{
+    // If the element found in the range_list, it means it is not used yet.
+    if (find(v.begin(), v.end(), random) != v.end()){
+
+        // Pop out the element and break while loop
         remove(v.begin(), v.end(), random);
+        v.pop_back();
         return false;
+    }
+    // Otherwise, the number has been used. So return true and pick another one.
+    else{
+        //cout << random << " Has been repeated" << endl;
+        return true;
     }
 };
 

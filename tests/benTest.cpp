@@ -10,7 +10,7 @@ int main(){
     vector<int> int_list;
 	StockList* stocklist_obj = new StockList("../src/companies.csv"); // Create 'list' inside
 
-    int_list = stocklist_obj->GetRandomIndexes(1, 500, 15);
+    int_list = stocklist_obj->GetRandomIndexes(1, 5, 3);
     for(int i = 0; i < int_list.size(); i++)
         cout << int_list.at(i) << endl;
 

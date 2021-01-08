@@ -7,19 +7,19 @@ template<typename T>
 class ObjectList{
 public:
     // Get
-    vector<T*> GetList();
+    vector<T> GetList();
     ~ObjectList();
 protected:
     vector<tuple<string, string, string>> ExtractData(string);
-    vector<T*> list;
+    vector<T> list;
 };
 
-class StockList: public ObjectList<Stock>{
+class StockList: public ObjectList<Stock*>{
 public:
     StockList(string);
     vector<Stock*> GenerateStocks(string, int = 15); // int is default to 15
     vector<int> GetRandomIndexes(int, int, int);
-    bool CheckReundance(vector<int>, int);
+    bool CheckRedundance(vector<int>&, int);
     int GenerateRandomWithRange(int, int);
 
     /* Working on */
