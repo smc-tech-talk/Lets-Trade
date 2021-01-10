@@ -1,3 +1,6 @@
+#ifndef OBJECTLIST_H
+#define OBJECTLIST_H
+
 #include <fstream>
 #include <tuple>
 #include <sstream>
@@ -27,3 +30,5 @@ public:
     void UpdateEveryStockPrice(); // whole
 
 };
+
+#endif
