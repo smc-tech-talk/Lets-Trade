@@ -1,10 +1,12 @@
 #include "../include/public_header.hpp"
-#include "objectList.cpp"
+#include "stock.cpp"
+//#include "objectList.cpp"
 
 int main(){
-    bool isPlaying = true;
-    while(isPlaying){
 
+    bool isPlaying = true;
+
+    while(isPlaying){
 
         /* #0 Create Bank System & StockList */
         // StockList* s_list = new StockList("./companies.csv");
@@ -12,7 +14,7 @@ int main(){
 
         /* #1 Insert Player Info */
         // Player* p = new Player(name, ...);
-        
+
 
         /* #2 First Loop */
         // a. Trade(Buy, Sell) only can buy on Day1

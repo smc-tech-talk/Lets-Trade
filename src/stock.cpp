@@ -1,7 +1,7 @@
 /* Include */
 #include "stock.hpp"
 time_t NOW = time(0); // current system date/time
-double INITIAL_STOCK_PRICE = -10000;
+double INITIAL_STOCK_PRICE = -10000; //
 
 /* Transaction */
 Transaction::Transaction(int t, double c){
@@ -11,7 +11,7 @@ Transaction::Transaction(int t, double c){
 };
 
 /* Company */
-Company::Company(string n)
+Company::Company(string n) // Test
     :companyName(n){};
 Company::Company(string n, string t)
     :companyName(n),
@@ -20,12 +20,10 @@ Company::Company(string n, string t)
     companyValue(0.00){};
 
 /* Stock */
-Stock::Stock(string s)
+Stock::Stock(string s) // Test
     :stockSymbol(s),
-    stockCurrentPrice(),
     stockPrevPrice(INITIAL_STOCK_PRICE),
-    stockIssuer(NULL) // Stock Issuer
-    {};
+    stockIssuer(NULL){};
 Stock::Stock(string s, double p, Company* c)
     :stockSymbol(s),
     stockCurrentPrice(p),
