@@ -17,11 +17,11 @@ private:
     vector<vector<string>> result;
 };
 
-class GenerateRandomNumbers{
+class RandomNumberGenerator{
 public:
-    GenerateRandomNumbers(int, int, int);
+    RandomNumberGenerator(int, int, int);
     vector<int> GetNumbers();
-    int GenerateRandomWithRange(int, int);
+    int RandomWithRange(int, int);
 
 private:
     vector<int> numbers;
