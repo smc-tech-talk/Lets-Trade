@@ -4,9 +4,38 @@
 //#include "../src/objectList.cpp"
 #include "../src/csvExtractor.cpp"
 
-int main(){
 
+
+int main(){
+    srand(time(NULL));
+    vector<vector<string>> v;
+    vector<int> vv;
     CSVExtractor* c = new CSVExtractor("../src/companies.csv");
+    GenerateRandomNumbers* n = new GenerateRandomNumbers(1, 10, 3);
+    v = c->GetResult();
+    vv = n->GetNumbers();
+
+    // CSVExtractor
+    for(std::size_t i = 0; i < v.size(); i++){
+        for(int j = 0; j < 3; j++){
+            switch (j) {
+                case 0: cout << "Symbol:\t"; break;
+                case 1: cout << "Name:\t"; break;
+                case 2: cout << "Type:\t"; break;
+            }
+             cout << v.at(i).at(j) << endl;
+        }
+    } 
+
+    // GenerateRandomNumbers
+    for(std::size_t i = 0; i < vv.size(); i++)
+        cout << vv.at(i) << endl;
+
+    delete c;
+    c = NULL;
+
+    delete n;
+    n = NULL;
     /*
     srand(time(NULL));
     vector<Stock*> s_list; // This will store StockList.list
