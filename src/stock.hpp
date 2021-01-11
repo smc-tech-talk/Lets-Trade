@@ -37,6 +37,7 @@ public:
     // Get
     double GetCurrentPrice();
     double GetPrevPrice();
+    double GetChangedPercentage();
     string GetSymbol();
     Company GetStockIssuer();
     vector<Transaction> GetTransactionHistory();
@@ -49,13 +50,13 @@ public:
 
     // Methods
     void AddTransactionHistory(int, double);
+    void UpdateChangedPercentage();
+    void UpdateStockPrice();
     int GetRandomNumber(int);
-    double GetChangedPercentage();
+    double GetRandomStockPrice(int = 4);
 
     // In Progress
-    double GetRandomStockPrice(int);
-    void UpdateStockPrice(double); // Update both stockCurrentPrice & stockPrevPrice
-                                   // Add Transaction History
+
 
     // Tests
     void PrintTransactionHistory();
@@ -66,9 +67,12 @@ public:
 protected:
     double stockCurrentPrice;
     double stockPrevPrice;
+    double stockUniqueConstant = 0.01418953;
+    double stockChangedPercentage;
     string stockSymbol;
     Company* stockIssuer; // Stock Issuer
     vector<Transaction> transactionHistory; // Neead fix
+
 
     // ToString
     friend ostream& operator<<(ostream& strm, const Stock& s);

@@ -39,7 +39,7 @@ void CSVExtractor::ExtractOneLine(ifstream& ip, string& s, string& n, string& t)
 /* GenerateRandomNumbers */
 
 // Constructor
-GenerateRandomNumbers::GenerateRandomNumbers(int start, int end, int size){
+RandomNumberGenerator::RandomNumberGenerator(int start, int end, int size){
 
     vector<int> v;
     vector<int> result;
@@ -50,11 +50,11 @@ GenerateRandomNumbers::GenerateRandomNumbers(int start, int end, int size){
         v.push_back(i);
 
     while(count != size){
-        random = this->GenerateRandomWithRange(start, end);
+        random = this->RandomWithRange(start, end);
 
         // If the vector element in the index is -1, pick again
         while(v.at(random) == -1)
-            random = this->GenerateRandomWithRange(start, end);
+            random = this->RandomWithRange(start, end);
         result.push_back(v.at(random));
 
         // Replace the used number as -1
@@ -66,7 +66,7 @@ GenerateRandomNumbers::GenerateRandomNumbers(int start, int end, int size){
 };
 
 // Methods
-vector<int> GenerateRandomNumbers::GetNumbers()
+vector<int> RandomNumberGenerator::GetNumbers()
     { return this->numbers; };
-int GenerateRandomNumbers::GenerateRandomWithRange(int start, int end)
+int RandomNumberGenerator::RandomWithRange(int start, int end)
     { return start + (rand()%(end - start)); };
