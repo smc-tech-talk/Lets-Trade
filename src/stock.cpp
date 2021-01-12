@@ -1,7 +1,7 @@
 /* Include */
 #include "stock.hpp"
 time_t NOW = time(0); // current system date/time
-double INITIAL_STOCK_PRICE = -10000; //
+double INITIAL_STOCK_PRICE = -10000;
 
 /* Transaction */
 Transaction::Transaction(int t, double c){
@@ -23,16 +23,23 @@ Company::Company(string n, string t)
 Stock::Stock(string s) // Test
     :stockSymbol(s),
     stockPrevPrice(INITIAL_STOCK_PRICE),
-    stockIssuer(NULL){};
+    stockIssuer(NULL){
+        this->stockUniqueConstant = (this->GetRandomNumber(4) + 1) * 0.00418953;
+        //cout << this->stockUniqueConstant << endl;
+    };
 Stock::Stock(string s, double p, Company* c)
     :stockSymbol(s),
     stockCurrentPrice(p),
     stockPrevPrice(INITIAL_STOCK_PRICE),
-    stockIssuer(c){};
+    stockIssuer(c){
+        this->stockUniqueConstant = (this->GetRandomNumber(4) + 1) * 0.0418953;
+        //cout << this->stockUniqueConstant << endl;
+    };
 
 // Get
 double Stock::GetCurrentPrice(){ return stockCurrentPrice; };
 double Stock::GetPrevPrice(){ return stockPrevPrice; };
+double Stock::GetChangedPercentage(){ return stockChangedPercentage; };
 string Stock::GetSymbol(){ return stockSymbol; };
 vector<Transaction> Stock::GetTransactionHistory(){ return transactionHistory; };
 Company Stock::GetStockIssuer(){ return *stockIssuer; }; // Return Object(Not pointer)
@@ -50,22 +57,34 @@ void Stock::AddTransactionHistory(int type,  double cost){
     // ChangeStockPrice
 };
 int Stock::GetRandomNumber(int num){ return (rand() % num); };
-double Stock::GetChangedPercentage(){
-    if(stockPrevPrice == INITIAL_STOCK_PRICE)
-        return 0.00;
+void Stock::UpdateChangedPercentage(){
+    if(this->stockPrevPrice == INITIAL_STOCK_PRICE)
+        this->stockChangedPercentage = 0.00;
     else
-        return ( 100 * (stockPrevPrice - stockCurrentPrice) ) / stockCurrentPrice;
+         this->stockChangedPercentage = ( 100 * (this->stockPrevPrice - this->stockCurrentPrice) ) / this->stockCurrentPrice;
 };
 
 // In Progress
 double Stock::GetRandomStockPrice(int i){
     int r = GetRandomNumber(i);
-    double result = (rand() % r);
+    double percentage  = (r * 0.0125 * 0.125) + this->stockUniqueConstant;
+    double result;
+
+    // More logic here
+    if(rand()%2 == 1 && (this->stockCurrentPrice-this->stockPrevPrice) > 10)
+        // Minus
+        percentage = percentage * (-1);
+
+    result = this->stockCurrentPrice + (this->stockCurrentPrice * percentage);
     return result;
 };
-void Stock::UpdateStockPrice(double){
-
+void Stock::UpdateStockPrice(){
+    double newStockPrice;
     // codes here
+    newStockPrice = GetRandomStockPrice();
+    this->stockPrevPrice = this->stockCurrentPrice;
+    this->stockCurrentPrice = newStockPrice;
+    this->UpdateChangedPercentage();
 };
 
 // Tests

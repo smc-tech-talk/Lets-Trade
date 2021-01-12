@@ -1,0 +1,23 @@
+# CMake generation dependency list for this directory.
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/CMakeCInformation.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/CMakeCXXInformation.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/CMakeCommonLanguageInclude.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/CMakeGenericSystem.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/CMakeInitializeConfigs.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/CMakeLanguageInformation.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/CMakeRCInformation.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/CMakeSystemSpecificInformation.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/CMakeSystemSpecificInitialize.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/Compiler/MSVC-C.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/Compiler/MSVC-CXX.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/Platform/Windows-MSVC-C.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/Platform/Windows-MSVC-CXX.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/Platform/Windows-MSVC.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/Platform/Windows.cmake
+C:/ProgramData/chocolatey/lib/cmake.portable/tools/cmake-3.19.2-win64-x64/share/cmake-3.19/Modules/Platform/WindowsPaths.cmake
+C:/Users/exit2/Documents/Projects/Lets-Trade/CMakeLists.txt
+C:/Users/exit2/Documents/Projects/Lets-Trade/build/CMakeFiles/3.19.2/CMakeCCompiler.cmake
+C:/Users/exit2/Documents/Projects/Lets-Trade/build/CMakeFiles/3.19.2/CMakeCXXCompiler.cmake
+C:/Users/exit2/Documents/Projects/Lets-Trade/build/CMakeFiles/3.19.2/CMakeRCCompiler.cmake
+C:/Users/exit2/Documents/Projects/Lets-Trade/build/CMakeFiles/3.19.2/CMakeSystem.cmake
