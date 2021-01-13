@@ -9,7 +9,7 @@ int main(){
     vector<vector<string>> v;
     vector<int> vv;
 
-    CSVExtractor* c = new CSVExtractor("../src/companies.csv");
+    CSVExtractor* c = new CSVExtractor("companies.csv");
     RandomNumberGenerator* n = new RandomNumberGenerator(1, 10, 3);
 
     v = c->GetResult();
@@ -46,5 +46,10 @@ int main(){
     delete n;
     n = NULL;
 
+    cout << "\n\n\n\n\n\n\n\n\n\n\t*************************************************************************************";
+    cout << "\n\t**If you are watching this message, CONGRATS! Everything has executed like a charm **\n";
+    cout << "\t*************************************************************************************\n\n\n\n\n\n\n\n\n\n";
+
+    system("pause");
     return 0;
 }
