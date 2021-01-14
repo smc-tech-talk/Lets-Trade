@@ -51,6 +51,14 @@ void Stock::SetSymbol(string s){ stockSymbol = s; };
 void Stock::SetStockIssuer(Company* c){ stockIssuer =  c; };
 
 // Methods
+void Stock::UpdateStockPrice(){
+    double newStockPrice;
+    // codes here
+    newStockPrice = GetRandomStockPrice();
+    this->stockPrevPrice = this->stockCurrentPrice;
+    this->stockCurrentPrice = newStockPrice;
+    this->UpdateChangedPercentage();
+};
 void Stock::AddTransactionHistory(int type,  double cost){
     Transaction t(type, cost);
     transactionHistory.push_back(t);
@@ -78,14 +86,7 @@ double Stock::GetRandomStockPrice(int i){
     result = this->stockCurrentPrice + (this->stockCurrentPrice * percentage);
     return result;
 };
-void Stock::UpdateStockPrice(){
-    double newStockPrice;
-    // codes here
-    newStockPrice = GetRandomStockPrice();
-    this->stockPrevPrice = this->stockCurrentPrice;
-    this->stockCurrentPrice = newStockPrice;
-    this->UpdateChangedPercentage();
-};
+
 
 // Tests
 void Stock::PrintTransactionHistory(){
