@@ -49,14 +49,13 @@ public:
     void SetStockIssuer(Company*); // Just passing pointer
 
     // Methods
+    void UpdateStockPrice();
     void AddTransactionHistory(int, double);
     void UpdateChangedPercentage();
-    void UpdateStockPrice();
     int GetRandomNumber(int);
-    double GetRandomStockPrice(int = 4);
 
     // In Progress
-
+    double GetRandomStockPrice(int = 4);
 
     // Tests
     void PrintTransactionHistory();
