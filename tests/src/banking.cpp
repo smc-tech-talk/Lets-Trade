@@ -8,26 +8,27 @@ string list_bank[9]{
 	"Washington Federal Savings and Loan", "Umpqua Bank",
 	"Golden1 Credit Union", "EASTWEST BANK", "Charles Schwab", "CHASE"
 };
-
+/*
 Account::Account() {
 
 	bal_account = 0;
-	
+	string u;
 	cout << "please input your username : " << endl;
-	cin >> this->username;
+	cin >> u;
+	this->username;
 
-	bank_name = list_bank[rand() % 9];
+	this->bank_name = list_bank[rand() % 9];
 	cout << "your account is randomly creadted on " << this->bank_name << endl;
 
-	log.push_back(username+"'s account created on "+bank_name+)
+	log.push_back(username+"'s account created on "+bank_name);
 
 
-}
+}*/
 
 Account::Account(string uname, int index_bankarr) {
 
 	bal_account = 0;
-	username = uname;
+	this->username = uname;
 	bank_name = list_bank[index_bankarr];
 
 }
@@ -55,10 +56,10 @@ void Account::info_Account(Account a){
 }
 
 void Account::decreased_bal(double dprice) {
-	
-	
+
+
 	bal_account -= dprice;
-	
+
 	string record;
 	record = "";
 	Account::record_Account(record);
@@ -69,7 +70,7 @@ void Account::decreased_bal(double dprice) {
 void Account::increased_bal(double iprice) {
 
 	bal_account += iprice;
-	
+
 	string record;
 	record = "";
 	Account::record_Account(record);

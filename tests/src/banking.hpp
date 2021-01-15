@@ -13,7 +13,7 @@ public:
 
 	Account(string uname, int index_bankarr);
 
-	~Account();
+	//~Account();
 
 	double bal_account;
 	string username;
@@ -28,10 +28,10 @@ public:
 	void decreased_bal(double dprice);
 	void increased_bal(double iprice);
 	void transfer_Account(Account toAccount, double tmoney);
-	
 
-	
-	
+
+
+
 private:
 
 	string account_number;
@@ -41,7 +41,7 @@ private:
 
 
 class Bank_user {
-	
+
 
 
 };

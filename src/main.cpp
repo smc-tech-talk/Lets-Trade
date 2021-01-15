@@ -10,11 +10,13 @@ int main(){
     vector<vector<string>> v;
     vector<int> vv;
     CSVExtractor* c = new CSVExtractor("companies.csv");
-    RandomNumberGenerator* n = new RandomNumberGenerator(1, 10, 15);
-    
+    RandomNumberGenerator* n = new RandomNumberGenerator(1, 30, 15);
 
+    /* Get Resources */
     v = c->GetResult();
     vv = n->GetNumbers();
+
+    /* Delete Pointers */
 
     delete c;
     c = NULL;
