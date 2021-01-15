@@ -73,7 +73,6 @@ protected:
     Company* stockIssuer; // Stock Issuer
     vector<Transaction> transactionHistory; // Neead fix
 
-
     // ToString
     friend ostream& operator<<(ostream& strm, const Stock& s);
 };
