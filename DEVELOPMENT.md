@@ -3,31 +3,86 @@ This is a fancy stock-trading game.
 
 ## Github Rules
 
-1. Never change other’s working file or folder(may cause serious conflict)
-2. All code reviews will take place on pull request
-3. Branch names don't matter but make sure they are meaningful
-  > ex) /dev/test/createAttack
-4. After merging the branch, the branch has to be deleted for clean branch tree
-5. Commit comments have to contain developer's name
-  > ex) Ben <comments here>
-6. Make sure git pull origin master before you start to work on the local project
-7. If you want to make any changes on the directory or files which are not in your working directory, always let others know and discuss it through. Otherwise the change will be dismissed.
-8. Nothing
+##### Branch naming conventions
 
-## Things to decide
-- Single Player vs Multiplayer (Turn-based)
+1. Skeleton
 
-## Parts
-- Logics
-  1. Stock Price
-  2. Bank Interest
-  ...
+  **[ changed file ] / [ type ] / [ name ]**
+ ```
+    stock.cpp/feat/create-new-feature
+    banking.cpp/test/create-multiuser-accounts
+    player.cpp/feat/sell-stock
+ ```
   
-- Loops
-  1. Main loop + Game scenario
+2. Type
 
-- Classes
-  1. Player
-  2. Stock
-  3. Bank
-  ...
+ - feat : feature
+ - new : something new
+ - fix: error fix
+ - update: any enhancement
+ - build: build configuration update
+ 
+3. Name
+
+  Try to use **[ verb ] - [ noun ]** combination.
+  verb: Always present tense.
+  noun: Try not to use adjectives. 
+    ex) make-~~fancy~~-feature
+  ```
+  // Good example
+  create-class-Player (O)
+  edit-class-Player (O)
+  
+  // Bad example of using ambiguous expressions
+  delete-old-function (X) => delete-func-AddStock (O)
+  ```
+4. So it is important to think **`what to do`** before write codes and create a branch.
+  
+##### Pushing branches
+
+1. Pushing directly to the master branch will not be allowed.
+2. Any push without a review will not be permitted.
+3. All pushes will go to smc-tech-talk/dev branch.
+4. It is free to make as many branches as the contributor wants, but before you push it to smc-tech-talk/dev, **it is required to merge branches into [ username ]/dev branch.**
+  ex) 
+  ```
+  /* Add changes and make commits */
+  
+  // ~ Coding 
+  git add .
+  git commit -m "Create AttckEveryone"
+  
+  // ~ Coding 
+  git add .
+  git commit -m "Finished final check of AttackEveryone"
+  
+  /* Checkout to your local dev branch */
+  git checkout dev
+  
+  /* Then merge the branch into your local dev branch*/
+  git merge banking.cpp/feat/add-new-feature
+  
+  /* Push your local dev branch to your forked Github repository */
+  git push -u origin dev
+  
+  /* In Github */
+   1. Make a pull request to smc-tech-talk/dev
+  ```
+  
+## Commit naming rules
+
+## C++ grammar rules
+
+1. When accessing a private variable, use `this->`
+```cpp
+class Person{
+  private:
+    string name;
+  ...  
+}
+
+Person::Person(string n){
+  name = n; // WRONG
+  this->name = n; // YES!
+}
+```

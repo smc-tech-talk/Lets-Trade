@@ -71,7 +71,7 @@ protected:
     double stockChangedPercentage;
     string stockSymbol;
     Company* stockIssuer; // Stock Issuer
-    vector<Transaction> transactionHistory; // Neead fix
+    vector<Transaction> transactionHistory; // Needa fix
 
     // ToString
     friend ostream& operator<<(ostream& strm, const Stock& s);
