@@ -19,7 +19,7 @@ Account::Account() {
 	bank_name = list_bank[rand() % 9];
 	cout << "your account is randomly creadted on " << this->bank_name << endl;
 
-	log.push_back(username+"'s account created on "+bank_name+)
+	log.push_back(username+"'s account created on "+bank_name);
 
 
 }
