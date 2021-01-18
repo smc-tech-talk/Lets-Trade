@@ -1,6 +1,5 @@
 // Followed the charyt in https://www.interactivebrokers.com/en/software/am3/am/funding/viewingtransactionhistory.htm
 // Date | Status | Type | Amount/Postion | Status
-
 #include "transaction.hpp"
 
 time_t NOW = time(0); // current system date/time
