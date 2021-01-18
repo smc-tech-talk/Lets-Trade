@@ -29,7 +29,7 @@ Transaction::Transaction(){
     this->date = date;
 };
 
-Transaction::GetDate(){ this->Date };
+Transaction::GetDate(Date date){ this->Date = date; };
 
 Transaction::Transaction(int hour, double amount){
 
