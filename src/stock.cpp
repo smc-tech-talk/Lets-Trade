@@ -31,17 +31,26 @@ Stock::Stock(string s, double p, Company* c)
     };
 
 // Get
-double Stock::GetCurrentPrice(){ return stockCurrentPrice; };
-double Stock::GetPrevPrice(){ return stockPrevPrice; };
-double Stock::GetChangedPercentage(){ return stockChangedPercentage; };
-string Stock::GetSymbol(){ return stockSymbol; };
-Company Stock::GetStockIssuer(){ return *stockIssuer; }; // Return Object(Not pointer)
+double Stock::GetCurrentPrice()
+    { return this->stockCurrentPrice; };
+double Stock::GetPrevPrice()
+    { return this->stockPrevPrice; };
+double Stock::GetChangedPercentage()
+    { return this->stockChangedPercentage; };
+string Stock::GetSymbol()
+    { return this->stockSymbol; };
+Company Stock::GetStockIssuer()
+    { return *(this->stockIssuer); }; // Return Object(Not pointer)
 
 // Set
-void Stock::SetCurrentPrice(double cp){ stockCurrentPrice = cp; };
-void Stock::SetPrevPrice(double pp){ stockPrevPrice = pp; };
-void Stock::SetSymbol(string s){ stockSymbol = s; };
-void Stock::SetStockIssuer(Company* c){ stockIssuer =  c; };
+void Stock::SetCurrentPrice(double cp)
+    { this->stockCurrentPrice = cp; };
+void Stock::SetPrevPrice(double pp)
+    { this->stockPrevPrice = pp; };
+void Stock::SetSymbol(string s)
+    { this->stockSymbol = s; };
+void Stock::SetStockIssuer(Company* c)
+    { this->stockIssuer =  c; };
 
 // Methods
 void Stock::UpdateChangedPercentage(){
@@ -61,7 +70,8 @@ void Stock::UpdateStockPrice(){
 int Stock::GetRandomNumber(int num){ return (rand() % num); };
 
 // In Progress
-vector<Transaction> Stock::GetTransactionHistory(){ return transactionHistory; };
+vector<Transaction> Stock::GetTransactionHistory()
+    { return this->transactionHistory; };
 double Stock::GetRandomStockPrice(int i){
     int r = GetRandomNumber(i);
     double percentage  = (r * 0.0125 * 0.125) + this->stockUniqueConstant;
@@ -75,7 +85,9 @@ double Stock::GetRandomStockPrice(int i){
     result = this->stockCurrentPrice + (this->stockCurrentPrice * percentage);
     return result;
 };
-/*void Stock::AddTransactionHistory(int type,  double cost){
+
+/*
+void Stock::AddTransactionHistory(int type,  double cost){
     Transaction::Transaction t(type, cost);
     transactionHistory.push_back(t);
     // ChangeStockPrice
@@ -96,12 +108,6 @@ ostream& operator<<(ostream& strm, const Stock& s) {
         return strm << "\n\n" << "Stock Symbol: " << s.stockSymbol << "\n\nCurrent Price: $" << s.stockCurrentPrice << "\n\nOwned Company:\n\n" << *(s.stockIssuer);
     return strm << "\n\n" << "Stock Symbol: " << s.stockSymbol << "\n\nCurrent Price: $" << s.stockCurrentPrice << "\n\nOwned Company:\n\n" << "NONE";
 };
-
-/*ostream& operator<<(ostream& strm, const Transaction& t) {
-    string type = (t.type) ? ("+") : ("-");
-    strm << "Margin: " << type << t.cost << "\tTransaction Time: " << t.currentTime << "\n\n";
-    return strm;
-};*/
 
 ostream& operator<<(ostream& strm, const Company& c) {
     return strm << "\tName: " << c.companyName << "\n\n\tType: " << c.companyType << "\n\n";
