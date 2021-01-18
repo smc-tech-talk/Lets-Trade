@@ -24,7 +24,7 @@ public:
     Transaction(int hour, double amount);
 
     // Get
-    Date GetDate(Date);
+    Date GetDate();
 
     // Set
     void SetDate(Date);
