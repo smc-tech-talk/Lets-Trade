@@ -18,8 +18,7 @@ Date::Date(int year, int month, int day, int hour, string real_time)
 // Constructors
 Transaction::Transaction() {};
 Transaction::Transaction(int t, double a)
-    :
-    type(type),
+    :type(type),
     amount(a)
     {
         Date date;
