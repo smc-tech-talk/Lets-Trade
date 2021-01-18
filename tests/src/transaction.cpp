@@ -15,18 +15,26 @@ Date::Date(int year, int month, int day, int hour, string real_time)
     real_time(real_time){};
 
 /* Transaction */
-// Test
-Transaction::Transaction() {
-    Date date;
-    date = Date(
-            (1900 + (GMT_TIME->tm_year)),
-            (GMT_TIME->tm_mon),
-            (GMT_TIME->tm_mday),
-            (GMT_TIME->tm_hour),
-            ctime(&NOW)
-        );
-    this->date = date;
-};
+// Constructors
+Transaction::Transaction() {};
+Transaction::Transaction(int t, double a)
+    :
+    type(type),
+    amount(a)
+    {
+        Date date;
+        date = Date(
+                (1900 + (GMT_TIME->tm_year)),
+                (GMT_TIME->tm_mon),
+                (GMT_TIME->tm_mday),
+                (GMT_TIME->tm_hour),
+                ctime(&NOW)
+            );
+        this->date = date;
+    };
 
+// Get
 Date Transaction::GetDate()
     { return this->date; };
+double Transaction::GetAmount()
+    { return amount; };
