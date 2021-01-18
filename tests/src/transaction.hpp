@@ -24,10 +24,10 @@ public:
     Transaction(int hour, double amount);
 
     // Get
-    Date GetDate();
+    Date GetDate(Date);
 
     // Set
-    void SetDate();
+    void SetDate(Date);
 
 private:
     Date date;
