@@ -6,7 +6,7 @@ using namespace std;
 class Player{
     private:
         string playerName;
-        Account bankAccount;
+        Account* bankAccount;
         vector< pair <string, int> >;
         
         
