@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include "stock.hpp"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -30,7 +31,42 @@ int Player::getPlayerAge(){ return this->playerAge; };
 
 // portfolio //
 
-// sell stocks
+// buy shares
+// checks duplicate and if found add it to the pos
+// if not add to a new pos
+// shares can not be zero or negative
+
+
+void Player::tradeStocks(Stocks* sS, int buyOrSell){
+    // buy = 0, sell = 1
+    int tradeShares;
+    string tradeSymbol = sS->GetSymbok();
+    switch(buyOrSell){
+        case 0:
+            cout << "Enter the number of shares to buy: ";
+            cin >> tradeShares;
+            buyShares(tradeSymbol, tradeShares);
+            break;
+        case 1:
+            cout << "Enter the number of shares to sell: ";
+            cin >> tradeShares;
+            buyShares(tradeSymbol, tradeShares);
+            break;
+            
+        default:
+            cout << "Error, invalid input";
+            break;
+    }
+}
+//void Player::buyShares(Stock* tS, int shares){
+//
+//}
+//
+//// sell shares
+//void Player::sellShares(Stock* tS, int shares){
+//
+//}
+
 
 
 
