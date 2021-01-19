@@ -17,8 +17,8 @@ class Player{
         Player(string pN);
         ~Player();
         void setPlayerName(string pN);
-        void setBankBalance(double bB);
+        void setPlayerAge(int pA);
         string getPlayerName();
-        double getBankBalance();
+        int getPlayerAge();
  
 };

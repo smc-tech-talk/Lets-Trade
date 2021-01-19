@@ -20,14 +20,17 @@ Player::~Player(){ }
 
 // setters
 void Player::setPlayerName(string pN){ this->playerName = pN; };
-void Player::setPlayerAge(int pA){ this->setPlayerAge = pA; };
+void Player::setPlayerAge(int pA){ this->playerAge = pA; };
 
 
 // getters
 string Player::getPlayerName(){ return this->playerName; };
-int Player::getPlayerName(){ return this->playerAge; };
+int Player::getPlayerAge(){ return this->playerAge; };
 
 
 // portfolio //
+
+// sell stocks
+
 
 
