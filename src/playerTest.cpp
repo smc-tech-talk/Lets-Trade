@@ -7,25 +7,6 @@
 
 int main(){
 
-    /* Initializing Data */
-    srand(time(NULL));
-    vector<vector<string>> v;
-    vector<int> vv;
-    CSVExtractor* c = new CSVExtractor("companies.csv");
-    RandomNumberGenerator* n = new RandomNumberGenerator(1, 30, 15);
-
-    /* Get Resources */
-    v = c->GetResult();
-    vv = n->GetNumbers();
-
-    /* Delete Pointers */
-
-    delete c;
-    c = NULL;
-
-    delete n;
-    n = NULL;
-
-    system("pause");
+    
     return 0;
 }

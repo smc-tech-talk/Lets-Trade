@@ -13,13 +13,6 @@ Player::Player(string pN){
     this->bankAccount = new Account();
     this->portfolio;
 }
-// player name + set bank balance
-Player::Player(string pN){
-	cout << "constructor has been called\n";
-    string playerName = pN;
-    double bankBalance = 5000;
-    vector<Stock> portfolio;
-}
 
 
 Player::~Player(){ }
