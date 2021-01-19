@@ -37,3 +37,16 @@ Date Transaction::GetDate()
     { return this->date; };
 double Transaction::GetAmount()
     { return amount; };
+string Transaction::GetTransactionType(){
+    TRANSACTION_TYPE t;
+    t = this->type;
+    switch (t) {
+        case STOCK_BUY: return "Buy Stock"; break;
+        case STOCK_SELL: return "Sell Stock"; break;
+        case ACCOUNT_DEPOSIT: return "Bank Account Deposit"; break;
+        case ACCOUNT_WITHDRAW: return "Bank Account Withraw"; break;
+        default:
+            return "TRANSACTIONTYPE::Error: No such transaction type";
+            break;
+    }
+};
