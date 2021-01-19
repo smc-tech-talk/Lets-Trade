@@ -4,9 +4,9 @@
 #include <time.h>
 #include <ctime>
 #include <vector>
+#include "transaction.hpp"
 
-enum TRANSACTION_TYPE { SELL, BUY };
-
+/*
 struct Transaction{
     Transaction(int, double);
     string currentTime;
@@ -15,9 +15,10 @@ struct Transaction{
 
     // ToString
     friend ostream& operator<<(ostream& strm, const Transaction& t);
-};
+};*/
 
-struct Company{
+class Company {
+public:
     Company(string);
     Company(string, string);
     string companyName;
@@ -31,6 +32,7 @@ struct Company{
 
 class Stock{
 public:
+    Stock();
     Stock(string);
     Stock(string, double, Company*);
 
@@ -40,7 +42,6 @@ public:
     double GetChangedPercentage();
     string GetSymbol();
     Company GetStockIssuer();
-    vector<Transaction> GetTransactionHistory();
 
     // Set
     void SetCurrentPrice(double);
@@ -49,17 +50,18 @@ public:
     void SetStockIssuer(Company*); // Just passing pointer
 
     // Methods
-    void AddTransactionHistory(int, double);
     void UpdateChangedPercentage();
     void UpdateStockPrice();
     int GetRandomNumber(int);
-    double GetRandomStockPrice(int = 4);
+
 
     // In Progress
-
+    vector<Transaction> GetTransactionHistory();
+    double GetRandomStockPrice(int = 4);
+    //void AddTransactionHistory();
+    //void PrintTransactionHistory();
 
     // Tests
-    void PrintTransactionHistory();
 
     // Dectructor
     ~Stock();

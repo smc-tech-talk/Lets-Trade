@@ -1,0 +1,52 @@
+// Followed the charyt in https://www.interactivebrokers.com/en/software/am3/am/funding/viewingtransactionhistory.htm
+// Date | Status | Type | Amount/Postion | Status
+#include "transaction.hpp"
+
+time_t NOW = time(0); // current system date/time
+tm* GMT_TIME = gmtime(&NOW);
+
+/* Date */
+Date::Date(){}; // Default Constructor
+Date::Date(int year, int month, int day, int hour, string real_time)
+    :year(year),
+    month(month),
+    day(day),
+    hour(hour),
+    real_time(real_time){};
+
+/* Transaction */
+// Constructors
+Transaction::Transaction() {};
+Transaction::Transaction(int t, double a)
+    :type(type),
+    amount(a)
+    {
+        Date date;
+        date = Date(
+                (1900 + (GMT_TIME->tm_year)),
+                (GMT_TIME->tm_mon),
+                (GMT_TIME->tm_mday),
+                (GMT_TIME->tm_hour),
+                ctime(&NOW)
+            );
+        this->date = date;
+    };
+
+// Get
+Date Transaction::GetDate()
+    { return this->date; };
+double Transaction::GetAmount()
+    { return amount; };
+string Transaction::GetTransactionType(){
+    TRANSACTION_TYPE t;
+    t = this->type;
+    switch (t) {
+        case STOCK_BUY: return "Buy Stock"; break;
+        case STOCK_SELL: return "Sell Stock"; break;
+        case ACCOUNT_DEPOSIT: return "Bank Account Deposit"; break;
+        case ACCOUNT_WITHDRAW: return "Bank Account Withraw"; break;
+        default:
+            return "TRANSACTIONTYPE::Error: No such transaction type";
+            break;
+    }
+};
