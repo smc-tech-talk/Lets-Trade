@@ -11,7 +11,7 @@ Player::Player(string pN){
 	cout << "constructor has been called\n";
     this->playerName = pN;
     this->bankAccount = new Account();
-    this->  
+    this->portfolio;
 }
 // player name + set bank balance
 Player::Player(string pN){
