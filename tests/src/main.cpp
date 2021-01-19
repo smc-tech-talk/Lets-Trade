@@ -12,15 +12,16 @@ int main(){
     srand(time(NULL));
     Stock* s = new Stock();
     TRANSACTION_TYPE tt;
-    tt = BUY_STOCK;
+    tt = STOCK_BUY;
 
     Transaction* t = new Transaction(tt, 1249.00);
-    Date d = t->GetDate();
+    cout << "Transaction Type:\t" << t->GetTransactionType() << endl;
+    /*Date d = t->GetDate();
     cout << "Transaction Amount:\t$"<< t->GetAmount() << endl;
     cout << "Year:\t" << d.year << endl;
     cout << "Month:\t" << d.month << endl;
     cout << "Day:\t" << d.day << endl;
-    cout << "Real Time:\t" << d.real_time << endl;
+    cout << "Real Time:\t" << d.real_time << endl;*/
     delete s;
     delete t;
     s=NULL;
