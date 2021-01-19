@@ -9,9 +9,9 @@ Player::Player(){}
 // player name only
 Player::Player(string pN){
 	cout << "constructor has been called\n";
-    string playerName = pN;
-    Account* bankAccount;
-    vector< pair <string, int> > portfolio;
+    this->playerName = pN;
+    this->bankAccount = new Account();
+    this->  
 }
 // player name + set bank balance
 Player::Player(string pN){
