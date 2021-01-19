@@ -5,7 +5,7 @@ using namespace std;
 class Player{
     private:
         string playerName;
-        double bankBalance;
+        Account bankAccount;
         vector< pair <string, int> > portfolio;
         
         
