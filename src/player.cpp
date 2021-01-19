@@ -21,8 +21,8 @@ Player::Player(string pN){
     vector<Stock> portfolio;
 }
 
-// destructor
-// Player::~Player(){}
+
+Player::~Player(){ }
 
 
 // setters
