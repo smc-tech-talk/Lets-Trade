@@ -19,12 +19,11 @@ Player::~Player(){ }
 
 
 // setters
-void Player::setPlayerName(string pN){ playerName = pN; };
-void Player::setBankBalance(double bB){ bankBalance = bB; };
+void Player::setPlayerName(string pN){ this->playerName = pN; };
+
 
 // getters
-string Player::getPlayerName(){ return playerName; };
-double Player::getBankBalance(){ return bankBalance; };
+string Player::getPlayerName(){ return this->playerName; };
 
 
 // portfolio //
