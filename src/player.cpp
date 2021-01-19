@@ -1,5 +1,4 @@
 #include "player.hpp"
-#include "stock.hpp"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -36,18 +35,25 @@ int Player::getPlayerAge(){ return this->playerAge; };
 // if not add to a new pos
 // shares can not be zero or negative
 
-void Player::buyShares(string tSymbol, int tShares){
-    
+void Player::buyShares(string tradeSymbol, int tradeShares){
+//    portfolio.push_back(make_pair(tradeSymbol, tradeShares));
 }
 
 // sell shares
-void Player::sellShares(Stock* tS, int shares){
+void Player::sellShares(string tradeSymbol, int tradeShares){
+    
+}
 
+// print function
+void Player::displayPortfolio(){
+    for (const auto& p : portfolio)
+    {
+      cout << p.first->GetSymbol() << "\t | " << p.second << endl;
+    }
 }
 
 
-
-void Player::tradeStocks(Stocks* sS, int tC, int tS){
+void Player::tradeStocks(Stock& sS, int tC, int tS){
     // tC = trade choice(buy = 0, sell = 1)
     // tS = trade shares
     
@@ -55,10 +61,13 @@ void Player::tradeStocks(Stocks* sS, int tC, int tS){
     int tradeChoice = tC;
     int tradeShares = tS;
     
-    // avoid possible redundant code for buyStocks and sellStocks
-    string tradeSymbol = sS->GetSymbok();
+    // portfolio has to take in string in order to check the duplicate?
+    // can acutally compare by sS->GetSymbol() = for loop portfolio[i]
+    // portfolio.first
     
+    string tradeSymbol = sS.GetSymbol();
     
+
     switch(tC){
         case 0:
             buyShares(tradeSymbol, tradeShares);
