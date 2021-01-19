@@ -67,14 +67,26 @@ void Player::displayPortfolio(){
     }
 }
 
+int Player::isPosInt(int n){
+    cin >> input;
+    while(1){
+        if(cin.fails()){
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n\);
+            cout << "\nError, try again: ";
+            cin >> input;
+        }
+        else{
+            cout << "\nSuccessful input";
+            return n;
+        }
+    }
+}
 
-
-
-
-// function for trading stocks. Takes Stock pointer, Trade choice(tC) and Trade shares(tS)
+// main function for trading stocks. Takes Stock pointer, Trade choice(tC) and Trade shares(tS)
 void Player::tradeStocks(Stock& sS, int tC, int tS){
     
-    // after validating for tC and tS
+    // validation required ie tC cannot be negative
     int tradeChoice = tC;
     int tradeShares = tS;
     
@@ -82,7 +94,9 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
     // can acutally compare by sS->GetSymbol() = for loop portfolio[i]
     // portfolio.first
     
-    // for test
+    
+    
+    // declared for test purpose
     string tradeSymbol;
 
     switch(tC){
