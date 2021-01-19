@@ -7,7 +7,7 @@ class Player{
     private:
         string playerName;
         Account* bankAccount;
-        vector< pair <string tickerSymbol, int shares> > portfolio;
+        vector< pair <string, int> > portfolio;
         
         
     public:
