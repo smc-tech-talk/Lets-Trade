@@ -11,9 +11,10 @@ int main(){
     /* Initializing Data */
     srand(time(NULL));
 
-    Player* p = new Player("Ben");
+    Transaction* t = new Transaction(STOCK_BUY, 0);
+    cout << *t << endl;
+    delete t;
+    t=NULL;
 
-    delete p;
-    p=NULL;
     return 0;
 }
