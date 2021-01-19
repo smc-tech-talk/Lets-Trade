@@ -20,10 +20,12 @@ Player::~Player(){ }
 
 // setters
 void Player::setPlayerName(string pN){ this->playerName = pN; };
+void Player::setPlayerAge(int pA){ this->setPlayerAge = pA; };
 
 
 // getters
 string Player::getPlayerName(){ return this->playerName; };
+int Player::getPlayerName(){ return this->playerAge; };
 
 
 // portfolio //
