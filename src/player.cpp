@@ -36,37 +36,41 @@ int Player::getPlayerAge(){ return this->playerAge; };
 // if not add to a new pos
 // shares can not be zero or negative
 
+void Player::buyShares(string tSymbol, int tShares){
+    
+}
 
-void Player::tradeStocks(Stocks* sS, int buyOrSell){
-    // buy = 0, sell = 1
-    int tradeShares;
+// sell shares
+void Player::sellShares(Stock* tS, int shares){
+
+}
+
+
+
+void Player::tradeStocks(Stocks* sS, int tC, int tS){
+    // tC = trade choice(buy = 0, sell = 1)
+    // tS = trade shares
+    
+    // after validating for tC and tS
+    int tradeChoice = tC;
+    int tradeShares = tS;
+    
+    // avoid possible redundant code for buyStocks and sellStocks
     string tradeSymbol = sS->GetSymbok();
-    switch(buyOrSell){
+    
+    
+    switch(tC){
         case 0:
-            cout << "Enter the number of shares to buy: ";
-            cin >> tradeShares;
             buyShares(tradeSymbol, tradeShares);
             break;
         case 1:
-            cout << "Enter the number of shares to sell: ";
-            cin >> tradeShares;
             buyShares(tradeSymbol, tradeShares);
             break;
-            
         default:
             cout << "Error, invalid input";
             break;
     }
 }
-//void Player::buyShares(Stock* tS, int shares){
-//
-//}
-//
-//// sell shares
-//void Player::sellShares(Stock* tS, int shares){
-//
-//}
-
 
 
 
