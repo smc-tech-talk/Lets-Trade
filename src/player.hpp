@@ -6,7 +6,7 @@ class Player{
     private:
         string playerName;
         double bankBalance;
-        vector<string> portfolio;
+        vector< pair <string, int> > portfolio;
         
         
     public:
