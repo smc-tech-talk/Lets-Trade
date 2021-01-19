@@ -1,3 +1,4 @@
+
 #include "banking.hpp"
 #include <cstdlib>
 #include <ctime>
@@ -8,27 +9,26 @@ string list_bank[9]{
 	"Washington Federal Savings and Loan", "Umpqua Bank",
 	"Golden1 Credit Union", "EASTWEST BANK", "Charles Schwab", "CHASE"
 };
-/*
+
 Account::Account() {
 
 	bal_account = 0;
-	string u;
-	cout << "please input your username : " << endl;
-	cin >> u;
-	this->username;
 
-	this->bank_name = list_bank[rand() % 9];
+	cout << "please input your username : " << endl;
+	cin >> this->username;
+
+	bank_name = list_bank[rand() % 9];
 	cout << "your account is randomly creadted on " << this->bank_name << endl;
 
-	log.push_back(username+"'s account created on "+bank_name);
+	//log.push_back(username+"'s account created on "+bank_name);
 
 
-}*/
+}
 
 Account::Account(string uname, int index_bankarr) {
 
 	bal_account = 0;
-	this->username = uname;
+	username = uname;
 	bank_name = list_bank[index_bankarr];
 
 }
