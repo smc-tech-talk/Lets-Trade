@@ -28,6 +28,7 @@ class Player{
         void sellShares(string tradeSymbol, int tradeShares);
         void displayPortfolio();
         void tradeStocks(Stock& sS, int tC, int tS);
+        bool isNewStock(Stock& s);
     
  
 };
