@@ -32,7 +32,7 @@ public:
     // Get
     Date GetDate();
     double GetAmount();
-    // string GetTransactionType();
+    string GetTransactionType();
     // string GetMonth();
 
     // Set
