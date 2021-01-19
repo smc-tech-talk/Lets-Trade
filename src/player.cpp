@@ -11,7 +11,7 @@ Player::Player(string pN){
 	cout << "constructor has been called\n";
     string playerName = pN;
     Account* bankAccount;
-    vector<Stock> portfolio;
+    vector< pair <string, int> > portfolio;
 }
 // player name + set bank balance
 Player::Player(string pN){
