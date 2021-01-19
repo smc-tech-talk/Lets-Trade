@@ -37,3 +37,19 @@ Date Transaction::GetDate()
     { return this->date; };
 double Transaction::GetAmount()
     { return amount; };
+string GetTransactionType(){
+    TRANSACTION_TYPE t;
+    t = this->type
+    switch (t) {
+        case STOCK_BUY:
+            break;
+        case STOCK_SELL:
+            break;
+        case ACCOUNT_DEPOSIT:
+            break;
+        case ACCOUNT_WITHDRAW:
+            break;
+
+
+    }
+};
