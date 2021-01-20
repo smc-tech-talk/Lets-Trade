@@ -28,9 +28,12 @@ string Player::getPlayerName(){ return this->playerName; };
 int Player::getPlayerAge(){ return this->playerAge; };
 
 
-// portfolio //
+/* -------------------------------------------------------------------------- */
+/*                                Portfolio                                   */
+/* -------------------------------------------------------------------------- */
 
-// returns true if a new stock is passed
+
+
 bool Player::isNewStock(Stock& s){
     for(int i; i<portfolio.size(); i++){
         // string comparison between the new stock s and s
@@ -59,31 +62,11 @@ void Player::sellShares(string tradeSymbol, int tradeShares){
     
 }
 
-// print function
-void Player::displayPortfolio(){
-    for (const auto& p : portfolio)
-    {
-      cout << p.first->GetSymbol() << "\t | " << p.second << endl;
-    }
-}
 
-int Player::isPosInt(int n){
-    cin >> input;
-    while(1){
-        if(cin.fails()){
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n\);
-            cout << "\nError, try again: ";
-            cin >> input;
-        }
-        else{
-            cout << "\nSuccessful input";
-            return n;
-        }
-    }
-}
 
-// main function for trading stocks. Takes Stock pointer, Trade choice(tC) and Trade shares(tS)
+
+
+// main function for trading stocks. Takes Stock pointer
 void Player::tradeStocks(Stock& sS, int tC, int tS){
     
     // validation required ie tC cannot be negative
@@ -110,7 +93,24 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
             cout << "Error, invalid input";
             break;
     }
+    
+  
+     
 }
 
 
 
+void Player::displayPlayerInfo(){
+    cout << "\nPlayer Name: " << this->playerName;
+    cout << "\nPlayer Age: " << this->playerAge;
+    cout << "\nBank Balance: $" << this->bankAccount->bal_account;
+}
+
+
+/*Display functions*/
+void Player::displayPortfolio(){
+    for (const auto& p : portfolio)
+    {
+      cout << p.first->GetSymbol() << "\t | " << p.second << endl;
+    }
+}
