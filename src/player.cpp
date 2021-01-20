@@ -33,19 +33,6 @@ int Player::getPlayerAge(){ return this->playerAge; };
 /* -------------------------------------------------------------------------- */
 
 
-bool Player::isNewStock(Stock& s){
-    for(int i; i<portfolio.size(); i++){
-        // string comparison between the new stock s and s
-        if(s.GetSymbol().compare(portfolio[i].first->GetSymbol())){
-            return true;
-        }
-        else
-            return false;
-        
-        // can be written as the following
-        // retrun (s.GetSymbol().compare(portfolio[i].first->GetSymbol()) ? true : false);
-    }
-}
 
 // buy shares
 // checks duplicate and if found add it to the pos
@@ -92,6 +79,13 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
             break;
     }
 }
+
+/*Validator functions*/
+bool Player::isNewStock(Stock& s){
+    for(int i; i<portfolio.size(); i++)
+         return (s.GetSymbol().compare(portfolio[i].first->GetSymbol()) ? true : false);
+}
+
 
 /*Display functions*/
 void Player::displayPortfolio(){
