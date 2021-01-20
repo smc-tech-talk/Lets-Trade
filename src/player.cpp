@@ -94,7 +94,7 @@ bool Player::isNewStock(Stock& s){
 int Player::isPosInt(int n)
 
     while(true){
-        if(isdigit(n) && n => 1)
+        if(n => 1)
             return n;
         else
         {
