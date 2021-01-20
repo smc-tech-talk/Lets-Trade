@@ -8,7 +8,6 @@ using namespace std;
 Player::Player(){}
 // player name only
 Player::Player(string pN){
-	cout << "constructor has been called\n";
     this->playerName = pN;
     this->bankAccount = new Account();
     this->portfolio;
@@ -44,7 +43,9 @@ int Player::getPlayerAge(){ return this->playerAge; };
 
 // buy stocks
 void Player::buyShares(string tradeSymbol, int tradeShares){
-    //    portfolio.push_back(make_pair(tradeSymbol, tradeShares));
+    // validator function
+    // portfolio.push_back(make_pair(tradeSymbol, tradeShares));
+    
 }
 
 // sell shares
@@ -93,7 +94,7 @@ bool Player::isNewStock(Stock& s){
 int Player::isPosInt(int n)
 
     while(true){
-        if(!cin.fail() && n => 1)
+        if(isdigit(n) && n => 1)
             return n;
         else
         {
