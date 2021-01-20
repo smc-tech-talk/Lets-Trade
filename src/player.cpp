@@ -91,10 +91,10 @@ bool Player::isNewStock(Stock& s){
          return (s.GetSymbol().compare(portfolio[i].first->GetSymbol()) ? true : false);
 }
 
-int Player::isPosInt(int n)
+int Player::isPosInt(int n){
 
     while(true){
-        if(n => 1)
+        if(n >= 1)
             return n;
         else
         {
@@ -103,6 +103,7 @@ int Player::isPosInt(int n)
             cout<<"Enter again: "<<endl;
             cin>>n;
         }
+    }
 }
 
 /* ---------------------------------Display-------------------------------- */
