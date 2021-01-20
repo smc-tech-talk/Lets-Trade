@@ -33,7 +33,6 @@ int Player::getPlayerAge(){ return this->playerAge; };
 /* -------------------------------------------------------------------------- */
 
 
-
 bool Player::isNewStock(Stock& s){
     for(int i; i<portfolio.size(); i++){
         // string comparison between the new stock s and s
@@ -65,7 +64,6 @@ void Player::sellShares(string tradeSymbol, int tradeShares){
 
 
 
-
 // main function for trading stocks. Takes Stock pointer
 void Player::tradeStocks(Stock& sS, int tC, int tS){
     
@@ -93,24 +91,16 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
             cout << "Error, invalid input";
             break;
     }
-    
-  
-     
 }
 
-
+/*Display functions*/
+void Player::displayPortfolio(){
+    for (const auto& p : portfolio)
+      cout << p.first->GetSymbol() << " | " << p.second << endl;
+}
 
 void Player::displayPlayerInfo(){
     cout << "\nPlayer Name: " << this->playerName;
     cout << "\nPlayer Age: " << this->playerAge;
     cout << "\nBank Balance: $" << this->bankAccount->bal_account;
-}
-
-
-/*Display functions*/
-void Player::displayPortfolio(){
-    for (const auto& p : portfolio)
-    {
-      cout << p.first->GetSymbol() << "\t | " << p.second << endl;
-    }
 }
