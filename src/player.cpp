@@ -33,21 +33,24 @@ int Player::getPlayerAge(){ return this->playerAge; };
 /* -------------------------------------------------------------------------- */
 
 
-
-// buy shares
+/* ---------------------------------Trade------------------------------------ */
+// WORK IN PROGRESS
 // checks duplicate and if found add it to the pos
 // if not add to a new pos
 // shares can not be zero or negative
 
+// important coocept
+/* each stock obj can have different info (shares + price)*/
+
+// buy stocks
 void Player::buyShares(string tradeSymbol, int tradeShares){
-//    portfolio.push_back(make_pair(tradeSymbol, tradeShares));
+    //    portfolio.push_back(make_pair(tradeSymbol, tradeShares));
 }
 
 // sell shares
 void Player::sellShares(string tradeSymbol, int tradeShares){
     
 }
-
 
 
 
@@ -80,14 +83,29 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
     }
 }
 
-/*Validator functions*/
+/* ---------------------------------Validate ------------------------------ */
+
 bool Player::isNewStock(Stock& s){
     for(int i; i<portfolio.size(); i++)
          return (s.GetSymbol().compare(portfolio[i].first->GetSymbol()) ? true : false);
 }
 
+int Player::isPosInt(int n)
 
-/*Display functions*/
+    while(true){
+        if(!cin.fail() && n => 1)
+            return n;
+        else
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout<<"Enter again: "<<endl;
+            cin>>n;
+        }
+}
+
+/* ---------------------------------Display-------------------------------- */
+
 void Player::displayPortfolio(){
     for (const auto& p : portfolio)
       cout << p.first->GetSymbol() << " | " << p.second << endl;

@@ -9,6 +9,7 @@ class Player{
         string playerName;
         double playerAge;
         Account* bankAccount;
+        // get stock pointer and num of shares
         vector< pair <Stock*, int> > portfolio;
         
         
