@@ -37,11 +37,10 @@ private:
 
 class Transaction {
 public:
-    // Date | Status | Type | Amount/Postion | Status
-
-    // Constructor
+    // Constructors
     Transaction(TRANSACTION_TYPE type);
     Transaction(TRANSACTION_TYPE type, double amount);
+    Transaction(TRANSACTION_TYPE t, double a, Date d);
 
     // Get
     Date GetDate();

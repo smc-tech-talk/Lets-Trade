@@ -55,6 +55,10 @@ Transaction::Transaction(TRANSACTION_TYPE t, double a) // add hour later
             );
         this->date = date;
     };
+Transaction::Transaction(TRANSACTION_TYPE t, double a, Date d) // Create Transaction with given Date
+    :type(t),
+    amount(a),
+    date(d){};
 
 // Get
 Date Transaction::GetDate()
