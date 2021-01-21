@@ -8,14 +8,14 @@ tm* GMT_TIME = gmtime(&NOW);
 /* Date */
 
 // Constructors
-Date::Date(){
+Date::Date(){ // This will give exact current time
     this->year = (1900 + (GMT_TIME->tm_year));
     this->month = (GMT_TIME->tm_mon);
     this->day = (GMT_TIME->tm_mday);
     this->hour = (GMT_TIME->tm_hour);
     this->time_stamp = ctime(&NOW);
 };
-Date::Date(int year, int month, int day, int hour, string time_stamp)
+Date::Date(int year, int month, int day, int hour, string time_stamp) // This will be used to implement game's time system
     :year(year),
     month(month),
     day(day),
@@ -35,6 +35,7 @@ string Date::GetTimeStamp()
 
 
 /* Transaction */
+
 // Constructors
 Transaction::Transaction(TRANSACTION_TYPE t)
     :type(t)
@@ -68,13 +69,14 @@ string Transaction::GetTransactionType(){
         case ACCOUNT_DEPOSIT: return "Bank Account Deposit"; break;
         case ACCOUNT_WITHDRAW: return "Bank Account Withraw"; break;
         default:
-            return "TRANSACTIONTYPE::Error: No such transaction type";
+            return "TRANSACTIONTYPE::Error: Wrong input transaction type";
             break;
     }
 };
 
+// __str__
 ostream& operator<<(ostream& strm, Date& d) {
-    return strm << "\n\nYear:\t\t" << d.GetYear() << "\n\nMonth:\t\t" << d.GetMonth() << "\n\nDay:\t\t" << d.GetDay() << "\n\nHour:\t\t" << d.GetHour() << "\n\n";
+    return strm << "\n\nYear:\t\t\t" << d.GetYear() << "\n\nMonth:\t\t\t" << d.GetMonth() << "\n\nDay:\t\t\t" << d.GetDay() << "\n\nHour:\t\t\t" << d.GetHour() << "\n\n";
 };
 ostream& operator<<(ostream& strm, Transaction& t) {
     Date d = t.date;
@@ -84,7 +86,7 @@ ostream& operator<<(ostream& strm, Transaction& t) {
         else if(!t.amount)
             throw "\n\nTransaction::Error:Zero amount of the transaction\n\n";
         else
-            return strm << "\n\nTransaction Type:\t" << t.GetTransactionType() << "\n\nAmount:\t\t$" << t.amount << d;
+            return strm << "\n\nTransaction Type:\t" << t.GetTransactionType() << "\n\nAmount:\t\t\t$" << t.amount << d;
     }catch(const char* err){
         return strm << err;
     }

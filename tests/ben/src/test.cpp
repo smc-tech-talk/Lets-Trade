@@ -13,6 +13,7 @@ int main(){
     Date* d = new Date();
     Transaction* t = new Transaction(STOCK_BUY, 200);
     cout << *t << endl;
+    cout << *d << endl;
     delete t;
     delete d;
     d=NULL;
