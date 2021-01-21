@@ -11,7 +11,7 @@ int main(){
     /* Initializing Data */
     srand(time(NULL));
     Date* d = new Date();
-    Transaction* t = new Transaction(STOCK_BUY, 0);
+    Transaction* t = new Transaction(STOCK_BUY, 200);
     cout << *t << endl;
     delete t;
     delete d;

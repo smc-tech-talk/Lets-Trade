@@ -6,13 +6,22 @@ time_t NOW = time(0); // current system date/time
 tm* GMT_TIME = gmtime(&NOW);
 
 /* Date */
-Date::Date(){}; // Default Constructor
+
+// Constructors
+Date::Date(){
+    this->year = (1900 + (GMT_TIME->tm_year));
+    this->month = (GMT_TIME->tm_mon);
+    this->day = (GMT_TIME->tm_mday);
+    this->hour = (GMT_TIME->tm_hour);
+    this->time_stamp = ctime(&NOW);
+};
 Date::Date(int year, int month, int day, int hour, string time_stamp)
     :year(year),
     month(month),
     day(day),
-    hour(hour),
-    time_stamp(time_stamp){};
+    hour(hour)
+        { this->time_stamp = ctime(&NOW); };
+
 int Date::GetYear()
     { return this->year; };
 int Date::GetMonth()
@@ -30,29 +39,14 @@ string Date::GetTimeStamp()
 Transaction::Transaction(TRANSACTION_TYPE t)
     :type(t)
     {
-        Date date;
-        date = Date(
-                (1900 + (GMT_TIME->tm_year)),
-                (GMT_TIME->tm_mon),
-                (GMT_TIME->tm_mday),
-                (GMT_TIME->tm_hour),
-                ctime(&NOW)
-            );
+        Date date = Date();
         this->date = date;
     };
-
 Transaction::Transaction(TRANSACTION_TYPE t, double a) // add hour later
     :type(t),
     amount(a)
     {
-        Date date;
-        date = Date(
-                (1900 + (GMT_TIME->tm_year)),
-                (GMT_TIME->tm_mon),
-                (GMT_TIME->tm_mday),
-                (GMT_TIME->tm_hour),
-                ctime(&NOW)
-            );
+        Date date = Date();
         this->date = date;
     };
 Transaction::Transaction(TRANSACTION_TYPE t, double a, Date d) // Create Transaction with given Date
