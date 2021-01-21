@@ -73,6 +73,9 @@ string Transaction::GetTransactionType(){
     }
 };
 
+ostream& operator<<(ostream& strm, Date& d) {
+    return strm << "\n\nYear:\t\t" << d.GetYear() << "\n\nMonth:\t\t" << d.GetMonth() << "\n\nDay:\t\t" << d.GetDay() << "\n\nHour:\t\t" << d.GetHour() << "\n\n";
+};
 ostream& operator<<(ostream& strm, Transaction& t) {
     Date d = t.date;
     try{
@@ -81,10 +84,8 @@ ostream& operator<<(ostream& strm, Transaction& t) {
         else if(!t.amount)
             throw "\n\nTransaction::Error:Zero amount of the transaction\n\n";
         else
-            return strm << "\n\nTransaction Type:\t" << t.GetTransactionType() << "\n\nAmount:\t\t$" << t.amount << "\n\nYear:\t\t" << d.GetYear() << "\n\nMonth:\t\t" << d.GetMonth() << "\n\nDay:\t\t" << d.GetDay() << "\n\nHour:\t\t" << d.GetHour() << "\n\n";
-
+            return strm << "\n\nTransaction Type:\t" << t.GetTransactionType() << "\n\nAmount:\t\t$" << t.amount << d;
     }catch(const char* err){
         return strm << err;
     }
-
 };

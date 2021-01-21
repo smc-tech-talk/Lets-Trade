@@ -25,6 +25,7 @@ public:
     //void SetMonth(int);
     //void SetDay(int);
     //void SetHour(int);
+    friend ostream& operator<<(ostream& strm, Date& d);
 
 private:
     int year;
