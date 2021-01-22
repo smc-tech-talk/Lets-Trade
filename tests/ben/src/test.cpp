@@ -11,13 +11,21 @@ int main(){
     /* Initializing Data */
     srand(time(NULL));
     Date* d = new Date();
-    Transaction* t = new Transaction(STOCK_BUY, 200);
-    cout << *t << endl;
-    cout << *d << endl;
-    delete t;
+    Transaction t(STOCK_BUY, 200, *d);
+    Transaction t2(STOCK_SELL, 45.05, *d);
+    Transaction t3(STOCK_BUY, 105.680, *d);
+
+    vector<Transaction> v;
+    Transaction::AddTransaction(v, t);
+    Transaction::AddTransaction(v, t2);
+    Transaction::AddTransaction(v, t3);
+
+    for(auto& t: v){
+        cout << t << endl;
+    }
+
     delete d;
     d=NULL;
-    t=NULL;
 
     return 0;
 }

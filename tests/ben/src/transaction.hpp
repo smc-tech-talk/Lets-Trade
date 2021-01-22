@@ -25,6 +25,7 @@ public:
     //void SetMonth(int);
     //void SetDay(int);
     //void SetHour(int);
+
     friend ostream& operator<<(ostream& strm, Date& d);
 
 private:
@@ -51,6 +52,9 @@ public:
 
     // Set
     void SetDate(Date);
+
+    // Methods
+    static void AddTransaction(vector<Transaction>&, Transaction&);
 
     friend ostream& operator<<(ostream& strm, Transaction& t);
 

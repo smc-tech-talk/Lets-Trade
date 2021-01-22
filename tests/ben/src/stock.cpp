@@ -86,15 +86,7 @@ double Stock::GetRandomStockPrice(int i){
     return result;
 };
 
-/*
-void Stock::AddTransactionHistory(int type,  double cost){
-    Transaction::Transaction t(type, cost);
-    transactionHistory.push_back(t);
-    // ChangeStockPrice
-};*/
-
 // Tests
-
 
 // Destructor
 Stock::~Stock(){

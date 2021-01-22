@@ -74,6 +74,11 @@ string Transaction::GetTransactionType(){
     }
 };
 
+// Methods
+void Transaction::AddTransaction(vector<Transaction>&v, Transaction& t){
+    v.push_back(t);
+};
+
 // __str__
 ostream& operator<<(ostream& strm, Date& d) {
     return strm << "\n\nYear:\t\t\t" << d.GetYear() << "\n\nMonth:\t\t\t" << d.GetMonth() << "\n\nDay:\t\t\t" << d.GetDay() << "\n\nHour:\t\t\t" << d.GetHour() << "\n\n";
