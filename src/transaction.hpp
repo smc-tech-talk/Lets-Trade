@@ -25,6 +25,7 @@ public:
     //void SetMonth(int);
     //void SetDay(int);
     //void SetHour(int);
+    friend ostream& operator<<(ostream& strm, Date& d);
 
 private:
     int year;
@@ -37,11 +38,10 @@ private:
 
 class Transaction {
 public:
-    // Date | Status | Type | Amount/Postion | Status
-
-    // Constructor
+    // Constructors
     Transaction(TRANSACTION_TYPE type);
     Transaction(TRANSACTION_TYPE type, double amount);
+    Transaction(TRANSACTION_TYPE t, double a, Date d);
 
     // Get
     Date GetDate();
