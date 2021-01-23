@@ -83,4 +83,4 @@ RandomNumberGenerator::RandomNumberGenerator(int start, int end, int size){
 vector<int> RandomNumberGenerator::GetNumbers()
     { return this->numbers; };
 int RandomNumberGenerator::RandomWithRange(int start, int end)
-    { return start + (rand()%(end - start)); };
+    { return (rand()%(end - start)); };

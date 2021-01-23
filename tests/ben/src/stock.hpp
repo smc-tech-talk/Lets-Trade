@@ -33,7 +33,7 @@ public:
 class Stock{
 public:
     Stock();
-    Stock(string);
+    Stock(string, Company*);
     Stock(string, double, Company*);
 
     // Get
