@@ -7,10 +7,9 @@ using namespace std;
 
 
 Player::Player(){}
-Player::Player(string pN, int pN, Account* aC, Portfolio* pO){
-    this->playerName = get;
-    this->playerAge = pA;
-//  unique_ptr<Account> bankAccount = make_unique<Account>();
+Player::Player(){
+    this->playerName = getFirstName();
+    this->playerAge = getAge();
     unique_ptr<Account> bankAccount(new Account());
     unique_ptr<Portfolio> userPortfolio(new Portfolio());
 }

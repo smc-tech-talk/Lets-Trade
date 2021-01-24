@@ -11,7 +11,6 @@ class Player: Public Human{
         Account* bankAccount;
         vector<Portfolio*> userPortfolio;
         
-        
     public:
         // default constructor
         Player();
@@ -23,15 +22,6 @@ class Player: Public Human{
         // getter
         string getPlayerName();
         int getPlayerAge();
-        /*-portfolio-*/
-        /*trade*/
-        void buyShares(string tradeSymbol, int tradeShares);
-        void sellShares(string tradeSymbol, int tradeShares);
-        void tradeStocks(Stock& sS, int tC, int tS);
-        /*valudation*/
-        bool isNewStock(Stock& s);
-        int isPosInt(int n);
-        /*display*/
         void displayPortfolio();
         void displayPlayerInfo();
 };
