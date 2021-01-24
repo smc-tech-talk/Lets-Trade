@@ -5,12 +5,25 @@
 
 class Share {
 public:
-    Share(double);
+    Share();
+    Share(Stock*, Player*, double);
+    Share(Stock*, Player*, double, int);
 private:
-    Stock* stock;
-    Player* shareHolder;
+    Stock* stock;           // Required
+    Player* shareHolder;    // Required
+    double purchasePrice;   // Required
     int numberOfShares = 0; // Any better name?
-    double purchasePrice;
+};
+
+class Certificate {
+public:
+    Certificate();
+    void PrintCertificate();
+private:
+    Company* company;
+    Player* owner;
+    Stock* stock;
+    Date* date;
 };
 
 #endif
