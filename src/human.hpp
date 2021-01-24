@@ -16,10 +16,13 @@ protected:
     int birthMonth;
     int birthDate;
     int SSN;
+    int uniqueID;
     
 public:
     void setAge(int a);
     int getAge();
     void setFirstName(string fN);
     string getFirstName();
+    void setUniqueID(auto u);
+    auto getUniqueID(){};
 };
