@@ -23,17 +23,30 @@ Player::~Portfolio(){ }
 // buy stocks
 void Player::buyShares(Share* share){
     positions.push_back(share);
-    
+    isDuplicate(true);
 }
 
 // sell shares
 void Player::sellShares(Share* share){
-    
+    isDuplicate(true);
     
 }
 
 
-int Player::showIndex(Share* s1, const Stock* s1){
+bool Player::isDuplicate(Share& buyingShare){
+    int i;
+        while(i<=sizeof(positios))){
+            while(buyingShare.GetSymbol != positions[i]){
+                i++;
+            }
+            else
+        }
+        // can go beyond
+        
+    }
+}
+
+int Player::showIndex(Share* sh, const Stock* sh){
     int* first = &(s1->begin);
     int* last = &(s1->end);
     {
