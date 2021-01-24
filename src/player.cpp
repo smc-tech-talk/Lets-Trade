@@ -2,15 +2,17 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <memory>
 using namespace std;
 
 // constructors
 Player::Player(){}
 // player name only
-Player::Player(string pN){
+Player::Player(string pN, Portfolio*,  ){
     this->playerName = pN;
-    this->bankAccount = new Account();
-    this->portfolio;
+//  unique_ptr<Account> bankAccount = make_unique<Account>();
+    unique_ptr<Account> bankAccount(new Account());
+    unique_ptr<Portfolio> userPortfolio(new Portfolio());
 }
 
 
@@ -44,14 +46,22 @@ int Player::getPlayerAge(){ return this->playerAge; };
 // buy stocks
 void Player::buyShares(string tradeSymbol, int tradeShares){
     // validator function
-    // portfolio.push_back(make_pair(tradeSymbol, tradeShares));
-    
+    if(isPosInt(tradeShares)){
+        portfolio.push_back(make_pair(tradeSymbol, tradeShares));
+    }
+    else{
+        cout << "/nTransaction incomplete";
+    }
 }
+
+
 
 // sell shares
 void Player::sellShares(string tradeSymbol, int tradeShares){
-    
+    for(int i; i<portfolio.size(); i++)
+
 }
+
 
 
 
@@ -86,6 +96,8 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
 
 /* ---------------------------------Validate ------------------------------ */
 
+// not in use
+// not recommended as it goes thru every single stock every time
 bool Player::isNewStock(Stock& s){
     for(int i; i<portfolio.size(); i++)
          return (s.GetSymbol().compare(portfolio[i].first->GetSymbol()) ? true : false);
@@ -118,3 +130,43 @@ void Player::displayPlayerInfo(){
     cout << "\nPlayer Age: " << this->playerAge;
     cout << "\nBank Balance: $" << this->bankAccount->bal_account;
 }
+
+
+/* ---------------------------------Ideas-------------------------------- */
+
+/*
+ 
+// 1d vector
+// if 2d, it has to go thru the vector everytime to look for the corresponding symbol
+// which is memory consuming
+ 
+vector<Stock*> = portolio;
+ 
+ <Stock*>
+
+void Player::buyStocks(Stock* s, int n){
+    s->AddShares(n);
+}
+ 
+
+void Player::sellStocks(Stock* s, int n){
+    s->RemoveShares(n)
+}
+
+void Player::displayPortfolio(const vector<Stock*> s)
+{
+    copy(s.begin(), s.end(), ostream_iterator<Stock*>(cout, " "));
+}
+ 
+Purchase price * shares
+in Plyaer.cpp
+ 
+ pair <Stock*, shares>
+ <MSFT*, 5>
+ 10
+ 
+ 
+ 
+ 
+ 
+ */
