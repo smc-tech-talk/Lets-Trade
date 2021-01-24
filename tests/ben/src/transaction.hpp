@@ -2,7 +2,7 @@
 #define TRANSACTION_H
 #include <time.h>
 
-enum TRANSACTION_TYPE { STOCK_BUY, STOCK_SELL, ACCOUNT_DEPOSIT, ACCOUNT_WITHDRAW };
+enum TRANSACTION_TYPE { DEFAULT, STOCK_BUY, STOCK_SELL, ACCOUNT_DEPOSIT, ACCOUNT_WITHDRAW };
 enum DAYS_OF_MONTH { JAN = 31, FEB = 28, MAR = 31, APR = 30, MAY = 31, JUN = 30,
             JUL = 31, AUG = 31, SEP = 30, OCT = 31, NOV = 30, DEC = 31 };
 
@@ -12,31 +12,47 @@ public:
     // Date(int, int, int, int, string);
     Date();
     Date(int, int, int, int, string);
+
+    // Get
+    int GetYear();
+    int GetMonth();
+    int GetDay();
+    int GetHour();
+    string GetTimeStamp();
+
+    // Set
+    //void SetYear(int);
+    //void SetMonth(int);
+    //void SetDay(int);
+    //void SetHour(int);
+    friend ostream& operator<<(ostream& strm, Date& d);
+
+private:
     int year;
     int month;
     int day;
     int hour;
-    string real_time;
-
+    string time_stamp;
     // double time;
 };
 
 class Transaction {
 public:
-    // Date | Status | Type | Amount/Postion | Status
-
-    // Constructor
-    Transaction();
-    Transaction(int type, double amount);
+    // Constructors
+    Transaction(TRANSACTION_TYPE type);
+    Transaction(TRANSACTION_TYPE type, double amount);
+    Transaction(TRANSACTION_TYPE t, double a, Date d);
 
     // Get
     Date GetDate();
     double GetAmount();
     string GetTransactionType();
-    // string GetMonth();
+    string GetMonth();
 
     // Set
     void SetDate(Date);
+
+    friend ostream& operator<<(ostream& strm, Transaction& t);
 
 private:
     Date date;
