@@ -21,7 +21,7 @@ Player::~Portfolio(){ }
 void Player::buyShares(Share* share, int quantity){
     // validate quanitity input
     isPosInt(quantity);
-    // if user already have the stock in userShare
+    // if user already have the stock in userShares
     if(isDuplicate){
         // increment the position
         s->positions -= quantity;
@@ -63,8 +63,8 @@ bool Player::isDuplicate(Share* s){
             s->GetSymbol!=positions[i])?i++:return true
         // once serch it up all the positions and still no found
         return false;
-    }
 }
+
 
 // returns index of the share or 0 if not found
 int Player::findShareIndex(Share* s, Stock* st){
@@ -73,23 +73,12 @@ int Player::findShareIndex(Share* s, Stock* st){
             s->GetSymbol!=positions[i])?i++:return i
         // once serch it up all the positions and still no found
         return 0;
-    }
 }
 
-int Player::findShareIndex(Share* s, const Stock* st){
-    int* first = &(s1->begin);
-    int* last = &(s1->end);
-    {
-      while (*first!=*last) {
-        if (*first==*val) return *first;
-        ++*first;
-      }
-      return *last;
-    }
-}
 
-int Player::showPortfolioSize(Portfolio* p1){
-    return p1.size();
+
+int Player::showPortfolioSize(){
+    return userShares.size();
 }
 
 
