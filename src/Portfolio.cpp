@@ -17,7 +17,8 @@ Portfolio::~Portfolio(){ }
 
 
 // add shares to userShares
-void Portfolio::buyShares(Share* share, int quantity){
+// next link with transaction history
+void Portfolio::buyShares(Share* share, int quantity, Date* gameDate){
     // validate quanitity input
     checkPosInt(quantity);
     // if user already have the stock in userShares
@@ -25,7 +26,7 @@ void Portfolio::buyShares(Share* share, int quantity){
         // increment the position
         share->positions -= quantity;
         // game time passes by 30 min
-        AddGameTime();
+        Date::AddGameTime(gameDate);
     }
     // if user purchases a new stock
     else
@@ -34,12 +35,12 @@ void Portfolio::buyShares(Share* share, int quantity){
 
 
 // remove shares from userShares
-void Portfolio::sellShares(Share* share, int quantity, Stock* stock){
+void Portfolio::sellShares(Share* share, int quantity, Stock* stock, Date* gameDate){
     checkPosInt(quantity);
     if(isDuplicate(share)){
         if(share->positions >= quantity){
             share->positions -= quantity;
-            // AddGameTime();
+            Date::AddGameTime(gameDate);
             // if user sells all the shares
             if(share->positions = 0)
                 // remove Shares* from userShares
