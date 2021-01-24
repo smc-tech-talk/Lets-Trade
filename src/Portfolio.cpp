@@ -20,16 +20,27 @@ Player::~Portfolio(){ }
 // if not add to a new pos
 // shares can not be zero or negative
 
-// buy stocks
-void Player::buyShares(Share* share){
-    
+// add shares to userShares
+void Player::buyShares(Share* share, int quantity){
+    // validate quanitity input
+    isPosInt(quantity);
+    // if user already have the stock in userShare
+    if(isDuplicate){
+        // increment the position
+        s->positions -= quantity;
+        // game time passes
+        timePasses(30);
+    }
+    // if user purchases a new stock
+    else
+        userShares.push_back(share);
 }
 
-// sell shares
+// remove shares from userShares
 void Player::sellShares(Share* s, int quantity){
     if(isDuplicate){
         if(s->positions >= quantity)
-            s->positions =- quantity;
+            s->positions -= quantity;
             timePasses(30);
             if(s->positions = 0)
                 userShares[findShareIndex].erase;
@@ -106,12 +117,7 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
 
 /* ---------------------------------Validate ------------------------------ */
 
-// not in use
-// not recommended as it goes thru every single stock every time
-bool Player::isNewStock(Stock& s){
-    for(int i; i<portfolio.size(); i++)
-         return (s.GetSymbol().compare(portfolio[i].first->GetSymbol()) ? true : false);
-}
+
 
 // no need as all stocks will be handled by the stock address
 int Player::isPosInt(int n){
