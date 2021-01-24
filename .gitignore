@@ -1,2 +1,4 @@
 *.exe
 *.DS_Store
+/tests/ben/lib
+/tests/ben/src/boost-test.cpp
