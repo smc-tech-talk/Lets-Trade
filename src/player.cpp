@@ -5,8 +5,6 @@
 #include "player.hpp"
 using namespace std;
 
-
-Player::Player(){}
 Player::Player(){
     this->playerName = getFirstName();
     this->playerAge = getAge();

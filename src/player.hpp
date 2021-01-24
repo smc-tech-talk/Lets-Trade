@@ -1,20 +1,22 @@
+#ifdef PLAYER_H
+#def PLAYER_H
+
 #include <vector>
 #include <string>
 #include "human.hpp"
+#include "portfolio.hpp"
 #include "banking.hpp"
 #include "stock.hpp"
 using namespace std;
 
-class Player: Public Human{
-    private:
-        Human* firstName;
-        Account* bankAccount;
-        vector<Portfolio*> userPortfolio;
+class Player: public Human{
+    protected:
+        string playerName;
+        int playerAge;
         
     public:
         // default constructor
         Player();
-        Player(string pN);
         ~Player();
         // setter
         void setPlayerName(string pN);
@@ -25,3 +27,4 @@ class Player: Public Human{
         void displayPortfolio();
         void displayPlayerInfo();
 };
+#endif

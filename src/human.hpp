@@ -1,3 +1,6 @@
+#ifdef HUMAN_H
+#def HUMAN_H
+
 #include <vector>
 #include <string>
 using namespace std;
@@ -19,6 +22,8 @@ protected:
     int uniqueID;
     
 public:
+    Human();
+    Human(string fN, int age);
     void setAge(int a);
     int getAge();
     void setFirstName(string fN);
@@ -27,5 +32,6 @@ public:
     template <typename T>
     void setUniqueID(T u);
     template <typename T>
-    T getUniqueID(){};
+    T getUniqueID();
 };
+#endif
