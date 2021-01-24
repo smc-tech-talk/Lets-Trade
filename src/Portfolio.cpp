@@ -140,12 +140,3 @@ void Player::displayPlayerInfo(){
     cout << "\nPlayer Age: " << this->playerAge;
     cout << "\nBank Balance: $" << this->bankAccount->bal_account;
 }
-
-
-/* ---------------------------------Ideas-------------------------------- */
-
-/*
- 
- 
- 
- */

@@ -23,6 +23,9 @@ public:
     int getAge();
     void setFirstName(string fN);
     string getFirstName();
-    void setUniqueID(auto u);
-    auto getUniqueID(){};
+    
+    template <typename T>
+    void setUniqueID(T u);
+    template <typename T>
+    T getUniqueID(){};
 };
