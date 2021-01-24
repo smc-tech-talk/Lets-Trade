@@ -5,16 +5,15 @@
 #include <memory>
 using namespace std;
 
-// constructors
+
 Player::Player(){}
-// player name only
-Player::Player(string pN, Portfolio*,  ){
+Player::Player(string pN, int pN, Account* aC, Portfolio* pO){
     this->playerName = pN;
+    this->playerAge = pA;
 //  unique_ptr<Account> bankAccount = make_unique<Account>();
     unique_ptr<Account> bankAccount(new Account());
     unique_ptr<Portfolio> userPortfolio(new Portfolio());
 }
-
 
 Player::~Player(){ }
 
@@ -22,7 +21,6 @@ Player::~Player(){ }
 // setters
 void Player::setPlayerName(string pN){ this->playerName = pN; };
 void Player::setPlayerAge(int pA){ this->playerAge = pA; };
-
 
 // getters
 string Player::getPlayerName(){ return this->playerName; };
