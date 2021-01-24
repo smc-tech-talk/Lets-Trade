@@ -15,10 +15,7 @@ Player::Portfolio(){
 Player::~Portfolio(){ }
 
 /* ---------------------------------Trade------------------------------------ */
-// WORK IN PROGRESS
-// checks duplicate and if found add it to the pos
-// if not add to a new pos
-// shares can not be zero or negative
+
 
 // add shares to userShares
 void Player::buyShares(Share* share, int quantity){
@@ -28,7 +25,7 @@ void Player::buyShares(Share* share, int quantity){
     if(isDuplicate){
         // increment the position
         s->positions -= quantity;
-        // game time passes
+        // game time passes by 30 min
         timePasses(30);
     }
     // if user purchases a new stock
@@ -39,15 +36,21 @@ void Player::buyShares(Share* share, int quantity){
 // remove shares from userShares
 void Player::sellShares(Share* s, int quantity){
     if(isDuplicate){
-        if(s->positions >= quantity)
+        if(s->positions >= quantity){
             s->positions -= quantity;
             timePasses(30);
+            // if user sells all the shares
             if(s->positions = 0)
+                // remove Shares* from userShares
                 userShares[findShareIndex].erase;
+                // scoot userShares
                 userShares.shrink_to_fit;
+        }
+        // if user tries to sell more than they have
         else
             cout << "The input quantity exceeds your positions."
     }
+    // if user does not own the share
     else
         cout << "The inpput shares not found in your portfolio";
     
