@@ -25,6 +25,4 @@ class Player: public Human{
         // getter
         string getPlayerName();
         int getPlayerAge();
-        void displayPortfolio();
-        void displayPlayerInfo();
 };

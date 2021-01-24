@@ -3,6 +3,8 @@
 #include "human.cpp"
 #include "player.cpp"
 #include "portfolio.cpp"
+#include "share.cpp"
+#include "transaction.cpp"
 
 int main(){
     std::cout << "Test";

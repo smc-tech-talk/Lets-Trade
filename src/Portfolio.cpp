@@ -5,9 +5,8 @@
 #include "portfolio.hpp"
 using namespace std;
 
-// takes user's first name sets up bank account and userPortfolio
+// takes user's first name sets up bank account and userShares
 Portfolio::Portfolio(){
-    unique_ptr<>;
     unique_ptr<Account> bankAccount(new Account());
     vector<Share*> userShares;
 }
@@ -22,35 +21,35 @@ void Portfolio::buyShares(Share* share, int quantity){
     // validate quanitity input
     checkPosInt(quantity);
     // if user already have the stock in userShares
-    if(isDuplicate){
+    if(isDuplicate(share)){
         // increment the position
-        s->positions -= quantity;
+        share->positions -= quantity;
         // game time passes by 30 min
         AddGameTime();
     }
     // if user purchases a new stock
     else
-        userShares.push_back(share);
+        this->userShares.push_back(share);
 }
 
 
 // remove shares from userShares
-void Portfolio::sellShares(Share* s, int quantity){
+void Portfolio::sellShares(Share* share, int quantity, Stock* stock){
     checkPosInt(quantity);
-    if(isDuplicate){
-        if(s->positions >= quantity){
-            s->positions -= quantity;
-            timePasses(30);
+    if(isDuplicate(share)){
+        if(share->positions >= quantity){
+            share->positions -= quantity;
+            // AddGameTime();
             // if user sells all the shares
-            if(s->positions = 0)
+            if(share->positions = 0)
                 // remove Shares* from userShares
-                userShares[findShareIndex].erase;
+//                this->userShares[findShareIndex(share, stock)].erase;
                 // scoot userShares
-                userShares.shrink_to_fit;
+            this->userShares.shrink_to_fit();
         }
         // if user tries to sell more than they have
         else
-            cout << "The input quantity exceeds your positions."
+            cout << "The input quantity exceeds your positions.";
     }
     // if user does not own the share
     else
@@ -59,27 +58,22 @@ void Portfolio::sellShares(Share* s, int quantity){
 }
 
 
-bool Portfolio::isDuplicate(Share* s){
+bool Portfolio::isDuplicate(Share* share){
     int i = 0;
-        while(positios.sizeof()) >= i)
-            s->GetSymbol!=positions[i])?i++:return true
+        while(sizeof(this->userShares) >= i)
+            share->GetSymbol!=userShares[i])?i++:return true
         // once serch it up all the positions and still no found
         return false;
 }
 
 
 // returns index of the share or 0 if not found
-int Portfolio::findShareIndex(Share* s, Stock* st){
+int Portfolio::findShareIndex(Share* share, Stock* stock){
     int i = 0;
-        while(positios.sizeof()) >= i)
-            s->GetSymbol!=positions[i])?i++:return i
+        while(sizeof(this->userShares) >= i)
+            share->GetSymbol!=userShares[i])?i++:return i
         // once serch it up all the positions and still no found
         return 0;
-}
-
-
-int Portfolio::showPortfolioSize(){
-    return userShares.size();
 }
 
 
@@ -102,8 +96,7 @@ int Portfolio::checkPosInt(int n){
 /* ---------------------------------Display-------------------------------- */
 
 void Portfolio::displayPortfolio(){
-    for (const auto& p : portfolio)
-      cout << p.first->GetSymbol() << " | " << p.second << endl;
+    
 }
 
 void Portfolio::displayPlayerInfo(){
