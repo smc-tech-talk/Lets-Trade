@@ -12,4 +12,4 @@ private:
 void Human::setAge(int a){this->age = a;};
 int  Human::getAge(){ return this->age; };
 void Human::setFirstName(string fN){this->firstName = fN;};
-int  Human::getFirstName(){ return this->firstName; };
+int  Human::getFirstName(){ return this->age; };

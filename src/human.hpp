@@ -20,4 +20,6 @@ protected:
 public:
     void setAge(int a);
     int getAge();
+    void setFirstName(string fN);
+    string getFirstName();
 };
