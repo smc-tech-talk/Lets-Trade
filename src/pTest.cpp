@@ -3,6 +3,7 @@
 #include "stock.cpp"
 #include "csvExtractor.cpp"
 #include "player.cpp"
+#include "human.cpp"
 
 
 int main(){
