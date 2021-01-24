@@ -1,45 +1,23 @@
-#include "player.hpp"
+#include <iostream>
 #include <string>
 #include <vector>
-#include <iostream>
 #include <memory>
+#include "player.hpp"
 using namespace std;
 
-
-Player::Player(){}
-Player::Player(string pN, int pN, Account* aC, Portfolio* pO){
-    this->playerName = pN;
-    this->playerAge = pA;
-//  unique_ptr<Account> bankAccount = make_unique<Account>();
+// takes user's first name sets up bank account and userPortfolio
+Player::Portfolio(){
     unique_ptr<Account> bankAccount(new Account());
     unique_ptr<Portfolio> userPortfolio(new Portfolio());
 }
 
-Player::~Player(){ }
-
-
-// setters
-void Player::setPlayerName(string pN){ this->playerName = pN; };
-void Player::setPlayerAge(int pA){ this->playerAge = pA; };
-
-// getters
-string Player::getPlayerName(){ return this->playerName; };
-int Player::getPlayerAge(){ return this->playerAge; };
-
-
-/* -------------------------------------------------------------------------- */
-/*                                Portfolio                                   */
-/* -------------------------------------------------------------------------- */
-
+Player::~Portfolio(){ }
 
 /* ---------------------------------Trade------------------------------------ */
 // WORK IN PROGRESS
 // checks duplicate and if found add it to the pos
 // if not add to a new pos
 // shares can not be zero or negative
-
-// important coocept
-/* each stock obj can have different info (shares + price)*/
 
 // buy stocks
 void Player::buyShares(string tradeSymbol, int tradeShares){
@@ -51,8 +29,6 @@ void Player::buyShares(string tradeSymbol, int tradeShares){
         cout << "/nTransaction incomplete";
     }
 }
-
-
 
 // sell shares
 void Player::sellShares(string tradeSymbol, int tradeShares){
