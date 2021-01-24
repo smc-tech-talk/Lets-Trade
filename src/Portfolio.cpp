@@ -2,13 +2,14 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "player.hpp"
+#include "portfolio.hpp"
 using namespace std;
 
 // takes user's first name sets up bank account and userPortfolio
 Player::Portfolio(){
+    unique_ptr<>;
     unique_ptr<Account> bankAccount(new Account());
-    vector<Shares* s>;
+    vector<Share*> positions;
 }
 
 Player::~Portfolio(){ }
@@ -20,20 +21,32 @@ Player::~Portfolio(){ }
 // shares can not be zero or negative
 
 // buy stocks
-void Player::buyShares(string tradeSymbol, int tradeShares){
-    // validator function
-    if(isPosInt(tradeShares)){
-        portfolio.push_back(make_pair(tradeSymbol, tradeShares));
-    }
-    else{
-        cout << "/nTransaction incomplete";
-    }
+void Player::buyShares(Share* share){
+    positions.push_back(share);
+    
 }
 
 // sell shares
-void Player::sellShares(string tradeSymbol, int tradeShares){
-    for(int i; i<portfolio.size(); i++)
+void Player::sellShares(Share* share){
+    
+    
+}
 
+
+int Player::showIndex(Share* s1, const Stock* s1){
+    int* first = &(s1->begin);
+    int* last = &(s1->end);
+    {
+      while (*first!=*last) {
+        if (*first==*val) return *first;
+        ++*first;
+      }
+      return *last;
+    }
+}
+
+int Player::showPortfolioSize(Portfolio* p1){
+    return p1.size();
 }
 
 
@@ -77,6 +90,7 @@ bool Player::isNewStock(Stock& s){
          return (s.GetSymbol().compare(portfolio[i].first->GetSymbol()) ? true : false);
 }
 
+// no need as all stocks will be handled by the stock address
 int Player::isPosInt(int n){
 
     while(true){
