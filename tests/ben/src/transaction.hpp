@@ -6,7 +6,7 @@ enum TRANSACTION_TYPE { DEFAULT, STOCK_BUY, STOCK_SELL, ACCOUNT_DEPOSIT, ACCOUNT
 enum DAYS_OF_MONTH { JAN = 31, FEB = 28, MAR = 31, APR = 30, MAY = 31, JUN = 30,
             JUL = 31, AUG = 31, SEP = 30, OCT = 31, NOV = 30, DEC = 31 };
 
-// enum MONTH { JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC };
+// enum MONTH { _JAN, _FEB, _MAR, _APR, _MAY, _JUN, __JUL, _AUG, _SEP, _OCT, _NOV, _DEC };
 class Date {
 public:
     // Date(int, int, int, int, string);
@@ -20,11 +20,13 @@ public:
     int GetHour();
     string GetTimeStamp();
 
-    // Set
-    //void SetYear(int);
-    //void SetMonth(int);
-    //void SetDay(int);
-    //void SetHour(int);
+    // Methods
+    void AddYear();  // Only adding one year is possible
+    void AddMonth(); // Only adding one month is possible
+    void AddDay();   // Only adding one day is possible
+    void AddHour();  // Only adding one day is possible
+    static void AddGameTime(Date*);
+    DAYS_OF_MONTH GetMaxDate();
 
     friend ostream& operator<<(ostream& strm, Date& d);
 

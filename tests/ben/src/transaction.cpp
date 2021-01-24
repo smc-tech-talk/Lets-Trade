@@ -11,7 +11,7 @@ Date::Date(){ // This will give exact current time
     this->year = (1900 + (GMT_TIME->tm_year));
     this->month = (GMT_TIME->tm_mon);
     this->day = (GMT_TIME->tm_mday);
-    this->hour = (GMT_TIME->tm_hour);
+    this->hour = (9); // Always start from 9am
     this->time_stamp = ctime(&NOW);
 };
 Date::Date(int year, int month, int day, int hour) // This will be used to implement game's time system
@@ -21,6 +21,7 @@ Date::Date(int year, int month, int day, int hour) // This will be used to imple
     hour(hour)
         { this->time_stamp = ctime(&NOW); };
 
+// Get
 int Date::GetYear()
     { return this->year; };
 int Date::GetMonth()
@@ -32,6 +33,52 @@ int Date::GetHour()
 string Date::GetTimeStamp()
     { return this->time_stamp; };
 
+// Methods
+void Date::AddYear()
+    { this->year+=1; };
+void Date::AddMonth(){
+    this->month += 1;
+    if(this->month >= 11){
+        this->AddYear();
+        this->month = 0;
+    }
+};
+void Date::AddDay(){
+    DAYS_OF_MONTH dom = this->GetMaxDate();
+    this->day += 1;
+    if (this->day >= dom){
+        this->AddMonth();
+        this->day = 0;
+    }
+};
+void Date::AddHour(){ // 9am to 3pm
+    this->hour += 1;
+    if(this->hour >= 15){
+        this->AddDay();
+        this->hour = 9;
+    }
+};
+void Date::AddGameTime(Date* gameDate){ // static
+    gameDate->AddHour();
+};
+DAYS_OF_MONTH Date::GetMaxDate(){
+    DAYS_OF_MONTH mth;
+    switch(this->month){
+        case 0: mth=JAN; break;
+        case 1: mth=FEB; break;
+        case 2: mth=MAR; break;
+        case 3: mth=APR; break;
+        case 4: mth=MAY; break;
+        case 5: mth=JUN; break;
+        case 6: mth=JUL; break;
+        case 7: mth=AUG; break;
+        case 8: mth=SEP; break;
+        case 9: mth=OCT; break;
+        case 10: mth=NOV; break;
+        case 11: mth=DEC; break;
+    }
+    return mth;
+};
 
 /* Transaction */
 
