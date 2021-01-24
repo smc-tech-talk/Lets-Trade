@@ -52,13 +52,11 @@ public:
     // Set
     void SetDate(Date);
 
-<<<<<<< HEAD
     // Methods
     static void AddTransaction(vector<Transaction>&, Transaction&);
-=======
+
     // In progress
     string GetMonth();
->>>>>>> dev
 
     friend ostream& operator<<(ostream& strm, Transaction& t);
 
