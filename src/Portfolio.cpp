@@ -57,16 +57,12 @@ void Player::sellShares(Share* s, int quantity){
 }
 
 
-bool Player::isDuplicate(Share& buyingShare){
-    int i;
-        while(i<=sizeof(positios))){
-            while(buyingShare.GetSymbol != positions[i]){
-                i++;
-            }
-            else
-        }
-        // can go beyond
-        
+bool Player::isDuplicate(Share* s){
+    int i = 0;
+        while(positios.sizeof()) >= i)
+            s->GetSymbol!=positions[i])?i++:return true
+        // once serch it up all the positions and still no found
+        return false;
     }
 }
 
