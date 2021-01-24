@@ -10,10 +10,13 @@
 int main(){
     /* Initializing Data */
     srand(time(NULL));
-
-    Transaction* t = new Transaction(STOCK_BUY, 0);
+    Date* d = new Date();
+    Transaction* t = new Transaction(STOCK_BUY, 200);
     cout << *t << endl;
+    cout << *d << endl;
     delete t;
+    delete d;
+    d=NULL;
     t=NULL;
 
     return 0;
