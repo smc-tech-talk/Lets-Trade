@@ -7,10 +7,9 @@ using namespace std;
 
 
 Player::Player(){}
-Player::Player(string pN, int pN, Account* aC, Portfolio* pO){
-    this->playerName = pN;
-    this->playerAge = pA;
-//  unique_ptr<Account> bankAccount = make_unique<Account>();
+// takes user's first name sets up bank account and userPortfolio
+Player::Player(string firstName, int Age){
+    unique_ptr<Human> person(new Human(firstName, age));
     unique_ptr<Account> bankAccount(new Account());
     unique_ptr<Portfolio> userPortfolio(new Portfolio());
 }
@@ -18,13 +17,13 @@ Player::Player(string pN, int pN, Account* aC, Portfolio* pO){
 Player::~Player(){ }
 
 
-// setters
-void Player::setPlayerName(string pN){ this->playerName = pN; };
-void Player::setPlayerAge(int pA){ this->playerAge = pA; };
-
-// getters
-string Player::getPlayerName(){ return this->playerName; };
-int Player::getPlayerAge(){ return this->playerAge; };
+//// setters
+//void Player::setPlayerName(string pN){ this->playerName = pN; };
+//void Player::setPlayerAge(int pA){ this->playerAge = pA; };
+//
+//// getters
+//string Player::getPlayerName(){ return this->playerName; };
+//int Player::getPlayerAge(){ return this->playerAge; };
 
 
 /* -------------------------------------------------------------------------- */

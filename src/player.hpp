@@ -1,16 +1,15 @@
 #include <vector>
 #include <string>
+#include "human.hpp"
 #include "banking.hpp"
 #include "stock.hpp"
 using namespace std;
 
-class Player{
+class Player: Public Human{
     private:
-        string playerName;
-        double playerAge;
+        Human* firstName;
         Account* bankAccount;
-        // get stock pointer and num of shares
-        vector< pair <Stock*, int> > portfolio;
+        vector<Portfolio*> userPortfolio;
         
         
     public:
