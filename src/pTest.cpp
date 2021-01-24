@@ -1,13 +1,8 @@
 /* Every header files working in progress here */
-#include "../include/public_header.hpp"
-#include "stock.cpp"
-#include "csvExtractor.cpp"
-#include "player.cpp"
+#include <iostream>
 #include "human.cpp"
-#include "portfolio.cpp"
-
 
 int main(){
-    cout << "Test";
+    std::cout << "Test";
     return 0;
 }

@@ -1,13 +1,11 @@
-#ifdef HUMAN_H
-#def HUMAN_H
-
+#pragma once
 #include <vector>
 #include <string>
+
 using namespace std;
 
 class Human{
     
-protected:
     string firstName;
     string lastName;
     double height;
@@ -33,5 +31,5 @@ public:
     void setUniqueID(T u);
     template <typename T>
     T getUniqueID();
+    
 };
-#endif
