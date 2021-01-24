@@ -13,7 +13,7 @@ private:
 // setters and getters
 void Human::setAge(int a){ this->age = a; };
 int  Human::getAge(){ return this->age; };
-void Human::(string fN){ this->firstName = fN; };
+void Human::setFirstName(string fN){ this->firstName = fN; };
 int  Human::getFirstName(){ return this->age; };
 template <typename T>
 void Human::setUniqueID(T u){ this->uniqueID = u };

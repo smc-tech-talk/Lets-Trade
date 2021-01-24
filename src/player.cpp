@@ -1,14 +1,14 @@
-#include "player.hpp"
+#include <iostream>
 #include <string>
 #include <vector>
-#include <iostream>
 #include <memory>
+#include "player.hpp"
 using namespace std;
 
 
 Player::Player(){}
 Player::Player(string pN, int pN, Account* aC, Portfolio* pO){
-    this->playerName = pN;
+    this->playerName = get;
     this->playerAge = pA;
 //  unique_ptr<Account> bankAccount = make_unique<Account>();
     unique_ptr<Account> bankAccount(new Account());
@@ -25,40 +25,6 @@ void Player::setPlayerAge(int pA){ this->playerAge = pA; };
 // getters
 string Player::getPlayerName(){ return this->playerName; };
 int Player::getPlayerAge(){ return this->playerAge; };
-
-
-/* -------------------------------------------------------------------------- */
-/*                                Portfolio                                   */
-/* -------------------------------------------------------------------------- */
-
-
-/* ---------------------------------Trade------------------------------------ */
-// WORK IN PROGRESS
-// checks duplicate and if found add it to the pos
-// if not add to a new pos
-// shares can not be zero or negative
-
-// important coocept
-/* each stock obj can have different info (shares + price)*/
-
-// buy stocks
-void Player::buyShares(string tradeSymbol, int tradeShares){
-    // validator function
-    if(isPosInt(tradeShares)){
-        portfolio.push_back(make_pair(tradeSymbol, tradeShares));
-    }
-    else{
-        cout << "/nTransaction incomplete";
-    }
-}
-
-
-
-// sell shares
-void Player::sellShares(string tradeSymbol, int tradeShares){
-    for(int i; i<portfolio.size(); i++)
-
-}
 
 
 
