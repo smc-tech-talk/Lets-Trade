@@ -22,8 +22,7 @@ Player::~Portfolio(){ }
 
 // buy stocks
 void Player::buyShares(Share* share){
-    positions.push_back(share);
-    isDuplicate(true);
+    
 }
 
 // sell shares
@@ -32,9 +31,14 @@ void Player::sellShares(Share* s, int quantity){
         if(s->positions >= quantity)
             s->positions =- quantity;
             timePasses(30);
+            if(s->positions = 0)
+                userShares[findShareIndex].erase;
+                userShares.shrink_to_fit;
         else
             cout << "The input quantity exceeds your positions."
     }
+    else
+        cout << "The inpput shares not found in your portfolio";
     
 }
 
@@ -52,7 +56,7 @@ bool Player::isDuplicate(Share& buyingShare){
     }
 }
 
-int Player::showIndex(Share* sh, const Stock* sh){
+int Player::findShareIndex(Share* sh, const Stock* st){
     int* first = &(s1->begin);
     int* last = &(s1->end);
     {
