@@ -11,12 +11,11 @@ Player::Player(string pN){
 	cout << "constructor has been called\n";
     this->playerName = pN;
     this->bankAccount = new Account();
-    this->portfolio;
 }
 
-
-Player::~Player(){ }
-
+Player::~Player(){
+	delete this->bankAccount;
+}
 
 // setters
 void Player::setPlayerName(string pN){ this->playerName = pN; };
@@ -41,7 +40,7 @@ void Player::buyShares(string tradeSymbol, int tradeShares){
 
 // sell shares
 void Player::sellShares(string tradeSymbol, int tradeShares){
-    
+
 }
 
 // print function
@@ -56,17 +55,17 @@ void Player::displayPortfolio(){
 void Player::tradeStocks(Stock& sS, int tC, int tS){
     // tC = trade choice(buy = 0, sell = 1)
     // tS = trade shares
-    
+
     // after validating for tC and tS
     int tradeChoice = tC;
     int tradeShares = tS;
-    
+
     // portfolio has to take in string in order to check the duplicate?
     // can acutally compare by sS->GetSymbol() = for loop portfolio[i]
     // portfolio.first
-    
+
     string tradeSymbol = sS.GetSymbol();
-    
+
 
     switch(tC){
         case 0:
@@ -80,6 +79,3 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
             break;
     }
 }
-
-
-
