@@ -66,7 +66,17 @@ bool Player::isDuplicate(Share* s){
     }
 }
 
-int Player::findShareIndex(Share* sh, const Stock* st){
+// returns index of the share or 0 if not found
+int Player::findShareIndex(Share* s, Stock* st){
+    int i = 0;
+        while(positios.sizeof()) >= i)
+            s->GetSymbol!=positions[i])?i++:return i
+        // once serch it up all the positions and still no found
+        return 0;
+    }
+}
+
+int Player::findShareIndex(Share* s, const Stock* st){
     int* first = &(s1->begin);
     int* last = &(s1->end);
     {
