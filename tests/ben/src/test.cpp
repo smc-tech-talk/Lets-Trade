@@ -5,46 +5,37 @@
 #include "banking.cpp"
 #include "player.cpp"
 #include "transaction.cpp"
-//#include "player.cpp"
 
-void CreateStocks();
+void CreateStocks(int howMany); // Should return vecotr<Stock*> later
 int main(){
+
     /* Initializing Data */
     srand(time(NULL));
-    /*Date* d = new Date();
-    Transaction t(STOCK_BUY, 200, *d);
-    Transaction t2(STOCK_SELL, 45.05, *d);
-    Transaction t3(STOCK_BUY, 105.680, *d);
+    CreateStocks(30);
 
-    vector<Transaction> v;
-    Transaction::AddTransaction(v, t);
-    Transaction::AddTransaction(v, t2);
-    Transaction::AddTransaction(v, t3);
+    Date* d = new Date(); // => Exact current time
 
-    for(auto& t: v){
-        cout << t << endl;
-    }*/
-    CreateStocks();
-    //delete d;
-    //d=NULL;
+    system("pause");
 
     return 0;
 }
 
-void CreateStocks(){
-    std::vector<int> index;
-    CSVExtractor* e = new CSVExtractor("./companies.csv");
-    RandomNumberGenerator* r = new RandomNumberGenerator(40, 200, 15);
-    auto result = e->GetResult();
-    index = r->GetNumbers();
+void CreateStocks(int howMany){ // Should return vector<Stock*> later
     int count;
+    std::vector<int> manyIndex;
+    CSVExtractor* e = new CSVExtractor("./companies.csv");
+    RandomNumberGenerator* r = new RandomNumberGenerator(1, 100, howMany);
+    auto result = e->GetResult();
+    manyIndex = r->GetNumbers();
 
-        for(int i = 0; i < index.size(); i++){
-        count = index.at(i);
-            for (int j = 0; j < 3; j++)
-                cout << result.at(count).at(j) << endl;
-            cout << "\n" << endl;
-        }
+    for(int i = 0; i < manyIndex.size(); i++){
+        count = manyIndex.at(i);
+
+        for (int j = 0; j < 3; j++)
+            cout << result.at(count).at(j) << endl;
+
+        cout << "\n" << endl;
+    }
 
     // Things to do
     // 1. Make Company* c = new Company(string name, string type);

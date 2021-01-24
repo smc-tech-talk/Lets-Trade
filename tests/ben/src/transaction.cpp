@@ -1,5 +1,4 @@
 // Followed the charyt in https://www.interactivebrokers.com/en/software/am3/am/funding/viewingtransactionhistory.htm
-// Date | Status | Type | Amount/Postion | Status
 #include "transaction.hpp"
 
 time_t NOW = time(0); // current system date/time
@@ -15,7 +14,7 @@ Date::Date(){ // This will give exact current time
     this->hour = (GMT_TIME->tm_hour);
     this->time_stamp = ctime(&NOW);
 };
-Date::Date(int year, int month, int day, int hour, string time_stamp) // This will be used to implement game's time system
+Date::Date(int year, int month, int day, int hour) // This will be used to implement game's time system
     :year(year),
     month(month),
     day(day),
@@ -74,10 +73,16 @@ string Transaction::GetTransactionType(){
     }
 };
 
+<<<<<<< HEAD
 // Methods
 void Transaction::AddTransaction(vector<Transaction>&v, Transaction& t){
     v.push_back(t);
 };
+=======
+// In progress
+string GetMonth()
+    { return "MONTH"; };
+>>>>>>> dev
 
 // __str__
 ostream& operator<<(ostream& strm, Date& d) {

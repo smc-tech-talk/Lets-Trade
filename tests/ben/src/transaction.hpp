@@ -11,7 +11,7 @@ class Date {
 public:
     // Date(int, int, int, int, string);
     Date();
-    Date(int, int, int, int, string);
+    Date(int, int, int, int);
 
     // Get
     int GetYear();
@@ -42,19 +42,23 @@ public:
     // Constructors
     Transaction(TRANSACTION_TYPE type);
     Transaction(TRANSACTION_TYPE type, double amount);
-    Transaction(TRANSACTION_TYPE t, double a, Date d);
+    Transaction(TRANSACTION_TYPE type, double amount, Date date);
 
     // Get
     Date GetDate();
     double GetAmount();
     string GetTransactionType();
-    string GetMonth();
 
     // Set
     void SetDate(Date);
 
+<<<<<<< HEAD
     // Methods
     static void AddTransaction(vector<Transaction>&, Transaction&);
+=======
+    // In progress
+    string GetMonth();
+>>>>>>> dev
 
     friend ostream& operator<<(ostream& strm, Transaction& t);
 
