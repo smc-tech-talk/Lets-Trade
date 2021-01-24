@@ -11,14 +11,16 @@ int main(){
 
     /* Initializing Data */
     srand(time(NULL));
-    CreateStocks(15);
+    CreateStocks(30);
+
+    Date* d = new Date(); // => Exact current time
 
     system("pause");
 
     return 0;
 }
 
-void CreateStocks(int howMany){ // Should return vecotr<Stock*> later
+void CreateStocks(int howMany){ // Should return vector<Stock*> later
     int count;
     std::vector<int> manyIndex;
     CSVExtractor* e = new CSVExtractor("./companies.csv");

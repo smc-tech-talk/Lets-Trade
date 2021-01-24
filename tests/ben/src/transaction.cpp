@@ -14,7 +14,7 @@ Date::Date(){ // This will give exact current time
     this->hour = (GMT_TIME->tm_hour);
     this->time_stamp = ctime(&NOW);
 };
-Date::Date(int year, int month, int day, int hour, string time_stamp) // This will be used to implement game's time system
+Date::Date(int year, int month, int day, int hour) // This will be used to implement game's time system
     :year(year),
     month(month),
     day(day),

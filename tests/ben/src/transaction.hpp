@@ -11,7 +11,7 @@ class Date {
 public:
     // Date(int, int, int, int, string);
     Date();
-    Date(int, int, int, int, string);
+    Date(int, int, int, int);
 
     // Get
     int GetYear();
