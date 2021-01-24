@@ -4,7 +4,7 @@
 #include "csvExtractor.cpp"
 #include "player.cpp"
 #include "human.cpp"
-#include "portolio.cpp"
+#include "portfolio.cpp"
 
 
 int main(){
