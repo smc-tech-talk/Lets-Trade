@@ -6,19 +6,19 @@
 using namespace std;
 
 // takes user's first name sets up bank account and userPortfolio
-Player::Portfolio(){
+Portfolio::Portfolio(){
     unique_ptr<>;
     unique_ptr<Account> bankAccount(new Account());
     vector<Share*> userShares;
 }
 
-Player::~Portfolio(){ }
+Portfolio::~Portfolio(){ }
 
 /* ---------------------------------Trade------------------------------------ */
 
 
 // add shares to userShares
-void Player::buyShares(Share* share, int quantity){
+void Portfolio::buyShares(Share* share, int quantity){
     // validate quanitity input
     checkPosInt(quantity);
     // if user already have the stock in userShares
@@ -26,7 +26,7 @@ void Player::buyShares(Share* share, int quantity){
         // increment the position
         s->positions -= quantity;
         // game time passes by 30 min
-        timePasses(30);
+        AddGameTime();
     }
     // if user purchases a new stock
     else
@@ -35,7 +35,7 @@ void Player::buyShares(Share* share, int quantity){
 
 
 // remove shares from userShares
-void Player::sellShares(Share* s, int quantity){
+void Portfolio::sellShares(Share* s, int quantity){
     checkPosInt(quantity);
     if(isDuplicate){
         if(s->positions >= quantity){
@@ -59,7 +59,7 @@ void Player::sellShares(Share* s, int quantity){
 }
 
 
-bool Player::isDuplicate(Share* s){
+bool Portfolio::isDuplicate(Share* s){
     int i = 0;
         while(positios.sizeof()) >= i)
             s->GetSymbol!=positions[i])?i++:return true
@@ -69,7 +69,7 @@ bool Player::isDuplicate(Share* s){
 
 
 // returns index of the share or 0 if not found
-int Player::findShareIndex(Share* s, Stock* st){
+int Portfolio::findShareIndex(Share* s, Stock* st){
     int i = 0;
         while(positios.sizeof()) >= i)
             s->GetSymbol!=positions[i])?i++:return i
@@ -78,42 +78,13 @@ int Player::findShareIndex(Share* s, Stock* st){
 }
 
 
-int Player::showPortfolioSize(){
+int Portfolio::showPortfolioSize(){
     return userShares.size();
 }
 
 
-// main function for trading stocks. Takes Stock pointer
-void Player::tradeStocks(Stock& sS, int tC, int tS){
-    
-    // validation required ie tC cannot be negative
-    int tradeChoice = tC;
-    int tradeShares = tS;
-    
-    // portfolio has to take in string in order to check the duplicate?
-    // can acutally compare by sS->GetSymbol() = for loop portfolio[i]
-    // portfolio.first
-    
-    
-    
-    // declared for test purpose
-    string tradeSymbol;
 
-    switch(tC){
-        case 0:
-            buyShares(tradeSymbol, tradeShares);
-            break;
-        case 1:
-            buyShares(tradeSymbol, tradeShares);
-            break;
-        default:
-            cout << "Error, invalid input";
-            break;
-    }
-}
-
-
-int Player::checkPosInt(int n){
+int Portfolio::checkPosInt(int n){
 
     while(true){
         if(n >= 1)
@@ -130,12 +101,12 @@ int Player::checkPosInt(int n){
 
 /* ---------------------------------Display-------------------------------- */
 
-void Player::displayPortfolio(){
+void Portfolio::displayPortfolio(){
     for (const auto& p : portfolio)
       cout << p.first->GetSymbol() << " | " << p.second << endl;
 }
 
-void Player::displayPlayerInfo(){
+void Portfolio::displayPlayerInfo(){
     cout << "\nPlayer Name: " << this->playerName;
     cout << "\nPlayer Age: " << this->playerAge;
     cout << "\nBank Balance: $" << this->bankAccount->bal_account;

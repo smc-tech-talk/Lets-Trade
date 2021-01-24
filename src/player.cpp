@@ -3,7 +3,6 @@
 #include <vector>
 #include <memory>
 #include "player.hpp"
-using namespace std;
 
 Player::Player(){
     this->playerName = getFirstName();

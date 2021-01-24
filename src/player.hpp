@@ -1,12 +1,13 @@
-#ifdef PLAYER_H
-#def PLAYER_H
-
-#include <vector>
-#include <string>
+#pragma once
 #include "human.hpp"
 #include "portfolio.hpp"
 #include "banking.hpp"
-#include "stock.hpp"
+#include "portfolio.hpp"
+
+
+#include <vector>
+#include <string>
+
 using namespace std;
 
 class Player: public Human{
@@ -27,4 +28,3 @@ class Player: public Human{
         void displayPortfolio();
         void displayPlayerInfo();
 };
-#endif

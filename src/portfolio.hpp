@@ -1,10 +1,11 @@
-#ifdef PORTFOLIO_H
-#def PORTFOLIO_H
-
+#pragma once
 #include <vector>
 #include <string>
 #include "player.hpp"
 #include "banking.hpp"
+#include "transaction.hpp"
+#include "share.hpp"
+#include "stock.hpp"
 using namespace std;
 
 class Portfolio{
@@ -17,14 +18,12 @@ class Portfolio{
         // default constructor
         Portfolio();
         ~Portfolio();
-        void buyShares(string tradeSymbol, int tradeShares);
-        void sellShares(string tradeSymbol, int tradeShares);
-        void tradeStocks(Stock& sS, int tC, int tS);
-        /*valudation*/
-        bool isNewStock(Stock& s);
-        int isPosInt(int n);
+        void buyShares(Share*);
+        void sellShares(Share*);
+        int checkPosInt(int n);
+        bool isDuplicate(Share*);
+        
         /*display*/
         void displayPortfolio();
         void displayPlayerInfo();
 };
-#endif
