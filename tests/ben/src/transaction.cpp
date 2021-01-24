@@ -73,6 +73,10 @@ string Transaction::GetTransactionType(){
     }
 };
 
+// In progress
+string GetMonth()
+    { return "MONTH"; };
+
 // __str__
 ostream& operator<<(ostream& strm, Date& d) {
     return strm << "\n\nYear:\t\t\t" << d.GetYear() << "\n\nMonth:\t\t\t" << d.GetMonth() << "\n\nDay:\t\t\t" << d.GetDay() << "\n\nHour:\t\t\t" << d.GetHour() << "\n\n";

@@ -41,16 +41,18 @@ public:
     // Constructors
     Transaction(TRANSACTION_TYPE type);
     Transaction(TRANSACTION_TYPE type, double amount);
-    Transaction(TRANSACTION_TYPE t, double a, Date d);
+    Transaction(TRANSACTION_TYPE type, double amount, Date date);
 
     // Get
     Date GetDate();
     double GetAmount();
     string GetTransactionType();
-    string GetMonth();
 
     // Set
     void SetDate(Date);
+
+    // In progress
+    string GetMonth();
 
     friend ostream& operator<<(ostream& strm, Transaction& t);
 
