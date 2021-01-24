@@ -8,7 +8,7 @@ using namespace std;
 // takes user's first name sets up bank account and userPortfolio
 Player::Portfolio(){
     unique_ptr<Account> bankAccount(new Account());
-    unique_ptr<Portfolio> userPortfolio(new Portfolio());
+    vector<Shares* s>;
 }
 
 Player::~Portfolio(){ }
