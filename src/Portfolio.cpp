@@ -13,12 +13,10 @@ Portfolio::Portfolio(){
 
 Portfolio::~Portfolio(){ }
 
-/* ---------------------------------Trade------------------------------------ */
-
 
 // add shares to userShares
-// next link with transaction history
-void Portfolio::buyShares(Share* share, int quantity, Date* gameDate){
+// next >> link with transaction history
+void Portfolio::buyShares(const Share* share, int quantity, Date* gameDate){
     // validate quanitity input
     checkPosInt(quantity);
     // if user already have the stock in userShares
@@ -35,7 +33,7 @@ void Portfolio::buyShares(Share* share, int quantity, Date* gameDate){
 
 
 // remove shares from userShares
-void Portfolio::sellShares(Share* share, int quantity, Stock* stock, Date* gameDate){
+void Portfolio::sellShares(const Share* share, int quantity, Stock* stock, Date* gameDate){
     checkPosInt(quantity);
     if(isDuplicate(share)){
         if(share->positions >= quantity){
@@ -45,7 +43,8 @@ void Portfolio::sellShares(Share* share, int quantity, Stock* stock, Date* gameD
             if(share->positions = 0)
                 // remove Shares* from userShares
 //                this->userShares[findShareIndex(share, stock)].erase;
-                // scoot userShares
+                this->userShares[findShareIndex(share, stock)];
+            // scoot userShares
             this->userShares.shrink_to_fit();
         }
         // if user tries to sell more than they have
@@ -105,3 +104,5 @@ void Portfolio::displayPlayerInfo(){
     cout << "\nPlayer Age: " << this->playerAge;
     cout << "\nBank Balance: $" << this->bankAccount->bal_account;
 }
+
+

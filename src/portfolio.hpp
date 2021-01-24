@@ -21,8 +21,8 @@ class Portfolio{
         // default constructor
         Portfolio();
         ~Portfolio();
-        void buyShares(Share*, int);
-        void sellShares(Share*, int);
+        void buyShares(Share*, int, Date*);
+        void sellShares(Share*, int, Date*);
         int checkPosInt(int n);
         bool isDuplicate(Share*);
         int findShareIndex(Share*, Stock*);
