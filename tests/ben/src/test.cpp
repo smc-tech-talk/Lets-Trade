@@ -6,23 +6,33 @@
 #include "player.cpp"
 #include "transaction.cpp"
 
-void CreateStocks(int howMany); // Should return vecotr<Stock*> later
+vector<Stock*> CreateStocks(int howMany); // Should return vecotr<Stock*> later
 int main(){
 
     /* Initializing Data */
     srand(time(NULL));
-    CreateStocks(30);
+    auto v = CreateStocks(30);
 
-    Date* d = new Date(); // => Exact current time
+    // Delete pointers in the vector before the program ends
+    for(auto& item: v){
+        cout << *item << endl;
+        delete item;
+        item = NULL;
+    }
 
     system("pause");
-
     return 0;
 }
 
-void CreateStocks(int howMany){ // Should return vector<Stock*> later
+
+/* Main funtions */
+vector<Stock*> CreateStocks(int howMany){ // Should return vector<Stock*> later
     int count;
+    string symbol, name, type;
+
     std::vector<int> manyIndex;
+    std::vector<Stock*> stocks;
+    
     CSVExtractor* e = new CSVExtractor("./companies.csv");
     RandomNumberGenerator* r = new RandomNumberGenerator(1, 100, howMany);
     auto result = e->GetResult();
@@ -31,20 +41,32 @@ void CreateStocks(int howMany){ // Should return vector<Stock*> later
     for(int i = 0; i < manyIndex.size(); i++){
         count = manyIndex.at(i);
 
+        // symbol/name/type
         for (int j = 0; j < 3; j++)
-            cout << result.at(count).at(j) << endl;
+            switch (j) {
+                case 0: symbol = result.at(count).at(j); break;
+                case 1: name = result.at(count).at(j); break;
+                case 2: type = result.at(count).at(j); break;
+            }
 
-        cout << "\n" << endl;
+        // Create Company
+        Company* c = new Company(name, type);
+
+        // Create Stock
+        Stock* s = new Stock(symbol, c);
+
+        // Reset Values
+        symbol, name, type = "";
+
+        // Push stock* to stocks
+        stocks.push_back(s);
     }
 
-    // Things to do
-    // 1. Make Company* c = new Company(string name, string type);
-    // 2. Make Stock* s = new Stock(string symbol, Company* c)
-    // 3. Push pointer to the vector vector<Stock*>
-    // 4. Company pointers will be handled by ~Stock()
-
+    // Delete used pointers
     delete e;
     delete r;
-    e=NULL;
-    r=NULL;
+    e = NULL;
+    r = NULL;
+
+    return stocks;
 }

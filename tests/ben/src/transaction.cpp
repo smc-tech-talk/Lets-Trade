@@ -73,16 +73,15 @@ string Transaction::GetTransactionType(){
     }
 };
 
-<<<<<<< HEAD
+
 // Methods
 void Transaction::AddTransaction(vector<Transaction>&v, Transaction& t){
     v.push_back(t);
 };
-=======
+
 // In progress
 string GetMonth()
     { return "MONTH"; };
->>>>>>> dev
 
 // __str__
 ostream& operator<<(ostream& strm, Date& d) {
