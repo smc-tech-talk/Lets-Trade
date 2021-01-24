@@ -9,7 +9,7 @@ using namespace std;
 Player::Portfolio(){
     unique_ptr<>;
     unique_ptr<Account> bankAccount(new Account());
-    vector<Share*> positions;
+    vector<Share*> userShares;
 }
 
 Player::~Portfolio(){ }
@@ -27,8 +27,14 @@ void Player::buyShares(Share* share){
 }
 
 // sell shares
-void Player::sellShares(Share* share){
-    isDuplicate(true);
+void Player::sellShares(Share* s, int quantity){
+    if(isDuplicate){
+        if(s->positions >= quantity)
+            s->positions =- quantity;
+            timePasses(30);
+        else
+            cout << "The input quantity exceeds your positions."
+    }
     
 }
 
