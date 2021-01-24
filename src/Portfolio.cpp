@@ -20,7 +20,7 @@ Player::~Portfolio(){ }
 // add shares to userShares
 void Player::buyShares(Share* share, int quantity){
     // validate quanitity input
-    isPosInt(quantity);
+    checkPosInt(quantity);
     // if user already have the stock in userShares
     if(isDuplicate){
         // increment the position
@@ -33,8 +33,10 @@ void Player::buyShares(Share* share, int quantity){
         userShares.push_back(share);
 }
 
+
 // remove shares from userShares
 void Player::sellShares(Share* s, int quantity){
+    checkPosInt(quantity);
     if(isDuplicate){
         if(s->positions >= quantity){
             s->positions -= quantity;
@@ -76,12 +78,9 @@ int Player::findShareIndex(Share* s, Stock* st){
 }
 
 
-
 int Player::showPortfolioSize(){
     return userShares.size();
 }
-
-
 
 
 // main function for trading stocks. Takes Stock pointer
@@ -113,12 +112,8 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
     }
 }
 
-/* ---------------------------------Validate ------------------------------ */
 
-
-
-// no need as all stocks will be handled by the stock address
-int Player::isPosInt(int n){
+int Player::checkPosInt(int n){
 
     while(true){
         if(n >= 1)
@@ -150,37 +145,6 @@ void Player::displayPlayerInfo(){
 /* ---------------------------------Ideas-------------------------------- */
 
 /*
- 
-// 1d vector
-// if 2d, it has to go thru the vector everytime to look for the corresponding symbol
-// which is memory consuming
- 
-vector<Stock*> = portolio;
- 
- <Stock*>
-
-void Player::buyStocks(Stock* s, int n){
-    s->AddShares(n);
-}
- 
-
-void Player::sellStocks(Stock* s, int n){
-    s->RemoveShares(n)
-}
-
-void Player::displayPortfolio(const vector<Stock*> s)
-{
-    copy(s.begin(), s.end(), ostream_iterator<Stock*>(cout, " "));
-}
- 
-Purchase price * shares
-in Plyaer.cpp
- 
- pair <Stock*, shares>
- <MSFT*, 5>
- 10
- 
- 
  
  
  
