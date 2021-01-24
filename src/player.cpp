@@ -8,7 +8,6 @@ using namespace std;
 Player::Player(){}
 // player name only
 Player::Player(string pN){
-	cout << "constructor has been called\n";
     this->playerName = pN;
     this->bankAccount = new Account();
     this->portfolio;
@@ -28,15 +27,25 @@ string Player::getPlayerName(){ return this->playerName; };
 int Player::getPlayerAge(){ return this->playerAge; };
 
 
-// portfolio //
+/* -------------------------------------------------------------------------- */
+/*                                Portfolio                                   */
+/* -------------------------------------------------------------------------- */
 
-// buy shares
+
+/* ---------------------------------Trade------------------------------------ */
+// WORK IN PROGRESS
 // checks duplicate and if found add it to the pos
 // if not add to a new pos
 // shares can not be zero or negative
 
+// important coocept
+/* each stock obj can have different info (shares + price)*/
+
+// buy stocks
 void Player::buyShares(string tradeSymbol, int tradeShares){
-//    portfolio.push_back(make_pair(tradeSymbol, tradeShares));
+    // validator function
+    // portfolio.push_back(make_pair(tradeSymbol, tradeShares));
+    
 }
 
 // sell shares
@@ -44,20 +53,12 @@ void Player::sellShares(string tradeSymbol, int tradeShares){
     
 }
 
-// print function
-void Player::displayPortfolio(){
-    for (const auto& p : portfolio)
-    {
-      cout << p.first->GetSymbol() << "\t | " << p.second << endl;
-    }
-}
 
 
+// main function for trading stocks. Takes Stock pointer
 void Player::tradeStocks(Stock& sS, int tC, int tS){
-    // tC = trade choice(buy = 0, sell = 1)
-    // tS = trade shares
     
-    // after validating for tC and tS
+    // validation required ie tC cannot be negative
     int tradeChoice = tC;
     int tradeShares = tS;
     
@@ -65,8 +66,10 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
     // can acutally compare by sS->GetSymbol() = for loop portfolio[i]
     // portfolio.first
     
-    string tradeSymbol = sS.GetSymbol();
     
+    
+    // declared for test purpose
+    string tradeSymbol;
 
     switch(tC){
         case 0:
@@ -81,5 +84,37 @@ void Player::tradeStocks(Stock& sS, int tC, int tS){
     }
 }
 
+/* ---------------------------------Validate ------------------------------ */
 
+bool Player::isNewStock(Stock& s){
+    for(int i; i<portfolio.size(); i++)
+         return (s.GetSymbol().compare(portfolio[i].first->GetSymbol()) ? true : false);
+}
 
+int Player::isPosInt(int n){
+
+    while(true){
+        if(n >= 1)
+            return n;
+        else
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout<<"Enter again: "<<endl;
+            cin>>n;
+        }
+    }
+}
+
+/* ---------------------------------Display-------------------------------- */
+
+void Player::displayPortfolio(){
+    for (const auto& p : portfolio)
+      cout << p.first->GetSymbol() << " | " << p.second << endl;
+}
+
+void Player::displayPlayerInfo(){
+    cout << "\nPlayer Name: " << this->playerName;
+    cout << "\nPlayer Age: " << this->playerAge;
+    cout << "\nBank Balance: $" << this->bankAccount->bal_account;
+}

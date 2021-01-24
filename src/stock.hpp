@@ -6,6 +6,17 @@
 #include <vector>
 #include "transaction.hpp"
 
+/*
+struct Transaction{
+    Transaction(int, double);
+    string currentTime;
+    int type;
+    double cost;
+
+    // ToString
+    friend ostream& operator<<(ostream& strm, const Transaction& t);
+};*/
+
 class Company {
 public:
     Company(string);

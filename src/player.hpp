@@ -9,6 +9,7 @@ class Player{
         string playerName;
         double playerAge;
         Account* bankAccount;
+        // get stock pointer and num of shares
         vector< pair <Stock*, int> > portfolio;
         
         
@@ -23,11 +24,15 @@ class Player{
         // getter
         string getPlayerName();
         int getPlayerAge();
-        // portfolio
+        /*-portfolio-*/
+        /*trade*/
         void buyShares(string tradeSymbol, int tradeShares);
         void sellShares(string tradeSymbol, int tradeShares);
-        void displayPortfolio();
         void tradeStocks(Stock& sS, int tC, int tS);
-    
- 
+        /*valudation*/
+        bool isNewStock(Stock& s);
+        int isPosInt(int n);
+        /*display*/
+        void displayPortfolio();
+        void displayPlayerInfo();
 };
