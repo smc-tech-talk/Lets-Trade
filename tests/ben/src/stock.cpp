@@ -14,10 +14,10 @@ Company::Company(string n, string t)
 
 /* Stock */
 Stock::Stock(){};
-Stock::Stock(string s) // Test
+Stock::Stock(string s, Company* c)
     :stockSymbol(s),
     stockPrevPrice(INITIAL_STOCK_PRICE),
-    stockIssuer(NULL){
+    stockIssuer(c){
         this->stockUniqueConstant = (this->GetRandomNumber(4) + 1) * 0.00418953;
         //cout << this->stockUniqueConstant << endl;
     };
@@ -86,15 +86,7 @@ double Stock::GetRandomStockPrice(int i){
     return result;
 };
 
-/*
-void Stock::AddTransactionHistory(int type,  double cost){
-    Transaction::Transaction t(type, cost);
-    transactionHistory.push_back(t);
-    // ChangeStockPrice
-};*/
-
 // Tests
-
 
 // Destructor
 Stock::~Stock(){

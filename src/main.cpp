@@ -2,6 +2,9 @@
 #include "../include/public_header.hpp"
 #include "stock.cpp"
 #include "csvExtractor.cpp"
+#include "banking.cpp"
+#include "player.cpp"
+#include "transaction.cpp"
 
 void CreateStocks(int howMany); // Should return vecotr<Stock*> later
 int main(){
