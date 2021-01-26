@@ -8,11 +8,11 @@ Share::Share(Stock* stock, Player* shareHolder, double pp)
     :stock(stock),
     shareHolder(shareHolder),
     purchasePrice(pp){};
-Share::Share(Stock* stock, Player* shareHolder, double pp, int positions)
+Share::Share(Stock* stock, Player* shareHolder, double pp, int numberOfShares)
     :stock(stock),
     shareHolder(shareHolder),
     purchasePrice(pp),
-    positions(positions){};
+    numberOfShares(numberOfShares){};
 
 // Methods
 

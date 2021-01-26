@@ -5,7 +5,7 @@
 using namespace std;
 
 class Human{
-    
+
     string firstName;
     string lastName;
     double height;
@@ -18,7 +18,7 @@ class Human{
     int birthDate;
     int SSN;
     int uniqueID;
-    
+
 public:
     Human();
     Human(string fN, int age);
@@ -26,10 +26,10 @@ public:
     int getAge();
     void setFirstName(string fN);
     string getFirstName();
-    
+
     template <typename T>
     void setUniqueID(T u);
     template <typename T>
     T getUniqueID();
-    
+
 };

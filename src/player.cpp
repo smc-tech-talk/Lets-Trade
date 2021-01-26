@@ -22,5 +22,3 @@ void Player::setPlayerAge(int pA){ this->playerAge = pA; };
 // getters
 string Player::getPlayerName(){ return this->playerName; };
 int Player::getPlayerAge(){ return this->playerAge; };
-
-

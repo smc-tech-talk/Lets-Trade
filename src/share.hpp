@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SHARE_H
+#define SHARE_H
 #include "stock.hpp"
 #include "player.hpp"
 
@@ -11,7 +12,7 @@ private:
     Stock* stock;           // Required
     Player* shareHolder;    // Required
     double purchasePrice;   // Required
-    int positions = 0;
+    int numberOfShares = 0; // Any better name?
 };
 
 class Certificate {
@@ -24,3 +25,5 @@ private:
     Stock* stock;
     Date* date;
 };
+
+#endif
