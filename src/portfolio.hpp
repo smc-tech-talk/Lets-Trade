@@ -15,8 +15,8 @@ class Portfolio{
         vector<Portfolio*> userShares;
     string playerName;
     int playerAge;
-        
-        
+
+
     public:
         // default constructor
         Portfolio();
@@ -26,7 +26,7 @@ class Portfolio{
         int checkPosInt(int n);
         bool isDuplicate(Share*);
         int findShareIndex(Share*, Stock*);
-        
+
         /*display*/
         void displayPortfolio();
         void displayPlayerInfo();

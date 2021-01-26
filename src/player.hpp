@@ -14,7 +14,7 @@ class Player: public Human{
     protected:
         string playerName;
         int playerAge;
-        
+
     public:
         // default constructor
         Player();
