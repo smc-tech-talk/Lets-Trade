@@ -1,9 +1,11 @@
 /* Every header files working in progress here */
 #include <iostream>
-#include "share.cpp"
+
 #include "human.cpp"
 
 #include "portfolio.cpp"
+#include "share.cpp"
+
 #include "transaction.cpp"
 
 

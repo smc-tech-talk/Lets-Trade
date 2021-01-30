@@ -1,17 +1,17 @@
 #pragma once
+#include "share.hpp"
 #include <vector>
 #include <string>
 #include "player.hpp"
 #include "banking.hpp"
 #include "transaction.hpp"
-#include "share.hpp"
 #include "stock.hpp"
 using namespace std;
 
 class Portfolio{
     protected:
     
-    friend class Share;
+    // friend class Share;
         
         
     public:

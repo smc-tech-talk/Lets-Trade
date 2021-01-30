@@ -1,7 +1,3 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <memory>
 #include "portfolio.hpp"
 using namespace std;
 
@@ -60,16 +56,16 @@ void Portfolio::sellShares(Stock* stock, const int quantity){
         cout << "\nTransaction error.";
 }
 
+// 
+int indexFinder(Stock* stock){
 
-int indexFinder(Stock* stock, vector<Share*> v){
-
-    // goes through the loop until the symbols match
-    for(int i=0;i<v.size(); i++){
-        if(stock->GetSymbol()!=v[i]->GetSymbol())
-            break;
-        else
-            return i;
-    }
+    // // goes through the loop until the symbols match
+    // for(int i=0;i<v.size(); i++){
+    //     if(stock->GetSymbol()!=v[i]->GetSymbol())
+    //         break;
+    //     else
+    //         return i;
+    // }
 
     // not found
     return -1;
