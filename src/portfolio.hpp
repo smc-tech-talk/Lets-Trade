@@ -13,21 +13,21 @@ class Portfolio{
         Human* firstName;
         Account* bankAccount;
         vector<Portfolio*> userShares;
-    string playerName;
-    int playerAge;
+        string playerName;
+        int playerAge;
         
         
     public:
         // default constructor
         Portfolio();
         ~Portfolio();
-        void buyShares(Share*, int, Date*);
-        void sellShares(Share*, int, Date*);
-        int checkPosInt(int n);
-        bool isDuplicate(Share*);
-        int findShareIndex(Share*, Stock*);
+        void buyShares(const Share&, int, const Date&);
+        void sellShares(const Share&, int, const Date&);
+        int checkPosInt(const int n) const;
+        bool isDuplicate(const Share&) const;
+        int findShareIndex(const Share&, const Stock&) const;
         
         /*display*/
-        void displayPortfolio();
-        void displayPlayerInfo();
+        void displayPortfolio() const;
+        void displayPlayerInfo() const;
 };

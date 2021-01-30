@@ -5,48 +5,46 @@
 #include "portfolio.hpp"
 using namespace std;
 
-// takes user's first name sets up bank account and userShares
+// takes user's first name sets up bank account and playerPortfolio
 Portfolio::Portfolio(){
-    unique_ptr<Account> bankAccount(new Account());
-    vector<Share*> userShares;
+    vector<Share*> playerPortfolio;
 }
 
 Portfolio::~Portfolio(){ }
 
 
-// add shares to userShares
+// add shares to playerPortfolio
 // next >> link with transaction history
-void Portfolio::buyShares(Share* share, int quantity, Date* gameDate){
+void Portfolio::buyShares(const Share& share, const int quantity, const Date&){
     // validate quanitity input
     checkPosInt(quantity);
-    // if user already have the stock in userShares
+    // if user already have the stock in playerPortfolio
     if(isDuplicate(share)){
         // increment the position
-        share->positions -= quantity;
+        share.GetPositions -= quantity;
         // game time passes by 30 min
         Date::AddGameTime(gameDate);
     }
     // if user purchases a new stock
     else
-        this->userShares.push_back(share);
+        this->playerPortfolio.push_back(share);
 }
 
 
-// remove shares from userShares
-void Portfolio::sellShares(Share* share, int quantity, Stock* stock, Date* gameDate)
-{
+// remove shares from playerPortfolio
+void Portfolio::sellShares(const Share& share, const int quantity, const Date&){
+
     checkPosInt(quantity);
     if(isDuplicate(share)){
-        if(share->positions >= quantity){
-            share->positions -= quantity;
+        if(share.GetPositions >= quantity){
+            share.GetPositions -= quantity;
             Date::AddGameTime(gameDate);
             // if user sells all the shares
-            if(share->positions = 0)
-                // remove Shares* from userShares
-//                this->userShares[findShareIndex(share, stock)].erase;
-                this->userShares[findShareIndex(share, stock)];
-            // scoot userShares
-            this->userShares.shrink_to_fit();
+            if(share.GetPositions = 0)
+                // remove Shares* from playerPortfolio this->playerPortfolio[findShareIndex(share, stock)].erase;
+                this->playerPortfolio[findShareIndex(share, stock)];
+            // scoot playerPortfolio
+            this->playerPortfolio.shrink_to_fit();
         }
         // if user tries to sell more than they have
         else
@@ -59,11 +57,11 @@ void Portfolio::sellShares(Share* share, int quantity, Stock* stock, Date* gameD
 }
 
 // O()
-bool Portfolio::isDuplicate(const Share* share) const
+bool Portfolio::isDuplicate(const Share& share) const
 {
     int i = 0;
-        while(sizeof(this->userShares) >= i)
-            share->GetSymbol!=userShares[i])?i++:return true
+        while(sizeof(this->playerPortfolio) >= i)
+            share.GetSymbol!=playerPortfolio[i])?i++:return true
         // once serch it up all the positions and still no found
         return false;
 }
@@ -71,11 +69,11 @@ bool Portfolio::isDuplicate(const Share* share) const
 
 // returns index of the share or 0 if not found
 // O(n)
-int Portfolio::findShareIndex(const Share* share, const Stock* stock) const
+int Portfolio::findShareIndex(const Share& share, const Stock& stock) const
 {
     int i = 0;
-        while(sizeof(this->userShares) >= i)
-            share->GetSymbol!=userShares[i])?i++:return i
+        while(sizeof(this->playerPortfolio) >= i)
+            share.GetSymbol!=playerPortfolio[i])?i++:return i
         // once serch it up all the positions and still no found
         return 0;
 }
@@ -99,11 +97,11 @@ int Portfolio::checkPosInt(const int n){
 
 /* ---------------------------------Display-------------------------------- */
 
-void Portfolio::displayPortfolio(){
+void Portfolio::displayPortfolio() const {
     
 }
 
-void Portfolio::displayPlayerInfo(){
+void Portfolio::displayPlayerInfo() const {
     cout << "\nPlayer Name: " << this->playerName;
     cout << "\nPlayer Age: " << this->playerAge;
     cout << "\nBank Balance: $" << this->bankAccount->bal_account;

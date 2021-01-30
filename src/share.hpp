@@ -7,8 +7,10 @@ public:
     Share();
     Share(Stock*, Player*, double);
     Share(Stock*, Player*, double, int);
+    void GetSymbol();
+    Stock SetSymbol(const Stock&);
 private:
-    Stock* stock;           // Required
+    Stock* stockSymbol;           // Required
     Player* shareHolder;    // Required
     double purchasePrice;   // Required
     int positions = 0;
