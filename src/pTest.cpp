@@ -1,10 +1,12 @@
 /* Every header files working in progress here */
 #include <iostream>
-#include "human.cpp"
-#include "player.cpp"
-#include "portfolio.cpp"
 #include "share.cpp"
+#include "human.cpp"
+
+#include "portfolio.cpp"
 #include "transaction.cpp"
+
+
 
 int main(){
     std::cout << "Test";

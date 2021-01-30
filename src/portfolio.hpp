@@ -9,23 +9,20 @@
 using namespace std;
 
 class Portfolio{
-    private:
-        Human* firstName;
-        Account* bankAccount;
-        vector<Portfolio*> userShares;
-        string playerName;
-        int playerAge;
+    protected:
+    
+    friend class Share;
         
         
     public:
         // default constructor
         Portfolio();
         ~Portfolio();
-        void buyShares(const Share&, int, const Date&);
-        void sellShares(const Share&, int, const Date&);
-        int checkPosInt(const int n) const;
-        bool isDuplicate(const Share&) const;
-        int findShareIndex(const Share&, const Stock&) const;
+        void buyShares(Stock*, const int);
+        void sellShares(Stock*, const int);
+        int indexFinder(Stock*);
+        // private
+        vector<Share*> sharesList;
         
         /*display*/
         void displayPortfolio() const;

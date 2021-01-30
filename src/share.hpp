@@ -1,19 +1,24 @@
 #pragma once
-#include "stock.hpp"
 #include "player.hpp"
+#include "stock.hpp"
+
 
 class Share {
 public:
     Share();
     Share(Stock*, Player*, double);
-    Share(Stock*, Player*, double, int);
-    void GetSymbol();
-    Stock SetSymbol(const Stock&);
+    Stock GetSymbol();
+    void SetSymbol(Stock&);
+    double GetTotalSpent();
+    void toShare();
+    int GetPosition();
 private:
     Stock* stockSymbol;           // Required
     Player* shareHolder;    // Required
     double purchasePrice;   // Required
-    int positions = 0;
+    int position;
+    double totalSpent;
+    friend class Portfolio;
 };
 
 class Certificate {
