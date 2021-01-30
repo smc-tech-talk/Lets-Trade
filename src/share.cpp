@@ -14,6 +14,8 @@ Share::Share(Stock* stock, Player* shareHolder, double pp, int positions)
     purchasePrice(pp),
     positions(positions){};
 
+Share::GetSymbol(){return this-> stockSymbol;}
+
 // Methods
 
 // ...

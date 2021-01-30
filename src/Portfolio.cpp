@@ -16,7 +16,7 @@ Portfolio::~Portfolio(){ }
 
 // add shares to userShares
 // next >> link with transaction history
-void Portfolio::buyShares(const Share* share, int quantity, Date* gameDate){
+void Portfolio::buyShares(Share* share, int quantity, Date* gameDate){
     // validate quanitity input
     checkPosInt(quantity);
     // if user already have the stock in userShares
@@ -33,7 +33,8 @@ void Portfolio::buyShares(const Share* share, int quantity, Date* gameDate){
 
 
 // remove shares from userShares
-void Portfolio::sellShares(const Share* share, int quantity, Stock* stock, Date* gameDate){
+void Portfolio::sellShares(Share* share, int quantity, Stock* stock, Date* gameDate)
+{
     checkPosInt(quantity);
     if(isDuplicate(share)){
         if(share->positions >= quantity){
@@ -57,8 +58,9 @@ void Portfolio::sellShares(const Share* share, int quantity, Stock* stock, Date*
     
 }
 
-
-bool Portfolio::isDuplicate(Share* share){
+// O()
+bool Portfolio::isDuplicate(const Share* share) const
+{
     int i = 0;
         while(sizeof(this->userShares) >= i)
             share->GetSymbol!=userShares[i])?i++:return true
@@ -68,7 +70,9 @@ bool Portfolio::isDuplicate(Share* share){
 
 
 // returns index of the share or 0 if not found
-int Portfolio::findShareIndex(Share* share, Stock* stock){
+// O(n)
+int Portfolio::findShareIndex(const Share* share, const Stock* stock) const
+{
     int i = 0;
         while(sizeof(this->userShares) >= i)
             share->GetSymbol!=userShares[i])?i++:return i
@@ -78,7 +82,7 @@ int Portfolio::findShareIndex(Share* share, Stock* stock){
 
 
 
-int Portfolio::checkPosInt(int n){
+int Portfolio::checkPosInt(const int n){
 
     while(true){
         if(n >= 1)
