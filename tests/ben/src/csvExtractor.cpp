@@ -49,8 +49,8 @@ RandomNumberGenerator::RandomNumberGenerator(int start, int end, int size){
     /* Error Handling */
     try
     {
-        if(end <= size)
-            throw "csvExtractor.cpp in constructor \'CSVExtractor::CSVExtractor(int start, int end, int size)\': \"end\" must be bigger than \"size\"";
+        if( (end - start) <= size )
+            throw "csvExt)ractor.cpp in constructor \'CSVExtractor::CSVExtractor(int start, int end, int size)\': \"end\" must be bigger than \"size\"";
     }
     catch(const char* err)
     {
@@ -83,4 +83,4 @@ RandomNumberGenerator::RandomNumberGenerator(int start, int end, int size){
 vector<int> RandomNumberGenerator::GetNumbers()
     { return this->numbers; };
 int RandomNumberGenerator::RandomWithRange(int start, int end)
-    { return start + (rand()%(end - start)); };
+    { return (rand()%(end - start)); };

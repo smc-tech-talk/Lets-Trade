@@ -1,3 +1,4 @@
+
 #include "banking.hpp"
 #include <cstdlib>
 #include <ctime>
@@ -12,14 +13,14 @@ string list_bank[9]{
 Account::Account() {
 
 	bal_account = 0;
-	
+
 	cout << "please input your username : " << endl;
 	cin >> this->username;
 
 	bank_name = list_bank[rand() % 9];
 	cout << "your account is randomly creadted on " << this->bank_name << endl;
 
-	log.push_back(username+"'s account created on "+bank_name);
+	//log.push_back(username+"'s account created on "+bank_name);
 
 
 }
@@ -55,10 +56,10 @@ void Account::info_Account(Account a){
 }
 
 void Account::decreased_bal(double dprice) {
-	
-	
+
+
 	bal_account -= dprice;
-	
+
 	string record;
 	record = "";
 	Account::record_Account(record);
@@ -69,7 +70,7 @@ void Account::decreased_bal(double dprice) {
 void Account::increased_bal(double iprice) {
 
 	bal_account += iprice;
-	
+
 	string record;
 	record = "";
 	Account::record_Account(record);

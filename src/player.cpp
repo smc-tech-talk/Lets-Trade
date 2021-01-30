@@ -1,39 +1,24 @@
-#include "player.hpp"
+#include <iostream>
 #include <string>
 #include <vector>
-#include <iostream>
-using namespace std;
+#include <memory>
+#include "player.hpp"
 
-// constructors
-Player::Player(){}
-// player name only
-Player::Player(string pN){
-	cout << "constructor has been called\n";
-    string playerName = pN;
-    double bankBalance = 5000;
-    vector<Stock> portfolio;
-}
-// player name + set bank balance
-Player::Player(string pN){
-	cout << "constructor has been called\n";
-    string playerName = pN;
-    double bankBalance = 5000;
-    vector<Stock> portfolio;
+
+Player::Player(){
+    this->playerName = getFirstName();
+    this->playerAge = getAge();
+    unique_ptr<Account> bankAccount(new Account());
+    unique_ptr<Portfolio> userPortfolio(new Portfolio());
 }
 
-// destructor
-// Player::~Player(){}
+Player::~Player(){}
 
 
 // setters
-void Player::setPlayerName(string pN){ playerName = pN; };
-void Player::setBankBalance(double bB){ bankBalance = bB; };
+void Player::setPlayerName(string pN){ this->playerName = pN; };
+void Player::setPlayerAge(int pA){ this->playerAge = pA; };
 
 // getters
-string Player::getPlayerName(){ return playerName; };
-double Player::getBankBalance(){ return bankBalance; };
-
-
-// portfolio //
-
-
+string Player::getPlayerName(){ return this->playerName; };
+int Player::getPlayerAge(){ return this->playerAge; };

@@ -5,10 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+<<<<<<< HEAD
             "name": "(lldb) 시작",
             "type": "cppdbg",
             "request": "launch",
             "program": "프로그램 이름 입력(예: ${workspaceFolder}/a.out)",
+=======
+            "name": "(lldb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "enter program name, for example ${workspaceFolder}/a.out",
+>>>>>>> d777bfd58a4fabc48c8a3839e8ba21d294ed7546
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
