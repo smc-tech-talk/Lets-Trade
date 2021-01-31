@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
@@ -5,11 +6,13 @@
 #include "player.hpp"
 
 
+
+
 Player::Player(){
     this->playerName = getFirstName();
     this->playerAge = getAge();
     unique_ptr<Account> bankAccount(new Account());
-    unique_ptr<Portfolio> userPortfolio(new Portfolio());
+    unique_ptr<Portfolio> playerPortfolio(new Portfolio());
 }
 
 Player::~Player(){}

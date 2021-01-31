@@ -3,8 +3,7 @@
 #include "portfolio.hpp"
 #include "banking.hpp"
 #include "portfolio.hpp"
-
-
+#include "share.hpp"
 #include <vector>
 #include <string>
 
@@ -14,6 +13,7 @@ class Player: public Human{
     protected:
         string playerName;
         int playerAge;
+
         
     public:
         // default constructor
