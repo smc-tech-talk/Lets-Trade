@@ -1,22 +1,24 @@
 #include "share.hpp"
-
 /* Share */
 
 // Constructors
 Share::Share(){};
-Share::Share(Stock* stock, Player* shareHolder, double pp)
-    :stock(stock),
-    shareHolder(shareHolder),
-    purchasePrice(pp){};
-Share::Share(Stock* stock, Player* shareHolder, double pp, int positions)
-    :stock(stock),
-    shareHolder(shareHolder),
-    purchasePrice(pp),
-    positions(positions){};
+Share::Share(Stock* sS, Player* sH, double p){
+    this->stockSymbol = sS;
+    this->shareHolder = sH;
+    this->purchasePrice = p;
+}
 
 // Methods
 
-// ...
+void Share::SetSymbol(Stock& s){this->stockSymbol=&s;}
+double Share::GetTotalSpent(){return this-> totalSpent;}
+
+void toShare(Stock* stock){
+
+}
+
+int Share::GetPosition(){return this->position;}
 
 /* Certificate */
 
