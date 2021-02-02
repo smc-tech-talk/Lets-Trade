@@ -5,8 +5,8 @@
 // default constructor
 Human::Human(){}
 Human::Human(std::string fN, int a){
-    this->firstName = fN;
-    this->age = a;
+  this->firstName = fN;
+  this->age = a;
 //  this->uniqueID = genRandom();
 }
 // setters and getters
@@ -18,5 +18,3 @@ template <typename T>
 void Human::setUniqueID(T u){ this->uniqueID = u; };
 template <typename T>
 T Human::getUniqueID(){ this->uniqueID; }
-
-
