@@ -13,12 +13,13 @@ public:
     void SetSymbol(Stock&);
     double GetTotalSpent();
     void toShare();
-    int GetPosition();
+    int GetPositions();
+    void SetPositions(int);
 private:
     Stock* stockSymbol;           // Required
     Player* shareHolder;    // Required
     double purchasePrice;   // Required
-    int numberOfShares = 0; // Any better name?
+    int positions = 0; // Any better name?
 };
 
 class Certificate {

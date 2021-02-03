@@ -1,6 +1,6 @@
 /* Every header files working in progress here */
 #include <iostream>
-
+#include <memory>
 #include "human.cpp"
 
 #include "portfolio.cpp"

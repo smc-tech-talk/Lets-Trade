@@ -22,8 +22,8 @@ void toShare(Stock* stock){
 
 }
 
-int Share::GetPosition(){return this->position;}
-
+int Share::GetPositions(){return this->positions;}
+void Share::SetPositions(int p){ this->positions = p; };
 /* Certificate */
 
 // Constructors

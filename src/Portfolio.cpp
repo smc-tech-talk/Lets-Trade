@@ -7,8 +7,6 @@ Portfolio::Portfolio(){
   vector<Share*> userShares;
 }
 
-Portfolio::~Portfolio(){ }
-
 // destructor
 Portfolio::~Portfolio(){}
 
@@ -21,7 +19,7 @@ void Portfolio::buyShares(Share* share, int quantity, Date* gameDate){
   // if user already have the stock in userShares
   if(isDuplicate(share)){
       // increment the position
-      share->positions -= quantity;
+      share->GetPositions() -= quantity;
       // game time passes by 30 min
       Date::AddGameTime(gameDate);
   }
@@ -36,11 +34,11 @@ void Portfolio::sellShares(Stock* stock, const int quantity){
 void Portfolio::sellShares(Share* share, int quantity, Stock* stock, Date* gameDate){
   checkPosInt(quantity);
   if(isDuplicate(share)){
-      if(share->positions >= quantity){
-          share->positions -= quantity;
+      if(share->GetPositions() >= quantity){
+          share->GetPositions() -= quantity;
           Date::AddGameTime(gameDate);
           // if user sells all the shares
-          if(share->positions = 0)
+          if(share->SetPositions(0))
               // remove Shares* from userShares
 //                this->userShares[findShareIndex(share, stock)].erase;
               // scoot userShares

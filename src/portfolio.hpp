@@ -1,7 +1,7 @@
 #pragma once
-#include "share.hpp"
 #include <vector>
 #include <string>
+#include "share.hpp"
 #include "player.hpp"
 #include "banking.hpp"
 #include "transaction.hpp"
@@ -13,15 +13,15 @@ class Portfolio{
         Human* firstName;
         Account* bankAccount;
         vector<Portfolio*> userShares;
-    string playerName;
-    int playerAge;
-
+        string playerName;
+        int playerAge;
 
     public:
         // default constructor
         Portfolio();
         ~Portfolio();
-        void buyShares(Share*, int);
+        void buyShares(Share*, int); // overloading
+        void buyShares(Share*, int, Date*); // overloading
         void sellShares(Share*, int);
         int checkPosInt(int n);
         bool isDuplicate(Share*);
