@@ -13,9 +13,13 @@ int main(){
     /* Initializing Data */
     srand(time(NULL));
 
+    /* Create Stocks */
     auto stocks = CreateStocks(15);
     for (auto& s: stocks)
         cout << *s << endl;
+
+    /* Generate Player */
+    // auto player = new Player(name, ...);
     system("pause");
     return 0;
 }
