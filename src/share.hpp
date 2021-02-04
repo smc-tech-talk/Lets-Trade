@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHARE_H
+#define SHARE_H
+#include "stock.hpp"
 #include "player.hpp"
 #include "stock.hpp"
 
@@ -11,14 +13,13 @@ public:
     void SetSymbol(Stock&);
     double GetTotalSpent();
     void toShare();
-    int GetPosition();
+    int GetPositions();
+    void SetPositions(int);
 private:
     Stock* stockSymbol;           // Required
     Player* shareHolder;    // Required
     double purchasePrice;   // Required
-    int position;
-    double totalSpent;
-    friend class Portfolio;
+    int positions = 0; // Any better name?
 };
 
 class Certificate {
@@ -31,3 +32,5 @@ private:
     Stock* stock;
     Date* date;
 };
+
+#endif

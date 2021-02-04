@@ -3,11 +3,15 @@
 
 // Constructors
 Share::Share(){};
-Share::Share(Stock* sS, Player* sH, double p){
-    this->stockSymbol = sS;
-    this->shareHolder = sH;
-    this->purchasePrice = p;
-}
+Share::Share(Stock* stock, Player* shareHolder, double pp)
+    :stock(stock),
+    shareHolder(shareHolder),
+    purchasePrice(pp){};
+Share::Share(Stock* stock, Player* shareHolder, double pp, int numberOfShares)
+    :stock(stock),
+    shareHolder(shareHolder),
+    purchasePrice(pp),
+    numberOfShares(numberOfShares){};
 
 // Methods
 
@@ -18,8 +22,8 @@ void toShare(Stock* stock){
 
 }
 
-int Share::GetPosition(){return this->position;}
-
+int Share::GetPositions(){return this->positions;}
+void Share::SetPositions(int p){ this->positions = p; };
 /* Certificate */
 
 // Constructors
