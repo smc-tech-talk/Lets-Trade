@@ -7,11 +7,13 @@
 #include "transaction.cpp"
 #include <memory>
 
-vector< std::unique_ptr<Stock> > CreateStocks(int howMany);// Should return vecotr<Stock*> later
+vector< std::unique_ptr<Stock> > CreateStocks(int howMany);  // Should return vecotr<Stock*> later
 int main(){
 
     /* Initializing Data */
     srand(time(NULL));
+    bool isPlaying, isDay, isTrade = true;
+    Date* official_date = new Date();
 
     /* Create Stocks */
     auto stocks = CreateStocks(15);
@@ -19,7 +21,49 @@ int main(){
         cout << *s << endl;
 
     /* Generate Player */
+
+    /* Genertate BankAccount */
+
+    /* Main Loop */
+    while(isPlaying){
+
+        while(isDay){
+
+            while(isTrade){
+                // Print Current Time()
+                // Print Positions
+                // Print Balance
+                // Print All Stocks
+                /*
+                swtich(first_decision){
+                    case:
+                        break;
+                    case:
+                        break;
+                    case:
+                        break;
+                    case:
+                        break;
+                }*/
+                // If trade ends
+                Date::AddGameTime(official_date);
+                isTrade = false;
+            }
+        }
+    }
+
+
+
+
+    /* Generate Player */
     // auto player = new Player(name, ...);
+
+    while(isPlaying){
+
+        /* codes ... */
+        isPlaying = false;
+    }
+
     system("pause");
     return 0;
 }
