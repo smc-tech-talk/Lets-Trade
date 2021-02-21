@@ -14,15 +14,26 @@ int main(){
     srand(time(NULL));
     bool isPlaying, isDay, isTrade = true;
     Date* official_date = new Date();
+    string name;
+    int age;
+    vector<Share*> fake_shares;
+    Portfolio* portfolio = new Portfolio(fake_shares);
 
     /* Create Stocks */
     auto stocks = CreateStocks(15);
-    for (auto& s: stocks)
-        cout << *s << endl;
+
+    /* for (auto& s: stocks)
+        cout << *s << endl; */
 
     /* Generate Player */
+    //GetUserInput<string>(&name, "Insert player name");
+    //GetUserInput<int>(&age, "Insert player age");
+    name = "Ben";
+    age = 20;
+    Player* player = new Player(name, age, portfolio);
 
     /* Genertate BankAccount */
+    Account* account  = new Account(player, "#s346xcc", 100000.00);
 
     /* Main Loop */
     while(isPlaying){
@@ -47,23 +58,13 @@ int main(){
                 }*/
                 // If trade ends
                 Date::AddGameTime(official_date);
-                isTrade = false;
+                if(official_date->GetHour() = 9)
+                    isTrade = false;
             }
+            isDay = false;
         }
-    }
-
-
-
-
-    /* Generate Player */
-    // auto player = new Player(name, ...);
-
-    while(isPlaying){
-
-        /* codes ... */
         isPlaying = false;
     }
-
     system("pause");
     return 0;
 }
@@ -84,4 +85,10 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
         stocks.push_back(std::move(s)); // emplace_back() does not work
     }
     return stocks;
+}
+
+template <class T>
+void GetUserInput(T arg, string msg){
+    cout << msg << ": \n";
+    cin >> arg;
 }
