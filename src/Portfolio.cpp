@@ -2,9 +2,9 @@
 using namespace std;
 
 // takes user's first name sets up bank account and userShares
-Portfolio::Portfolio(){
-  unique_ptr<Account> bankAccount(new Account());
-  vector<Share*> userShares;
+// We gotta develop this construtor
+Portfolio::Portfolio(vector<Share*> shares){
+  this->playerShares = shares;
 }
 
 // destructor

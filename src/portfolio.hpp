@@ -10,15 +10,13 @@ using namespace std;
 
 class Portfolio{
     private:
-        Human* firstName;
-        Account* bankAccount;
-        vector<Portfolio*> userShares;
-        string playerName;
-        int playerAge;
+        Human* shareHolder;
+        vector<Share*> playerShares;
 
     public:
         // default constructor
         Portfolio();
+        Portfolio(vector<Share*> shares);
         ~Portfolio();
         void buyShares(Share*, int); // overloading
         void buyShares(Share*, int, Date*); // overloading

@@ -13,7 +13,7 @@ class Player: public Human{
     protected:
         string playerName;
         int playerAge;
-
+        Portfolio* portfolio;
     public:
         // default constructor
         Player();
@@ -21,6 +21,7 @@ class Player: public Human{
         // setter
         void setPlayerName(string pN);
         void setPlayerAge(int pA);
+        void setPortfolio(Portfolio* portfolio);
         // getter
         string getPlayerName();
         int getPlayerAge();

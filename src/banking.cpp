@@ -1,5 +1,3 @@
-
-#include "banking.hpp"
 #include <cstdlib>
 #include <ctime>
 
@@ -22,7 +20,6 @@ Account::Account() {
 
 	//log.push_back(username+"'s account created on "+bank_name);
 
-
 }
 
 Account::Account(string uname, int index_bankarr) {
@@ -32,6 +29,11 @@ Account::Account(string uname, int index_bankarr) {
 	bank_name = list_bank[index_bankarr];
 
 }
+
+Account::Account(Player* player, string account_number, double balance)
+	:player(player),
+	account_number(account_number),
+	balance(balance){};
 
 string Account::time_stamp() {
 
