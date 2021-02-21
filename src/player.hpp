@@ -1,11 +1,9 @@
 #pragma once
-#include "human.hpp"
-#include "portfolio.hpp"
-#include "banking.hpp"
-#include "portfolio.hpp"
-#include "share.hpp"
+#include <memory>
 #include <vector>
 #include <string>
+#include "human.hpp"
+#include "portfolio.hpp"
 
 using namespace std;
 

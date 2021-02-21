@@ -8,8 +8,12 @@ Portfolio::Portfolio(vector<Share*> shares){
 }
 
 // destructor
-Portfolio::~Portfolio(){}
+Portfolio::~Portfolio(){
+    //delete shareHolder;
+}
 
+
+/*
 
 // add shares to userShares
 // next link with transaction history
@@ -102,14 +106,12 @@ int Portfolio::findShareIndex(Share* share, Stock* stock){
   }
 }
 
+*/
+
 /* ---------------------------------Display-------------------------------- */
-
-void Portfolio::displayPortfolio(){
-
-}
-
+/*
 void Portfolio::displayPlayerInfo(){
   cout << "\nPlayer Name: " << this->playerName;
   cout << "\nPlayer Age: " << this->playerAge;
   cout << "\nBank Balance: $" << this->bankAccount->bal_account;
-}
+} */

@@ -1,21 +1,8 @@
-#ifndef STOCK_H
-#define STOCK_H
-
+#pragma once
 #include <time.h>
 #include <ctime>
 #include <vector>
 #include "transaction.hpp"
-
-/*
-struct Transaction{
-    Transaction(int, double);
-    string currentTime;
-    int type;
-    double cost;
-
-    // ToString
-    friend ostream& operator<<(ostream& strm, const Transaction& t);
-};*/
 
 class Company {
 public:
@@ -78,5 +65,3 @@ protected:
     // ToString
     friend ostream& operator<<(ostream& strm, const Stock& s);
 };
-
-#endif

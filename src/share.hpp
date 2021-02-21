@@ -1,9 +1,7 @@
-#ifndef SHARE_H
-#define SHARE_H
+#pragma once
+
 #include "stock.hpp"
 #include "player.hpp"
-#include "stock.hpp"
-
 
 class Share {
 public:
@@ -32,5 +30,3 @@ private:
     Stock* stock;
     Date* date;
 };
-
-#endif

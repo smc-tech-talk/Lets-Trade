@@ -3,6 +3,8 @@
 #include "stock.cpp"
 #include "transaction.cpp"
 #include "csvExtractor.cpp"
+#include "./testfiles/player.cpp"
+#include "./testfiles/portfolio.cpp"
 //#include "banking.cpp"
 //#include "player.cpp"
 //#include "share.cpp"
@@ -20,6 +22,8 @@ int main(){
     srand(time(NULL));
     bool isPlaying, isDay, isTrade = true;
     auto official_date = std::make_unique<Date>();
+    Player* player;
+    Portfolio* portfolio;
     string name;
     int age;
     //vector<Share*> fake_shares;
@@ -29,17 +33,25 @@ int main(){
     /* Create Stocks */
     auto stocks = CreateStocks(15);
 
-    /* for (auto& s: stocks)
-        cout << *s << endl; */
-
     /* Generate Player */
     GetUserInput<std::string&>(name, "Insert player name");
     GetUserInput<int&>(age, "Insert player age");
 
-    cout << name << endl;
-    cout << age << endl;
+    portfolio = new Portfolio();
+    portfolio->BuyShare(stocks.at(0).get(), 10);
+    player = new Player(name, age, portfolio);
 
-    // Player::Player* player = new Player::Player(name, age, portfolio);
+
+    cout << player->GetName() << endl;
+    cout << player->GetAge() << endl;
+    cout << *official_date << endl;
+
+    // Two ways of accessing to the Portfolio
+    // 1. using portfolio
+    // 2. using player->GetPortfolio()
+    cout << "Portfolio" << endl;
+    cout << ( ( player->GetPortfolio() ).GetShares().at(0) ).GetStock() << endl; // Print the first stock of the portfolio
+    cout << "Current Postion: " <<  ( portfolio->GetShares().at(0) ).GetPosition() << endl;
 
     /* Genertate BankAccount */
     // Account::Account* account  = new Account::Account(player, "#s346xcc", 100000.00);
@@ -77,6 +89,8 @@ int main(){
     }
     */
     system("pause");
+    delete player;
+    player = NULL;
     return 0;
 }
 
