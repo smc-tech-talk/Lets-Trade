@@ -1,23 +1,30 @@
 /* Every header files working in progress here */
 #include "../include/public_header.hpp"
 #include "stock.cpp"
-#include "csvExtractor.cpp"
-#include "banking.cpp"
-#include "player.cpp"
 #include "transaction.cpp"
+#include "csvExtractor.cpp"
+//#include "banking.cpp"
+//#include "player.cpp"
+//#include "share.cpp"
+//#include "portfolio.cpp"
+
 #include <memory>
 
+template<class T>
+void GetUserInput(T const &arg, std::string const msg);
 vector< std::unique_ptr<Stock> > CreateStocks(int howMany);  // Should return vecotr<Stock*> later
 int main(){
 
     /* Initializing Data */
+
     srand(time(NULL));
     bool isPlaying, isDay, isTrade = true;
-    Date* official_date = new Date();
+    auto official_date = std::make_unique<Date>();
     string name;
     int age;
-    vector<Share*> fake_shares;
-    Portfolio* portfolio = new Portfolio(fake_shares);
+    //vector<Share*> fake_shares;
+    //Portfolio* portfolio = new Portfolio(fake_shares);
+
 
     /* Create Stocks */
     auto stocks = CreateStocks(15);
@@ -26,16 +33,19 @@ int main(){
         cout << *s << endl; */
 
     /* Generate Player */
-    //GetUserInput<string>(&name, "Insert player name");
-    //GetUserInput<int>(&age, "Insert player age");
-    name = "Ben";
-    age = 20;
-    Player* player = new Player(name, age, portfolio);
+    GetUserInput<std::string&>(name, "Insert player name");
+    GetUserInput<int&>(age, "Insert player age");
+
+    cout << name << endl;
+    cout << age << endl;
+
+    // Player::Player* player = new Player::Player(name, age, portfolio);
 
     /* Genertate BankAccount */
-    Account* account  = new Account(player, "#s346xcc", 100000.00);
+    // Account::Account* account  = new Account::Account(player, "#s346xcc", 100000.00);
 
-    /* Main Loop */
+    /*
+    Main Loop
     while(isPlaying){
 
         while(isDay){
@@ -45,7 +55,7 @@ int main(){
                 // Print Positions
                 // Print Balance
                 // Print All Stocks
-                /*
+
                 swtich(first_decision){
                     case:
                         break;
@@ -55,7 +65,7 @@ int main(){
                         break;
                     case:
                         break;
-                }*/
+                }
                 // If trade ends
                 Date::AddGameTime(official_date);
                 if(official_date->GetHour() = 9)
@@ -65,6 +75,7 @@ int main(){
         }
         isPlaying = false;
     }
+    */
     system("pause");
     return 0;
 }
@@ -88,7 +99,7 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
 }
 
 template <class T>
-void GetUserInput(T arg, string msg){
+void GetUserInput(T const& arg, std::string const msg){
     cout << msg << ": \n";
     cin >> arg;
 }
