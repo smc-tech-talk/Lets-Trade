@@ -33,14 +33,15 @@ int main(){
     /* Create Stocks */
     auto stocks = CreateStocks(15);
 
+    /* Fill up portfolio with stocks */
+
+
     /* Generate Player */
     GetUserInput<std::string&>(name, "Insert player name");
     GetUserInput<int&>(age, "Insert player age");
 
-    portfolio = new Portfolio();
-    portfolio->BuyShare(stocks.at(0).get(), 10);
+    portfolio = new Portfolio(stocks);
     player = new Player(name, age, portfolio);
-
 
     cout << player->GetName() << endl;
     cout << player->GetAge() << endl;
@@ -50,8 +51,14 @@ int main(){
     // 1. using portfolio
     // 2. using player->GetPortfolio()
     cout << "Portfolio" << endl;
-    cout << ( ( player->GetPortfolio() ).GetShares().at(0) ).GetStock() << endl; // Print the first stock of the portfolio
-    cout << "Current Postion: " <<  ( portfolio->GetShares().at(0) ).GetPosition() << endl;
+    //cout << ( ( player->GetPortfolio() ).GetShares().at(0) ).GetStock() << endl; // Print the first stock of the portfolio
+    //cout << "Current Postion: " <<  ( portfolio->GetShares().at(0) ).GetPosition() << endl;
+
+    /* Testing */
+    portfolio->BuyShare(stocks.at(1).get(), 4);
+    portfolio->BuyShare(stocks.at(2).get(), 1);
+    portfolio->BuyShare(stocks.at(3).get(), 3);
+    portfolio->BuyShare(stocks.at(0).get(), 3);
 
     /* Genertate BankAccount */
     // Account::Account* account  = new Account::Account(player, "#s346xcc", 100000.00);

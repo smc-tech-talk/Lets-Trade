@@ -1,33 +1,20 @@
 #pragma once
 #include <memory>
-#include "../stock.hpp"
-
-class Share {
-public:
-    Share();
-    Share(Stock*, int);
-    void IncreaseAmount(int);
-    void DecreaseAmount(int);
-
-    // Getter
-    Stock GetStock();
-    int GetPosition();
-private:
-    Stock* stock;
-    int position;
-};
+#include "share.cpp"
 
 class Portfolio {
 public:
     // Constructors
     Portfolio();
+    Portfolio(vector<std::unique_ptr<Stock>>&);
 
     // Getter
     std::vector<Share> GetShares();
     Share GetShareByIndex(int);
-    // Setter
+    Share GetShareByStock(Stock*);
 
     // Methods
+    void InitializeEmptyShares(vector<std::unique_ptr<Stock>>&);
     void BuyShare(Stock*, int);
     void SellShare(Stock*, int);
 private:

@@ -1,33 +1,32 @@
 #include "portfolio.hpp"
 
-/* Share */
-Share::Share(){};
-Share::Share(Stock* s, int a)
-    :stock(s),
-    position(a){};
-void Share::IncreaseAmount(int a)
-    { this->position += a; };
-void Share::DecreaseAmount(int a)
-    { this->position -= a; };
-// Getter
-Stock Share::GetStock()
-    { return *(this->stock); };
-int Share::GetPosition()
-    { return this->position; };
-
 /* Portfolio */
 Portfolio::Portfolio(){};
+
+Portfolio::Portfolio(vector<std::unique_ptr<Stock>> &stocks){
+    InitializeEmptyShares(stocks);
+};
 void Portfolio::BuyShare(Stock* stock, int a){
-    // if the player has the stock already,
-        // share.IncreaseAmount(a);
-    Share s = Share(stock, a);
-    this->shares.push_back(s);
-    // else
+    Share s = GetShareByStock(stock);
+    s.IncreaseAmount(a);
 };
-void Portfolio::SellShare(Stock*, int){ // In progress
-    // if the player has the stock already,
-        // share.DecreaseAmount(a);
+void Portfolio::SellShare(Stock* stock, int a){ // In progress
+    Share s = GetShareByStock(stock);
+    s.DecreaseAmount(a);
 };
+
+// Methods
+void Portfolio::InitializeEmptyShares(vector<std::unique_ptr<Stock>> &stocks){
+    try{
+        for(auto& s : stocks){
+            Share share = Share(s.get(), 0);
+            this->shares.push_back(share);
+        }
+    } catch(const char* errMessage){
+        exit(1);
+    }
+};
+
 // Getter
 std::vector<Share> Portfolio::GetShares()
     { return this->shares; };
@@ -41,4 +40,18 @@ Share Portfolio::GetShareByIndex(int index)
         cout << "Portfolio::Error::" << errMessage << endl;
     }
     return s;
+};
+Share Portfolio::GetShareByStock(Stock* stock)
+{
+    Share share;
+    try {
+        for(auto& s : this->shares){
+            // Decide which to use. vector.find() or just loop
+            if( stock == s.GetStockPtr() )
+                share = s;
+        }
+    } catch(const char* errMessage){
+        cout << "Portfolio::Error::" << errMessage << endl;
+    }
+    return share;
 };
