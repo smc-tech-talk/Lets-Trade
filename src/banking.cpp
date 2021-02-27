@@ -1,21 +1,5 @@
-#include <cstdlib>
-#include <ctime>
-#include <stdlib.h>
-#include <string>
+#include "banking.hpp"
 
-
-string list_bank[9]{
-	"CIT Bank", "Bank of The West", "WELLS FARGO",
-	"Washington Federal Savings and Loan", "Umpqua Bank",
-	"Golden1 Credit Union", "EASTWEST BANK", "Charles Schwab", "CHASE"
-};
-
-char codebook[] = { 'a','A','b','B','c','C','d','D','e',
-					'E','f','F','g','G','h','H','i','I','j','J','k','K',
-					'l','L','m','M','n','N','o','O','p','P','q','Q','r',
-					'R','s','S','t','T','u','U','v','V','w','W','x','X',
-					'y','Y','z','Z','0','1','2','3','4','5','6','7','8','9',
-					'!','@','#','$','%','&','*' };
 
 Account::Account(Player* a_player) {
 
@@ -63,19 +47,19 @@ void Account::input_record(Transaction t, Date* d){
 		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
 		log.push_back(tmp);
 	}
-	if (t.GetTransactionType() == "Sell Stock"){
+	else if (t.GetTransactionType() == "Sell Stock"){
 
 		balance += t.GetAmount();
 		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
 		log.push_back(tmp);
 	}
-	if (t.GetTransactionType() == "Bank Account Deposit"){
+	else if (t.GetTransactionType() == "Bank Account Deposit"){
 
 		balance += t.GetAmount();
 		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
 		log.push_back(tmp);
 	}
-	if (t.GetTransactionType() == "Bank Account Withraw"){
+	else if (t.GetTransactionType() == "Bank Account Withraw"){
 
 		balance -= t.GetAmount();
 		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
