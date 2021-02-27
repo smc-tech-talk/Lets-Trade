@@ -6,6 +6,8 @@
 #include <vector>
 using namespace std;
 
+
+
 /*
 class Bank {
 	string bankName;
@@ -20,30 +22,30 @@ public:
 
 	Account();
 
-	Account(string uname, int index_bankarr);
+	Account(Player* a_player);
 
 	Account(Player* player, string account_number, double balance);
 
 	// Account(Player* p, string accountName, Bank* b); => A constructor using 'Bank' class
 	//~Account();
 
-	double bal_account;
-	string username; // => Should be Player now.
-	string bank_name;
+	
 	vector <string> log;
 
-	string time_stamp();
 
-	void record_Account(string rec);
-	void info_Account(Account a);
-	void decreased_bal(double dprice);
-	void increased_bal(double iprice);
-	void transfer_Account(Account toAccount, double tmoney);
+	void initialize_balance();
+	double get_balance();
+	void create_account_number();
+	void print_record();
+	void input_record(Transaction t, Date* d);
+	void info_Account();
+	
 
 private:
 	Player* player;
 	string account_number;
 	double balance;
+	string bank_name;
 };
 
 
