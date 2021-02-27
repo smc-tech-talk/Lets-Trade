@@ -62,10 +62,3 @@ private:
 	double balance;
 	string bank_name;
 };
-
-
-class Bank_user {
-
-
-
-};

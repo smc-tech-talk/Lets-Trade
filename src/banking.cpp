@@ -93,5 +93,3 @@ void Account::info_Account(){
 	print_record();
 
 }
-
-
