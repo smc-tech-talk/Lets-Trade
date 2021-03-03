@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include "../stock.hpp"
-#include "../transaction.hpp"
+#include "stock.hpp"
+#include "transaction.hpp"
 
 #ifndef SHARE_H
 #define SHARE_H
