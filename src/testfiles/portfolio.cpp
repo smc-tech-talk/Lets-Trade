@@ -3,8 +3,8 @@
 /* Portfolio */
 Portfolio::Portfolio(){};
 
-Portfolio::Portfolio(vector<std::unique_ptr<Stock>> &stocks){
-    InitializeEmptyShares(stocks);
+Portfolio::Portfolio(const vector<std::unique_ptr<Stock>>& stocks){
+    //InitializeEmptyShares(stocks);
 };
 void Portfolio::BuyShare(Stock* stock, int a){
     Share s = GetShareByStock(stock);
@@ -16,7 +16,7 @@ void Portfolio::SellShare(Stock* stock, int a){ // In progress
 };
 
 // Methods
-void Portfolio::InitializeEmptyShares(vector<std::unique_ptr<Stock>> &stocks){
+void Portfolio::InitializeEmptyShares(const vector<std::unique_ptr<Stock>>& stocks){
     try{
         for(auto& s : stocks){
             Share share = Share(s.get(), 0);

@@ -1,12 +1,16 @@
 #pragma once
+
 #include <memory>
-#include "share.cpp"
+#include "share.hpp"
+
+#ifndef PORTFOLIO_H
+#define PORTFOLIO_H
 
 class Portfolio {
 public:
     // Constructors
     Portfolio();
-    Portfolio(vector<std::unique_ptr<Stock>>&);
+    Portfolio(const vector<std::unique_ptr<Stock>>&);
 
     // Getter
     std::vector<Share> GetShares();
@@ -14,9 +18,11 @@ public:
     Share GetShareByStock(Stock*);
 
     // Methods
-    void InitializeEmptyShares(vector<std::unique_ptr<Stock>>&);
+    void InitializeEmptyShares(const vector<std::unique_ptr<Stock>>&);
     void BuyShare(Stock*, int);
     void SellShare(Stock*, int);
 private:
     std::vector<Share> shares;
 };
+
+#endif
