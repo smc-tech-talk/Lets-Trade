@@ -1,67 +1,43 @@
-/* Every header files working in progress here */
 #include "../include/public_header.hpp"
-#include "stock.cpp"
-#include "transaction.cpp"
-#include "csvExtractor.cpp"
-#include "./testfiles/player.cpp"
-#include "./testfiles/portfolio.cpp"
-//#include "banking.cpp"
-//#include "player.cpp"
-//#include "share.cpp"
-//#include "portfolio.cpp"
-
+#include "stock.hpp"
+#include "transaction.hpp"
+#include "csvExtractor.hpp"
+//#include "./testfiles/player.hpp"
+#include "./testfiles/portfolio.hpp"
 #include <memory>
 
-template<class T>
+//extern Date* GAME_TIME = new Date();
+
+template<typename T>
 void GetUserInput(T const &arg, std::string const msg);
 vector< std::unique_ptr<Stock> > CreateStocks(int howMany);  // Should return vecotr<Stock*> later
 int main(){
 
     /* Initializing Data */
-
     srand(time(NULL));
     bool isPlaying, isDay, isTrade = true;
     auto official_date = std::make_unique<Date>();
-    Player* player;
-    Portfolio* portfolio;
+    //Player* player;
+    //Portfolio* portfolio;
     string name;
     int age;
-    //vector<Share*> fake_shares;
-    //Portfolio* portfolio = new Portfolio(fake_shares);
+    vector<std::unique_ptr<Stock>> fake_shares = CreateStocks(15);
+    Portfolio* portfolio = new Portfolio(fake_shares);
 
 
     /* Create Stocks */
-    auto stocks = CreateStocks(15);
+    //auto stocks = CreateStocks(15);
 
-    /* Fill up portfolio with stocks */
+    cin >> name;
+    //GetUserInput<std::string&>(name, "Insert player name");
+    //GetUserInput<int&>(age, "Insert player age");
 
-
-    /* Generate Player */
-    GetUserInput<std::string&>(name, "Insert player name");
-    GetUserInput<int&>(age, "Insert player age");
-
-    portfolio = new Portfolio(stocks);
-    player = new Player(name, age, portfolio);
-
-    cout << player->GetName() << endl;
-    cout << player->GetAge() << endl;
-    cout << *official_date << endl;
-
-    // Two ways of accessing to the Portfolio
-    // 1. using portfolio
-    // 2. using player->GetPortfolio()
     cout << "Portfolio" << endl;
-    //cout << ( ( player->GetPortfolio() ).GetShares().at(0) ).GetStock() << endl; // Print the first stock of the portfolio
-    //cout << "Current Postion: " <<  ( portfolio->GetShares().at(0) ).GetPosition() << endl;
 
-    /* Testing */
-    portfolio->BuyShare(stocks.at(1).get(), 4);
-    portfolio->BuyShare(stocks.at(2).get(), 1);
-    portfolio->BuyShare(stocks.at(3).get(), 3);
-    portfolio->BuyShare(stocks.at(0).get(), 3);
-
-    /* Genertate BankAccount */
-    // Account::Account* account  = new Account::Account(player, "#s346xcc", 100000.00);
+    //portfolio->BuyShare(stocks.at(1).get(), 4);
+    //portfolio->BuyShare(stocks.at(2).get(), 1);
+    //portfolio->BuyShare(stocks.at(3).get(), 3);
+    //portfolio->BuyShare(stocks.at(0).get(), 3);
 
     /*
     Main Loop
@@ -96,8 +72,11 @@ int main(){
     }
     */
     system("pause");
-    delete player;
-    player = NULL;
+    //delete player;
+    //player = NULL;
+    //delete GAME_TIME;
+    //GAME_TIME = NULL;
+
     return 0;
 }
 
@@ -119,7 +98,7 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
     return stocks;
 }
 
-template <class T>
+template <typename T>
 void GetUserInput(T const& arg, std::string const msg){
     cout << msg << ": \n";
     cin >> arg;
