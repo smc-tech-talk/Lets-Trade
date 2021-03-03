@@ -1,6 +1,11 @@
 #pragma once
+
 #include <memory>
 #include "../stock.hpp"
+#include "../transaction.hpp"
+
+#ifndef SHARE_H
+#define SHARE_H
 
 class Share {
 public:
@@ -15,7 +20,16 @@ public:
     Stock GetStock();
     Stock* GetStockPtr();
     int GetPosition();
+    std::vector<Transaction> GetTransactionHistory();
+
+    // Setter
+    void SetValue(double);
+
 private:
     Stock* stock;
-    int position;
+    int position = 0;
+    std::vector<Transaction> transactionHistory;
+    double value = 0.00;
 };
+
+#endif
