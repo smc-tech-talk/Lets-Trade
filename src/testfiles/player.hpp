@@ -1,6 +1,9 @@
 #pragma once
 #include "portfolio.hpp"
 
+#ifndef PLAYER_H
+#define PLAYER_H
+
 class Player {
 public:
     Player();
@@ -12,6 +15,7 @@ public:
     std::string GetName();
     int GetAge();
     Portfolio GetPortfolio();
+    
     // Setter
     void SetName(std::string);
     void SetAge(int);
@@ -20,3 +24,5 @@ private:
     int age;
     Portfolio* portfolio;
 };
+
+#endif
