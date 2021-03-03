@@ -2,7 +2,10 @@
 #include <time.h>
 #include <ctime>
 #include <vector>
-#include "transaction.hpp"
+#include "transaction.hpp" // has public header
+
+#ifndef STOCK_H
+#define STOCK_H
 
 class Company {
 public:
@@ -65,3 +68,5 @@ protected:
     // ToString
     friend ostream& operator<<(ostream& strm, const Stock& s);
 };
+
+#endif
