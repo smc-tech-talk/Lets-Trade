@@ -28,9 +28,8 @@ int main(){
     /* Create Stocks */
     //auto stocks = CreateStocks(15);
 
-    cin >> name;
-    //GetUserInput<std::string&>(name, "Insert player name");
-    //GetUserInput<int&>(age, "Insert player age");
+    GetUserInput<std::string&>(name, "Insert player name");
+    GetUserInput<int&>(age, "Insert player age");
 
     cout << "Portfolio" << endl;
 
