@@ -1,49 +1,104 @@
-/* Every header files working in progress here */
 #include "../include/public_header.hpp"
-#include "stock.cpp"
-#include "csvExtractor.cpp"
-#include "banking.cpp"
-#include "player.cpp"
-#include "transaction.cpp"
+#include "stock.hpp"
+#include "transaction.hpp"
+#include "csvExtractor.hpp"
+//#include "./testfiles/player.hpp"
+#include "./testfiles/portfolio.hpp"
+#include <memory>
 
-void CreateStocks(int howMany); // Should return vecotr<Stock*> later
+//extern Date* GAME_TIME = new Date();
+
+template<typename T>
+void GetUserInput(T const &arg, std::string const msg);
+vector< std::unique_ptr<Stock> > CreateStocks(int howMany);  // Should return vecotr<Stock*> later
 int main(){
 
     /* Initializing Data */
     srand(time(NULL));
+    bool isPlaying, isDay, isTrade = true;
+    auto official_date = std::make_unique<Date>();
+    //Player* player;
+    //Portfolio* portfolio;
+    string name;
+    int age;
+    vector<std::unique_ptr<Stock>> fake_shares = CreateStocks(15);
+    Portfolio* portfolio = new Portfolio(fake_shares);
 
-    CreateStocks(15);
 
+    /* Create Stocks */
+    //auto stocks = CreateStocks(15);
+
+    GetUserInput<std::string&>(name, "Insert player name");
+    GetUserInput<int&>(age, "Insert player age");
+
+    cout << "Portfolio" << endl;
+
+    //portfolio->BuyShare(stocks.at(1).get(), 4);
+    //portfolio->BuyShare(stocks.at(2).get(), 1);
+    //portfolio->BuyShare(stocks.at(3).get(), 3);
+    //portfolio->BuyShare(stocks.at(0).get(), 3);
+
+    /*
+    Main Loop
+    while(isPlaying){
+
+        while(isDay){
+
+            while(isTrade){
+                // Print Current Time()
+                // Print Positions
+                // Print Balance
+                // Print All Stocks
+
+                swtich(first_decision){
+                    case:
+                        break;
+                    case:
+                        break;
+                    case:
+                        break;
+                    case:
+                        break;
+                }
+                // If trade ends
+                Date::AddGameTime(official_date);
+                if(official_date->GetHour() = 9)
+                    isTrade = false;
+            }
+            isDay = false;
+        }
+        isPlaying = false;
+    }
+    */
     system("pause");
+    //delete player;
+    //player = NULL;
+    //delete GAME_TIME;
+    //GAME_TIME = NULL;
+
     return 0;
 }
 
-void CreateStocks(int howMany){ // Should return vecotr<Stock*> later
+vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
     int count;
-    std::vector<int> manyIndex;
-    CSVExtractor* e = new CSVExtractor("./companies.csv");
-    RandomNumberGenerator* r = new RandomNumberGenerator(1, 100, howMany);
-    auto result = e->GetResult();
-    manyIndex = r->GetNumbers();
+    vector<std::unique_ptr<Stock>> stocks;
+    auto e = std::make_unique<CSVExtractor>("./companies.csv");
+    auto r = std::make_unique<RandomNumberGenerator>(1, 400, howMany);
+    auto data = e->GetResult();
+    auto manyIndex = r->GetNumbers();
 
     for(int i = 0; i < manyIndex.size(); i++){
         count = manyIndex.at(i);
 
-        for (int j = 0; j < 3; j++)
-            cout << result.at(count).at(j) << endl;
-
-        cout << "\n" << endl;
+        Company* c = new Company(data.at(count).at(1), data.at(count).at(2)); // This will be handled by ~Stock()
+        auto s = std::make_unique<Stock>(data.at(count).at(0), c);
+        stocks.push_back(std::move(s)); // emplace_back() does not work
     }
+    return stocks;
+}
 
-    // Things to do
-    // 1. Make Company* c = new Company(string name, string type);
-    // 2. Make Stock* s = new Stock(string symbol, Company* c)
-    // 3. Push pointer to the vector vector<Stock*>
-    // 4. Company pointers will be handled by ~Stock()
-
-    delete e;
-    delete r;
-    e=NULL;
-    r=NULL;
-
+template <typename T>
+void GetUserInput(T const& arg, std::string const msg){
+    cout << msg << ": \n";
+    cin >> arg;
 }

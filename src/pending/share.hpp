@@ -1,7 +1,7 @@
 #pragma once
-#include "player.hpp"
-#include "stock.hpp"
 
+#include "stock.hpp"
+#include "player.hpp"
 
 class Share {
 public:
@@ -11,14 +11,13 @@ public:
     void SetSymbol(Stock&);
     double GetTotalSpent();
     void toShare();
-    int GetPosition();
+    int GetPositions();
+    void SetPositions(int);
 private:
     Stock* stockSymbol;           // Required
     Player* shareHolder;    // Required
     double purchasePrice;   // Required
-    int position;
-    double totalSpent;
-    friend class Portfolio;
+    int positions = 0; // Any better name?
 };
 
 class Certificate {
