@@ -7,15 +7,64 @@
 #include "transaction.cpp"
 #include <memory>
 
-vector< std::unique_ptr<Stock> > CreateStocks(int howMany);// Should return vecotr<Stock*> later
+vector< std::unique_ptr<Stock> > CreateStocks(int howMany);  // Should return vecotr<Stock*> later
 int main(){
 
     /* Initializing Data */
     srand(time(NULL));
+    bool isPlaying, isDay, isTrade = true;
+    Date* official_date = new Date();
+    string name;
+    int age;
+    vector<Share*> fake_shares;
+    Portfolio* portfolio = new Portfolio(fake_shares);
 
+    /* Create Stocks */
     auto stocks = CreateStocks(15);
-    for (auto& s: stocks)
-        cout << *s << endl;
+
+    /* for (auto& s: stocks)
+        cout << *s << endl; */
+
+    /* Generate Player */
+    //GetUserInput<string>(&name, "Insert player name");
+    //GetUserInput<int>(&age, "Insert player age");
+    name = "Ben";
+    age = 20;
+    Player* player = new Player(name, age, portfolio);
+
+    /* Genertate BankAccount */
+    Account* account  = new Account(player, "#s346xcc", 100000.00);
+
+    /* Main Loop */
+    while(isPlaying){
+
+        while(isDay){
+
+            while(isTrade){
+                // Print Current Time()
+                // Print Positions
+                // Print Balance
+                // Print All Stocks
+                /*
+                swtich(first_decision){
+                    case:
+                        break;
+                    case:
+                        break;
+                    case:
+                        break;
+                    case:
+                        break;
+                }*/
+                // If trade ends
+                Date::AddGameTime(official_date);
+                if(official_date->GetHour() = 9)
+                    isTrade = false;
+            }
+            isDay = false;
+        }
+        isPlaying = false;
+    }
     system("pause");
     return 0;
 }
@@ -36,4 +85,10 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
         stocks.push_back(std::move(s)); // emplace_back() does not work
     }
     return stocks;
+}
+
+template <class T>
+void GetUserInput(T arg, string msg){
+    cout << msg << ": \n";
+    cin >> arg;
 }

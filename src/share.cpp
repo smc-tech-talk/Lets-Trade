@@ -1,5 +1,4 @@
 #include "share.hpp"
-
 /* Share */
 
 // Constructors
@@ -16,8 +15,15 @@ Share::Share(Stock* stock, Player* shareHolder, double pp, int numberOfShares)
 
 // Methods
 
-// ...
+void Share::SetSymbol(Stock& s){this->stockSymbol=&s;}
+double Share::GetTotalSpent(){return this-> totalSpent;}
 
+void toShare(Stock* stock){
+
+}
+
+int Share::GetPositions(){return this->positions;}
+void Share::SetPositions(int p){ this->positions = p; };
 /* Certificate */
 
 // Constructors

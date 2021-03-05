@@ -2,17 +2,24 @@
 #define SHARE_H
 #include "stock.hpp"
 #include "player.hpp"
+#include "stock.hpp"
+
 
 class Share {
 public:
     Share();
     Share(Stock*, Player*, double);
-    Share(Stock*, Player*, double, int);
+    Stock GetSymbol();
+    void SetSymbol(Stock&);
+    double GetTotalSpent();
+    void toShare();
+    int GetPositions();
+    void SetPositions(int);
 private:
-    Stock* stock;           // Required
+    Stock* stockSymbol;           // Required
     Player* shareHolder;    // Required
     double purchasePrice;   // Required
-    int numberOfShares = 0; // Any better name?
+    int positions = 0; // Any better name?
 };
 
 class Certificate {

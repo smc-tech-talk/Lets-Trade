@@ -1,19 +1,14 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <memory>
 #include "portfolio.hpp"
 using namespace std;
 
 // takes user's first name sets up bank account and userShares
-Portfolio::Portfolio(){
-  unique_ptr<Account> bankAccount(new Account());
-  vector<Share*> userShares;
+// We gotta develop this construtor
+Portfolio::Portfolio(vector<Share*> shares){
+  this->playerShares = shares;
 }
 
-Portfolio::~Portfolio(){ }
-
-/* ---------------------------------Trade------------------------------------ */
+// destructor
+Portfolio::~Portfolio(){}
 
 
 // add shares to userShares
@@ -24,7 +19,7 @@ void Portfolio::buyShares(Share* share, int quantity, Date* gameDate){
   // if user already have the stock in userShares
   if(isDuplicate(share)){
       // increment the position
-      share->positions -= quantity;
+      share->GetPositions() -= quantity;
       // game time passes by 30 min
       Date::AddGameTime(gameDate);
   }
@@ -33,16 +28,17 @@ void Portfolio::buyShares(Share* share, int quantity, Date* gameDate){
       this->userShares.push_back(share);
 }
 
+void Portfolio::sellShares(Stock* stock, const int quantity){
 
 // remove shares from userShares
 void Portfolio::sellShares(Share* share, int quantity, Stock* stock, Date* gameDate){
   checkPosInt(quantity);
   if(isDuplicate(share)){
-      if(share->positions >= quantity){
-          share->positions -= quantity;
+      if(share->GetPositions() >= quantity){
+          share->GetPositions() -= quantity;
           Date::AddGameTime(gameDate);
           // if user sells all the shares
-          if(share->positions = 0)
+          if(share->SetPositions(0))
               // remove Shares* from userShares
 //                this->userShares[findShareIndex(share, stock)].erase;
               // scoot userShares
@@ -58,6 +54,9 @@ void Portfolio::sellShares(Share* share, int quantity, Stock* stock, Date* gameD
 
 }
 
+    // new stock
+    else if(index==-1)
+        cout << "\nThe share does not exist.";
 
 bool Portfolio::isDuplicate(Share* share){
   int i = 0;
@@ -67,6 +66,16 @@ bool Portfolio::isDuplicate(Share* share){
       return false;
 }
 
+//
+int indexFinder(Stock* stock){
+
+    // // goes through the loop until the symbols match
+    // for(int i=0;i<v.size(); i++){
+    //     if(stock->GetSymbol()!=v[i]->GetSymbol())
+    //         break;
+    //     else
+    //         return i;
+    // }
 
 // returns index of the share or 0 if not found
 int Portfolio::findShareIndex(Share* share, Stock* stock){
@@ -79,7 +88,6 @@ int Portfolio::findShareIndex(Share* share, Stock* stock){
 
 
 
-int Portfolio::checkPosInt(int n){
 
   while(true){
       if(n >= 1)

@@ -1,4 +1,6 @@
 #pragma once
+#include "player.hpp"
+#include "banking.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -20,6 +22,8 @@ public:
 
 	Account(string uname, int index_bankarr);
 
+	Account(Player* player, string account_number, double balance);
+
 	// Account(Player* p, string accountName, Bank* b); => A constructor using 'Bank' class
 	//~Account();
 
@@ -37,10 +41,9 @@ public:
 	void transfer_Account(Account toAccount, double tmoney);
 
 private:
-
+	Player* player;
 	string account_number;
-
-
+	double balance;
 };
 
 
