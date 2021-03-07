@@ -1,6 +1,4 @@
-#include <cstdlib>
-#include <ctime>
-
+#include "banking.hpp"
 
 string list_bank[9]{
 	"CIT Bank", "Bank of The West", "WELLS FARGO",

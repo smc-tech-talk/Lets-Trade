@@ -1,21 +1,11 @@
-#ifndef STOCK_H
-#define STOCK_H
-
+#pragma once
 #include <time.h>
 #include <ctime>
 #include <vector>
-#include "transaction.hpp"
+#include "transaction.hpp" // has public header
 
-/*
-struct Transaction{
-    Transaction(int, double);
-    string currentTime;
-    int type;
-    double cost;
-
-    // ToString
-    friend ostream& operator<<(ostream& strm, const Transaction& t);
-};*/
+#ifndef STOCK_H
+#define STOCK_H
 
 class Company {
 public:

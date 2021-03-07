@@ -1,51 +1,39 @@
 #include "share.hpp"
-/* Share */
 
-// Constructors
 Share::Share(){};
-Share::Share(Stock* stock, Player* shareHolder, double pp)
-    :stock(stock),
-    shareHolder(shareHolder),
-    purchasePrice(pp){};
-Share::Share(Stock* stock, Player* shareHolder, double pp, int numberOfShares)
-    :stock(stock),
-    shareHolder(shareHolder),
-    purchasePrice(pp),
-    numberOfShares(numberOfShares){};
+Share::Share(Stock* s, int a)
+    :stock(s),
+    position(a){};
 
 // Methods
-
-void Share::SetSymbol(Stock& s){this->stockSymbol=&s;}
-double Share::GetTotalSpent(){return this-> totalSpent;}
-
-void toShare(Stock* stock){
-
-}
-
-int Share::GetPositions(){return this->positions;}
-void Share::SetPositions(int p){ this->positions = p; };
-/* Certificate */
-
-// Constructors
-Certificate::Certificate(){};
-
-// Methods
-void Certificate::PrintCertificate(){
-    string STRING = "Ben's Certificate";
-    cout << "+-------------------------+" << endl;
-    for (int i = 0; i < 15; i++){
-        cout << "|";
-        for (int j = 0; j < 25; j++){
-            if(j == 3 && i == 3){
-                for (int k = 0; k < STRING.size(); k++){
-                    cout << STRING[k];
-                    j++;
-                }
-                cout << ' ';
-            }else
-                cout << ' ';
-        }
-        cout << "|\n";
-    }
-    cout << "+-------------------------+" << endl;
+void Share::IncreaseAmount(int a)
+{
+    double current = ( this->stock )->GetCurrentPrice();
+    Stock* s = this->stock;
+    cout << *s << endl;
+    this->position += a;
+    SetValue(current * this->position);
 };
+void Share::DecreaseAmount(int a)
+{
+    double current = ( this->stock )->GetCurrentPrice();
+    if(this->position > 0)
+        this->position -= a;
+    SetValue(current * this->position);
+    Transaction newTransaction = Transaction(STOCK_SELL);
+    Transaction::AddTransaction(this->transactionHistory, newTransaction);
+};
+
+// Getter
+Stock Share::GetStock()
+    { return *(this->stock); };
+Stock* Share::GetStockPtr()
+    { return this->stock; };
+int Share::GetPosition()
+    { return this->position; };
+std::vector<Transaction> Share::GetTransactionHistory()
+    { return this->transactionHistory; };
+
+// Settter
+void Share::SetValue(double v)
+    { this->value = v; };

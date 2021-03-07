@@ -1,31 +1,30 @@
-#pragma once
-#include <iostream>
-#include <string>
-#include <vector>
-#include <memory>
 #include "player.hpp"
 
-Player::Player(){
-    this->playerName = getFirstName();
-    this->playerAge = getAge();
-    unique_ptr<Account> bankAccount(new Account());
-    unique_ptr<Portfolio> playerPortfolio(new Portfolio());
-}
-Player::Player(string pN, int pA, Portfolio* p){
-    setFirstName(pN);
-    setAge(pA);
-    setPortfolio(p);
-    // keep-> unique_ptr<Account> bankAccount(new Account());
-    // keep-> unique_ptr<Portfolio> playerPortfolio(new Portfolio());
-}
+Player::Player(){};
+Player::Player(std::string name, int age)
+    :name(name),
+    age(age){};
+Player::Player(std::string n, int a, Portfolio* p)
+    :name(n),
+    age(a),
+    portfolio(p){};
 
-Player::~Player(){}
+// Getter
+std::string Player::GetName()
+    { return this->name; };
+int Player::GetAge()
+    { return this->age; };
+Portfolio Player::GetPortfolio()
+    { return *(this->portfolio); };
 
+// Setter
+void Player::SetName(std::string name)
+    { this->name = name; };
+void Player::SetAge(int age)
+    { this->age = age; };
 
-// setters
-void Player::setPlayerName(string pN){ this->playerName = pN; };
-void Player::setPlayerAge(int pA){ this->playerAge = pA; };
-
-// getters
-string Player::getPlayerName(){ return this->playerName; };
-int Player::getPlayerAge(){ return this->playerAge; };
+// Destructor
+Player::~Player(){
+    delete this->portfolio;
+    this->portfolio = NULL;
+};

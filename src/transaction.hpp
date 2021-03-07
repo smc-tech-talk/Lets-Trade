@@ -1,6 +1,11 @@
+#pragma once
+#include "../include/public_header.hpp"
+#include <vector>
+#include <time.h>
+
+
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
-#include <time.h>
 
 enum TRANSACTION_TYPE { DEFAULT, STOCK_BUY, STOCK_SELL, ACCOUNT_DEPOSIT, ACCOUNT_WITHDRAW };
 enum DAYS_OF_MONTH { JAN = 31, FEB = 28, MAR = 31, APR = 30, MAY = 31, JUN = 30,
@@ -18,7 +23,7 @@ public:
     int GetMonth();
     int GetDay();
     int GetHour();
-    string GetTimeStamp();
+    std::string GetTimeStamp();
 
     // Methods
     void AddYear();  // Only adding one year is possible
@@ -28,7 +33,7 @@ public:
     static void AddGameTime(Date*);
     DAYS_OF_MONTH GetMaxDate();
 
-    friend ostream& operator<<(ostream& strm, Date& d);
+    friend std::ostream& operator<<(std::ostream& strm, Date& d);
 
 private:
     int year;
@@ -49,7 +54,7 @@ public:
     // Get
     Date GetDate();
     double GetAmount();
-    string GetTransactionType();
+    std::string GetTransactionType();
 
     // Set
     void SetDate(Date);
@@ -58,7 +63,7 @@ public:
     static void AddTransaction(vector<Transaction>&, Transaction&);
 
     // In progress
-    string GetMonth();
+    std::string GetMonth();
 
     friend ostream& operator<<(ostream& strm, Transaction& t);
 

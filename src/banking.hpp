@@ -1,9 +1,10 @@
 #pragma once
-#include "player.hpp"
-#include "banking.hpp"
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <string>
 #include <vector>
+//#include "player.hpp"
 using namespace std;
 
 /*
