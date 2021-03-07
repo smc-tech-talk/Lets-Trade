@@ -2,8 +2,8 @@
 #include "stock.hpp"
 #include "transaction.hpp"
 #include "csvExtractor.hpp"
-//#include "./testfiles/player.hpp"
-#include "./testfiles/portfolio.hpp"
+#include "player.hpp"
+#include "portfolio.hpp"
 #include <memory>
 
 //extern Date* GAME_TIME = new Date();
@@ -17,26 +17,23 @@ int main(){
     srand(time(NULL));
     bool isPlaying, isDay, isTrade = true;
     auto official_date = std::make_unique<Date>();
-    //Player* player;
-    //Portfolio* portfolio;
+    Player* player;
     string name;
     int age;
     vector<std::unique_ptr<Stock>> fake_shares = CreateStocks(15);
     Portfolio* portfolio = new Portfolio(fake_shares);
 
-
     /* Create Stocks */
     //auto stocks = CreateStocks(15);
-
     GetUserInput<std::string&>(name, "Insert player name");
     GetUserInput<int&>(age, "Insert player age");
 
-    cout << "Portfolio" << endl;
+    player = new Player(name, age, portfolio);
 
-    //portfolio->BuyShare(stocks.at(1).get(), 4);
-    //portfolio->BuyShare(stocks.at(2).get(), 1);
-    //portfolio->BuyShare(stocks.at(3).get(), 3);
-    //portfolio->BuyShare(stocks.at(0).get(), 3);
+    portfolio->BuyShare(stocks.at(1).get(), 4);
+    portfolio->BuyShare(stocks.at(2).get(), 1);
+    portfolio->BuyShare(stocks.at(3).get(), 3);
+    portfolio->BuyShare(stocks.at(0).get(), 3);
 
     /*
     Main Loop
