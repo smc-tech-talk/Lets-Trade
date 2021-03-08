@@ -9,7 +9,7 @@
 //extern Date* GAME_TIME = new Date();
 
 template<typename T>
-void GetUserInput(T const &arg, std::string const msg);
+void GetUserInput(const T &arg, const std::string msg);
 vector< std::unique_ptr<Stock> > CreateStocks(int howMany);  // Should return vecotr<Stock*> later
 int main(){
 
@@ -95,7 +95,7 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
 }
 
 template <typename T>
-void GetUserInput(T const& arg, std::string const msg){
+void GetUserInput(const T& arg, const std::string msg){
     cout << msg << ": \n";
     cin >> arg;
 }
