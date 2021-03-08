@@ -8,7 +8,7 @@
 
 class CSVExtractor{
 public:
-    CSVExtractor(string);
+    CSVExtractor(const string);
     vector<vector<string>> GetResult();
     void ExtractData(ifstream&);
     void ExtractOneLine(ifstream&, string&, string&, string&);
