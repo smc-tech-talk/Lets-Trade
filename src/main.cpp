@@ -9,7 +9,7 @@
 //extern Date* GAME_TIME = new Date();
 
 template<typename T>
-void GetUserInput(const T &arg, const std::string msg);
+void GetUserInput(T &arg, const std::string msg);
 vector< std::unique_ptr<Stock> > CreateStocks(int howMany);  // Should return vecotr<Stock*> later
 int main(){
 
@@ -20,8 +20,8 @@ int main(){
     Player* player;
     string name;
     int age;
-    vector<std::unique_ptr<Stock>> fake_shares = CreateStocks(15);
-    Portfolio* portfolio = new Portfolio(fake_shares);
+    vector<std::unique_ptr<Stock>> stocks = CreateStocks(15);
+    Portfolio* portfolio = new Portfolio(stocks);
 
     /* Create Stocks */
     //auto stocks = CreateStocks(15);
@@ -95,7 +95,7 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
 }
 
 template <typename T>
-void GetUserInput(const T& arg, const std::string msg){
+void GetUserInput(T& arg, const std::string msg){
     cout << msg << ": \n";
     cin >> arg;
 }
