@@ -1,28 +1,28 @@
 #pragma once
 
-#include <vector>
-#include <string>
+#include <memory>
 #include "share.hpp"
-#include "transaction.hpp"
 
-class Portfolio{
+#ifndef PORTFOLIO_H
+#define PORTFOLIO_H
 
-private:
-    vector<Share*> playerShares;
-
+class Portfolio {
 public:
-    // default constructor
+    // Constructors
     Portfolio();
-    Portfolio(vector<Share*> shares);
-    ~Portfolio();
-    //void buyShares(Share*, int); // overloading
-    //void buyShares(Share*, int, Date*); // overloading
-    //void sellShares(Share*, int);
-    //int checkPosInt(int n);
-    //bool isDuplicate(Share*);
-    //int findShareIndex(Share*, Stock*);
+    Portfolio(const vector<std::unique_ptr<Stock>>&);
 
-    /*display*/
-    //void displayPortfolio() const;
-    //void displayPlayerInfo() const;
+    // Getter
+    std::vector<Share> GetShares();
+    Share GetShareByIndex(int);
+    Share GetShareByStock(Stock*);
+
+    // Methods
+    void InitializeEmptyShares(const vector<std::unique_ptr<Stock>>&);
+    void BuyShare(Stock*, int);
+    void SellShare(Stock*, int);
+private:
+    std::vector<Share> shares;
 };
+
+#endif
