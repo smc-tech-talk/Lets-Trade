@@ -3,7 +3,7 @@
 /* CSVExtractor */
 
 // Constructor
-CSVExtractor::CSVExtractor(string filePath){
+CSVExtractor::CSVExtractor(const string filePath){
     ifstream ip(filePath);
     this->ExtractData(ip);
     ip.close();
