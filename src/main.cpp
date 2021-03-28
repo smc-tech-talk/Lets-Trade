@@ -2,79 +2,64 @@
 #include "stock.hpp"
 #include "transaction.hpp"
 #include "csvExtractor.hpp"
-#include "player.hpp"
-#include "portfolio.hpp"
+//#include "player.hpp"
+//#include "portfolio.hpp"
 #include <memory>
 
-//extern Date* GAME_TIME = new Date();
 
 template<typename T>
 void GetUserInput(T &arg, const std::string msg);
-vector< std::unique_ptr<Stock> > CreateStocks(int howMany);  // Should return vecotr<Stock*> later
+vector< std::unique_ptr<Stock> > CreateStocks(int howMany); // Should return vecotr<Stock*> later
+void PrintStart(const std::unique_ptr<Date>& date);
+void PrintDay(int day, double balance = 0.00);
+void PrintTrade();
+void PrintPortfolioDemo();
 int main(){
 
-    /* Initializing Data */
+    int PAUSE;
     srand(time(NULL));
-    bool isPlaying, isDay, isTrade = true;
-    auto official_date = std::make_unique<Date>();
-    Player* player;
+    static int day = 1;
+    bool isPlaying = true, isDay = true, isTrade = true;
+    auto game_time = std::make_unique<Date>();
+    /*
     string name;
     int age;
+    auto official_date = std::make_unique<Date>();
+    Player* player;
+    Account* account;
     vector<std::unique_ptr<Stock>> stocks = CreateStocks(15);
     Portfolio* portfolio = new Portfolio(stocks);
 
-    /* Create Stocks */
-    //auto stocks = CreateStocks(15);
+    auto stocks = CreateStocks(15);
     GetUserInput<std::string&>(name, "Insert player name");
     GetUserInput<int&>(age, "Insert player age");
 
     player = new Player(name, age, portfolio);
+    account = new Account(player);
 
-    portfolio->BuyShare(stocks.at(1).get(), 4);
-    portfolio->BuyShare(stocks.at(2).get(), 1);
-    portfolio->BuyShare(stocks.at(3).get(), 3);
-    portfolio->BuyShare(stocks.at(0).get(), 3);
-
-    /*
-    Main Loop
+    */
     while(isPlaying){
-
+        PrintStart(game_time);
         while(isDay){
-
+            PrintDay(day);
             while(isTrade){
-                // Print Current Time()
-                // Print Positions
-                // Print Balance
-                // Print All Stocks
-
-                swtich(first_decision){
-                    case:
-                        break;
-                    case:
-                        break;
-                    case:
-                        break;
-                    case:
-                        break;
-                }
-                // If trade ends
-                Date::AddGameTime(official_date);
-                if(official_date->GetHour() = 9)
+                PrintTrade();
+                std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
+                std::cin >> PAUSE;
+                std::cout << "1 Selected!\n" << endl;
+                Date::AddGameTime(*(game_time));
+                PrintPortfolioDemo();
+                if(game_time->GetHour() == 9)
                     isTrade = false;
             }
             isDay = false;
         }
         isPlaying = false;
     }
-    */
-    system("pause");
-    //delete player;
-    //player = NULL;
-    //delete GAME_TIME;
-    //GAME_TIME = NULL;
 
     return 0;
 }
+
 
 vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
     int count;
@@ -98,4 +83,39 @@ template <typename T>
 void GetUserInput(T& arg, const std::string msg){
     cout << msg << ": \n";
     cin >> arg;
+}
+
+/* All Console Printing Functions Here */
+void PrintStart(const std::unique_ptr<Date>& date){
+    std::cout << "\n" << std::endl;
+    std::cout << "\t\t\t********************************************" << std::endl;
+    std::cout << "\t\t\t*** Welcome to the world of Let's Trade! ***" << std::endl;
+    std::cout << "\t\t\t********************************************" << std::endl;
+    std::cout << "\n\t\t\tCurrent Time: " << std::endl;
+    std::cout << "\t\t\t" << *date << std::endl;
+}
+void PrintDay(int day, double balance){
+    std::cout << "\n" << std::endl;
+    std::cout << "\t\t\t\t\t| Day " << day << " |" << std::endl;
+    std::cout << "\n"<< std::endl;
+    std::cout << "\tYou have $ " << balance  << "in your account.\n" << std::endl;
+    PrintPortfolioDemo();
+}
+void PrintTrade(){
+    std::cout << "\n" << std::endl;
+    std::cout << "\tWhat would you like to do?\n\n" << endl;
+    std::cout << "\t1. Print stock lists" << endl;
+    std::cout << "\t2. Buy a stock" << endl;
+    std::cout << "\t3. Sell a stock" << endl;
+    std::cout << "\t4. Check my portfolio" << endl;
+    std::cout << "\t5. Check my banking status" << endl;
+    std::cout << "\n"<< std::endl;
+}
+void PrintPortfolioDemo(){
+    std::cout << "\nThis is portfolio demo version\n" << std::endl;
+    std::cout << "=============================" << std::endl;
+    std::cout << "Income: " << std::endl;
+    std::cout << "\nLoss: " << std::endl;
+    std::cout << "\nBalance: " << std::endl;
+    std::cout << "=============================" << std::endl;
 }

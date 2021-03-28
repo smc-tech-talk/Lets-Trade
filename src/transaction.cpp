@@ -58,8 +58,8 @@ void Date::AddHour(){ // 9am to 3pm
         this->hour = 9;
     }
 };
-void Date::AddGameTime(Date* gameDate){ // static
-    gameDate->AddHour();
+void Date::AddGameTime(Date& gameDate){ // static
+    gameDate.AddHour();
 };
 DAYS_OF_MONTH Date::GetMaxDate(){
     DAYS_OF_MONTH mth;
