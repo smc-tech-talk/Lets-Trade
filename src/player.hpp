@@ -1,28 +1,28 @@
 #pragma once
-#include "human.hpp"
-#include "portfolio.hpp"
-#include "banking.hpp"
 #include "portfolio.hpp"
 
+#ifndef PLAYER_H
+#define PLAYER_H
 
-#include <vector>
-#include <string>
+class Player {
+public:
+    Player();
+    ~Player();
+    Player(std::string, int);
+    Player(std::string, int, Portfolio*);
 
-using namespace std;
-
-class Player: public Human{
-    protected:
-        string playerName;
-        int playerAge;
-
-    public:
-        // default constructor
-        Player();
-        ~Player();
-        // setter
-        void setPlayerName(string pN);
-        void setPlayerAge(int pA);
-        // getter
-        string getPlayerName();
-        int getPlayerAge();
+    // Getter
+    std::string GetName();
+    int GetAge();
+    Portfolio GetPortfolio();
+    
+    // Setter
+    void SetName(std::string);
+    void SetAge(int);
+private:
+    std::string name;
+    int age;
+    Portfolio* portfolio;
 };
+
+#endif

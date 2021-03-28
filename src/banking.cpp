@@ -1,84 +1,96 @@
-
 #include "banking.hpp"
-#include <cstdlib>
-#include <ctime>
 
+Account::Account(Player* a_player) {
 
-string list_bank[9]{
-	"CIT Bank", "Bank of The West", "WELLS FARGO",
-	"Washington Federal Savings and Loan", "Umpqua Bank",
-	"Golden1 Credit Union", "EASTWEST BANK", "Charles Schwab", "CHASE"
-};
-
-Account::Account() {
-
-	bal_account = 0;
-
-	cout << "please input your username : " << endl;
-	cin >> this->username;
-
-	bank_name = list_bank[rand() % 9];
-	cout << "your account is randomly creadted on " << this->bank_name << endl;
-
-	//log.push_back(username+"'s account created on "+bank_name);
-
+	player = a_player;
+	bank_name = list_bank[rand()%9];
+	create_account_number();
+	initialize_balance();
 
 }
 
-Account::Account(string uname, int index_bankarr) {
 
-	bal_account = 0;
-	username = uname;
-	bank_name = list_bank[index_bankarr];
+Account::Account(Player* player, string account_number, double balance)
+	:player(player),
+	account_number(account_number),
+	balance(balance){};
+
+
+void Account::initialize_balance(){
+	this->balance = 100000.00;
+}
+
+
+double Account::get_balance(){
+
+	return balance;
+}
+
+void Account::create_account_number(){
+	
+	char address[8];
+
+     for(int i =0; i<8; i++){
+
+		 address[i] = codebook[rand()%69];
+
+	 }
+
+	 this->account_number = address;
+ 
+}
+
+void Account::input_record(Transaction t, Date* d){
+
+	if (t.GetTransactionType() == "Buy Stock"){
+
+		balance -= t.GetAmount();
+		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
+		log.push_back(tmp);
+	}
+	if (t.GetTransactionType() == "Sell Stock"){
+
+		balance += t.GetAmount();
+		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
+		log.push_back(tmp);
+	}
+	if (t.GetTransactionType() == "Bank Account Deposit"){
+
+		balance += t.GetAmount();
+		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
+		log.push_back(tmp);
+	}
+	if (t.GetTransactionType() == "Bank Account Withraw"){
+
+		balance -= t.GetAmount();
+		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
+		log.push_back(tmp);
+	}
 
 }
 
-string Account::time_stamp() {
 
-	string ttime;
+void Account::print_record() {
 
-	return ttime;
+	if(log.empty()){
+		cout << "There is no transaction yet." << endl;
+	}
 
-}
+	else{
 
-void Account::record_Account(string rec) {
-
-	log.push_back(rec);
-
-}
-
-void Account::info_Account(Account a){
-
-	cout << "User "<<a.username << "'s account" << endl;
-	cout << "Bank fo transaction : " << a.bank_name << endl;
-	cout << "Current balance : " << a.bal_account << endl;
+	for(int i=0; i<log.size();i++){
+		cout<<log.at(i);
+	}
+	}
 
 }
 
-void Account::decreased_bal(double dprice) {
+void Account::info_Account(){
 
-
-	bal_account -= dprice;
-
-	string record;
-	record = "";
-	Account::record_Account(record);
-
-
-}
-
-void Account::increased_bal(double iprice) {
-
-	bal_account += iprice;
-
-	string record;
-	record = "";
-	Account::record_Account(record);
-}
-
-void Account::transfer_Account(Account toAccount, double tmoney) {
-
-	bal_account -= tmoney;
-	toAccount.bal_account += tmoney;
+	cout << "User "<< player->GetName() << "'s account" << endl;
+	cout << "Bank fo transaction : " << bank_name << endl;
+	cout << "Account number : " << account_number << endl;
+	cout << "Current balance : " << get_balance() << endl;
+	print_record();
 
 }

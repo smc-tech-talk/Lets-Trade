@@ -1,29 +1,35 @@
+#pragma once
+
+#include <memory>
+#include "stock.hpp"
+#include "transaction.hpp"
+
 #ifndef SHARE_H
 #define SHARE_H
-#include "stock.hpp"
-#include "player.hpp"
 
 class Share {
 public:
     Share();
-    Share(Stock*, Player*, double);
-    Share(Stock*, Player*, double, int);
-private:
-    Stock* stock;           // Required
-    Player* shareHolder;    // Required
-    double purchasePrice;   // Required
-    int numberOfShares = 0; // Any better name?
-};
+    Share(Stock*, int);
 
-class Certificate {
-public:
-    Certificate();
-    void PrintCertificate();
+    // Methods
+    void IncreaseAmount(int);
+    void DecreaseAmount(int);
+
+    // Getter
+    Stock GetStock();
+    Stock* GetStockPtr();
+    int GetPosition();
+    std::vector<Transaction> GetTransactionHistory();
+
+    // Setter
+    void SetValue(double);
+
 private:
-    Company* company;
-    Player* owner;
     Stock* stock;
-    Date* date;
+    int position = 0;
+    std::vector<Transaction> transactionHistory;
+    double value = 0.00;
 };
 
 #endif
