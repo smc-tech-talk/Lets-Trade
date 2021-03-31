@@ -2,8 +2,9 @@
 #include "stock.hpp"
 #include "transaction.hpp"
 #include "csvExtractor.hpp"
-//#include "player.hpp"
-//#include "portfolio.hpp"
+#include "player.hpp"
+#include "portfolio.hpp"
+//#include "banking.hpp"
 #include <memory>
 
 
@@ -21,23 +22,26 @@ int main(){
     static int day = 1;
     bool isPlaying = true, isDay = true, isTrade = true;
     auto game_time = std::make_unique<Date>();
-    /*
+    
     string name;
     int age;
     auto official_date = std::make_unique<Date>();
     Player* player;
-    Account* account;
-    vector<std::unique_ptr<Stock>> stocks = CreateStocks(15);
+    auto stocks = CreateStocks(15);
+    // vector<std::unique_ptr<Stock>> stocks = CreateStocks(15);
     Portfolio* portfolio = new Portfolio(stocks);
 
-    auto stocks = CreateStocks(15);
+    
     GetUserInput<std::string&>(name, "Insert player name");
     GetUserInput<int&>(age, "Insert player age");
 
     player = new Player(name, age, portfolio);
+    /*
+    Account* account;
+    
     account = new Account(player);
-
     */
+    
     while(isPlaying){
         PrintStart(game_time);
         while(isDay){
