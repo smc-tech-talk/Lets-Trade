@@ -89,7 +89,16 @@ void GetUserInput(T& arg, const std::string msg){
 void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "\n" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
-    std::cout << "\t\t\t*** Welcome to the world of Let's Trade! ***" << std::endl;
+    std::cout << " __                  __   __                 ________                         __           " << std::endl;
+    std::cout << "|  \\                |  \\ |  \\               |        \\                       |  \\          " << std::endl;
+    std::cout << "| $$       ______  _| $$_| $$ _______        \\$$$$$$$$______   ______    ____| $$  ______  " << std::endl;
+    std::cout << "| $$      /      \\|   $$ \\$ /       \\         | $$  /      \\ |      \\  /      $$ /      \\ " << std::endl;
+    std::cout << "| $$     |  $$$$$$\\\\$$$$$$  |  $$$$$$$         | $$ |  $$$$$$\\ \\$$$$$$\\|  $$$$$$$|  $$$$$$\\" << std::endl;
+    std::cout << "| $$     | $$    $$ | $$ __  \\$$    \\          | $$ | $$   \\$$/      $$| $$  | $$| $$    $$" << std::endl;
+    std::cout << "| $$_____| $$$$$$$$ | $$|  \\ _\\$$$$$$\\         | $$ | $$     |  $$$$$$$| $$__| $$| $$$$$$$$" << std::endl;
+    std::cout << "| $$     \\\\$$    \\  \\$$  $$|       $$          | $$ | $$      \\$$    $$ \\$$    $$ \\$$     \\" << std::endl;
+    std::cout << " \\$$$$$$$$ \\$$$$$$$   \\$$$$  \\$$$$$$$           \\$$  \\$        \\$$$$$$$  \\$$$$$$$  \\$$$$$$$" << std::endl;
+    std::cout << "" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
     std::cout << "\n\t\t\tCurrent Time: " << std::endl;
     std::cout << "\t\t\t" << *date << std::endl;
