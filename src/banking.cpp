@@ -8,8 +8,6 @@ Account::Account(Player* a_player) {
 	initialize_balance();
 
 }
-// 트랜스액션 함수로 돈 조절하는거 따로 만들기!
-// 텍스트
 
 Account::Account(Player* player, string account_number, double balance)
 	:player(player),
