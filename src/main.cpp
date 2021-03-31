@@ -119,3 +119,13 @@ void PrintPortfolioDemo(){
     std::cout << "\nBalance: " << std::endl;
     std::cout << "=============================" << std::endl;
 }
+
+// /*
+// void PrintPortfolioDemo2(double balance){
+//     std::cout << "\n" << player.GetName() << \'s Portfolio:\n" << std::endl;
+//     std::cout << "=============================" << std::endl;
+//     std::cout << "Balance: " << balance << std::endl;
+//     std::cout << "\nGain: " << std::endl;
+//     std::cout << "\nLoss: " << std::endl;
+//     std::cout << "=============================" << std::endl;
+// }
