@@ -37,9 +37,11 @@ public:
 	void info_Account();
 
 
+
 private:
 	Player* player;
 	string account_number;
 	double balance;
 	string bank_name;
+
 };

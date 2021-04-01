@@ -77,7 +77,7 @@ int main(){
                         break;
                     }
                     case 5:{
-                        account->print_record();
+                        account->info_Account();
                         break;
                     }
                 }
