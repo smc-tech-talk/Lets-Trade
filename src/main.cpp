@@ -56,7 +56,6 @@ int main(){
         }
         isPlaying = false;
     }
-
     return 0;
 }
 
