@@ -109,3 +109,7 @@ void Account::info_Account(){
 void Account::add_balance(double balance){
 	this->balance_records.push_back(balance);
 }
+
+double Account::get_previous_balance(){
+	return this->balance_records.back();
+}
