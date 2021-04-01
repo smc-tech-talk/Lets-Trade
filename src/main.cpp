@@ -11,7 +11,7 @@ template<typename T>
 void GetUserInput(T &arg, const std::string msg);
 vector< std::unique_ptr<Stock> > CreateStocks(int howMany); // Should return vecotr<Stock*> later
 void PrintStart(const std::unique_ptr<Date>& date);
-void PrintDay(int day, double balance = 0.00);
+void PrintDay(int day, Account& account);
 void PrintTrade();
 void PrintPortfolioDemo();
 void PrintPortfolio(Account& account, Player& player);
@@ -42,7 +42,7 @@ int main(){
     while(isPlaying){
         PrintStart(game_time);
         while(isDay){
-            PrintDay(day, account->get_balance());
+            PrintDay(day, *account);
             PrintPortfolio(*account, *player);
             while(isTrade){
                 PrintTrade();
@@ -112,11 +112,11 @@ void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "\n\t\t\tCurrent Time: " << std::endl;
     std::cout << "\t\t\t" << *date << std::endl;
 }
-void PrintDay(int day, double balance){
+void PrintDay(int day, Account& account){
     std::cout << "\n" << std::endl;
     std::cout << "\t\t\t\t\t| Day " << day << " |" << std::endl;
     std::cout << "\n"<< std::endl;
-    std::cout << "\tYour Balance: $" << balance << std::endl;
+    std::cout << "\tYour Balance: $" << account.get_balance() << std::endl;
 }
 void PrintTrade(){
     std::cout << "\n" << std::endl;
