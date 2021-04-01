@@ -7,6 +7,7 @@
 #include "banking.hpp"
 #include <memory>
 
+void DisplayMessage(const std::string msg);
 template<typename T>
 void GetUserInput(T &arg, const std::string msg);
 vector< std::unique_ptr<Stock> > CreateStocks(int howMany); // Should return vecotr<Stock*> later
@@ -86,6 +87,11 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
     return stocks;
 }
 
+
+void DisplayMessage(const std::string msg){
+    cout << msg << ": \n";
+}
+
 template <typename T>
 void GetUserInput(T& arg, const std::string msg){
     cout << msg << ": \n";
@@ -120,7 +126,7 @@ void PrintDay(int day, Account& account){
 }
 void PrintTrade(){
     std::cout << "\n\t==========Main Menu=========== \n" << endl;
-    std::cout << "\t1 Display Stock Lists" << endl;
+    std::cout << "\t1. Display Stock Lists" << endl;
     std::cout << "\t2. Buy Stocks" << endl;
     std::cout << "\t3. Sell Stocks" << endl;
     std::cout << "\t4. Check Portfolio" << endl;
