@@ -119,13 +119,13 @@ void PrintDay(int day, Account& account){
     std::cout << "\tYour Balance: $" << account.get_balance() << std::endl;
 }
 void PrintTrade(){
-    std::cout << "\n" << std::endl;
-    std::cout << "\tWhat would you like to do?\n\n" << endl;
-    std::cout << "\t1. Print stock lists" << endl;
-    std::cout << "\t2. Buy a stock" << endl;
-    std::cout << "\t3. Sell a stock" << endl;
-    std::cout << "\t4. Check my portfolio" << endl;
-    std::cout << "\t5. Check my banking status" << endl;
+    std::cout << "\n\t==========Main Menu=========== \n" << endl;
+    std::cout << "\t1 Display Stock Lists" << endl;
+    std::cout << "\t2. Buy Stocks" << endl;
+    std::cout << "\t3. Sell Stocks" << endl;
+    std::cout << "\t4. Check Portfolio" << endl;
+    std::cout << "\t5. Check Bank Account" << endl;
+    std::cout << "\t=============================" << std::endl;
     std::cout << "\n"<< std::endl;
 }
 void PrintPortfolioDemo(){
