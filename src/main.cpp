@@ -14,7 +14,7 @@ void PrintStart(const std::unique_ptr<Date>& date);
 void PrintDay(int day, double balance = 0.00);
 void PrintTrade();
 void PrintPortfolioDemo();
-void PrintPortfolioDemo2(Account& account, Player& player);
+void PrintPortfolio(Account& account, Player& player);
 
 // main
 int main(){
@@ -43,7 +43,7 @@ int main(){
         PrintStart(game_time);
         while(isDay){
             PrintDay(day, account->get_balance());
-            //PrintPortfolioDemo2(100, *player);
+            PrintPortfolio(*account, *player);
             while(isTrade){
                 PrintTrade();
                 std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
@@ -138,7 +138,7 @@ void PrintPortfolioDemo(){
 }
 
 
-void PrintPortfolioDemo2(Account& account, Player& player){
+void PrintPortfolio(Account& account, Player& player){
     std::cout << "\n" << player.GetName() << "'s Portfolio:\n" << std::endl;
     std::cout << "=============================" << std::endl;
     std::cout << "Balance: " << account.get_balance() << std::endl;
