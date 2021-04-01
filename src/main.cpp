@@ -14,7 +14,7 @@ void PrintStart(const std::unique_ptr<Date>& date);
 void PrintDay(int day, double balance = 0.00);
 void PrintTrade();
 void PrintPortfolioDemo();
-void PrintPortfolioDemo2(double balance, Player& player);
+void PrintPortfolioDemo2(Account& account, Player& player);
 int main(){
 
     int PAUSE;
@@ -42,15 +42,15 @@ int main(){
     while(isPlaying){
         PrintStart(game_time);
         while(isDay){
-            PrintDay(day, balance);
-            PrintPortfolioDemo2(100, *player);
+            //PrintDay(day, balance);
+            //PrintPortfolioDemo2(100, *player);
             while(isTrade){
                 PrintTrade();
                 std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
                 std::cin >> PAUSE;
                 std::cout << "1 Selected!\n" << endl;
                 Date::AddGameTime(*(game_time));
-                PrintPortfolioDemo2(100, *player);
+                //PrintPortfolioDemo2(100, *player);
                 if(game_time->GetHour() == 9)
                     isTrade = false;
             }
@@ -96,6 +96,7 @@ void GetUserInput(T& arg, const std::string msg){
 void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "\n" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
+    std::cout << "\t\t\t\t\tWelcome to" << std::endl;
     std::cout << " __                  __   __                 ________                         __           " << std::endl;
     std::cout << "|  \\                |  \\ |  \\               |        \\                       |  \\          " << std::endl;
     std::cout << "| $$       ______  _| $$_| $$ _______        \\$$$$$$$$______   ______    ____| $$  ______  " << std::endl;
@@ -105,6 +106,7 @@ void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "| $$_____| $$$$$$$$ | $$|  \\ _\\$$$$$$\\         | $$ | $$     |  $$$$$$$| $$__| $$| $$$$$$$$" << std::endl;
     std::cout << "| $$     \\\\$$    \\  \\$$  $$|       $$          | $$ | $$      \\$$    $$ \\$$    $$ \\$$     \\" << std::endl;
     std::cout << " \\$$$$$$$$ \\$$$$$$$   \\$$$$  \\$$$$$$$           \\$$  \\$        \\$$$$$$$  \\$$$$$$$  \\$$$$$$$" << std::endl;
+    std::cout << "\n\t\t\t\tPowered by SMC Tech Talk Team 2021" << std::endl;
     std::cout << "" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
     std::cout << "\n\t\t\tCurrent Time: " << std::endl;
@@ -136,10 +138,10 @@ void PrintPortfolioDemo(){
 }
 
 
-void PrintPortfolioDemo2(double balance, Player& player){
+void PrintPortfolioDemo2(Account& account, Player& player){
     std::cout << "\n" << player.GetName() << "'s Portfolio:\n" << std::endl;
     std::cout << "=============================" << std::endl;
-    std::cout << "Balance: " << balance << std::endl;
+    std::cout << "Balance: " << account.get_balance() << std::endl;
     std::cout << "\nGain: " << std::endl;
     std::cout << "\nLoss: " << std::endl;
     std::cout << "=============================" << std::endl;
