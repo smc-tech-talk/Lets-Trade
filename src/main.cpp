@@ -33,8 +33,9 @@ int main(){
     auto stocks = CreateStocks(15);
     Portfolio* portfolio = new Portfolio(stocks);
 
-    GetUserInput<std::string&>(name, "Insert player name");
-    GetUserInput<int&>(age, "Insert player age");
+    DisplayMessage("Welcome, Enter player info to start");
+    GetUserInput<std::string&>(name, "Enter Your Name");
+    GetUserInput<int&>(age, "Enter Your Age");
 
     player = new Player(name, age, portfolio);
     Account* account;
