@@ -51,6 +51,36 @@ int main(){
                 int userInput = 0;
                 PrintTrade();
                 GetUserInput(userInput, "Enter Your Choice");
+                switch(userInput){
+                    case 1:{
+                        //Stock::PrintStockLists();
+                        break;
+                    }
+                    case 2:{
+                        Stock* symbol;
+                        int quantity;
+                        // read stock symbol input here
+
+                        GetUserInput(quantity, "Quantity");
+                        portfolio->BuyShare(symbol, quantity);
+                        break;
+                    }
+                    case 3:{
+                        // Stock* symbol;
+                        // int quantity;
+                        // GetUserInput(quantity, "Quantity");
+                        // portfolio->SellShare(symbol, quantity);
+                        break;
+                    }
+                    case 4:{
+                        //Portfolio::PrintPortfolio(userInput);
+                        break;
+                    }
+                    case 5:{
+                        account->print_record();
+                        break;
+                    }
+                }
                 std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
                 std::cin >> PAUSE;
                 std::cout << "1 Selected!\n" << endl;
