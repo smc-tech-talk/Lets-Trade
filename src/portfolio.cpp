@@ -21,7 +21,6 @@ void Portfolio::InitializeEmptyShares(const vector<std::unique_ptr<Stock>>& stoc
         for(auto& s : stocks){
             Share share = Share(s.get(), 0);
             this->shares.push_back(share);
-            cout << "Initialized a stock" << endl;
         }
     } catch(const char* errMessage){
         exit(1);

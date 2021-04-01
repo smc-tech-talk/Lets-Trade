@@ -4,9 +4,8 @@
 #include "csvExtractor.hpp"
 #include "player.hpp"
 #include "portfolio.hpp"
-//#include "banking.hpp"
+#include "banking.hpp"
 #include <memory>
-
 
 template<typename T>
 void GetUserInput(T &arg, const std::string msg);
@@ -15,6 +14,7 @@ void PrintStart(const std::unique_ptr<Date>& date);
 void PrintDay(int day, double balance = 0.00);
 void PrintTrade();
 void PrintPortfolioDemo();
+void PrintPortfolioDemo2(double balance, Player& player);
 int main(){
 
     int PAUSE;
@@ -22,37 +22,35 @@ int main(){
     static int day = 1;
     bool isPlaying = true, isDay = true, isTrade = true;
     auto game_time = std::make_unique<Date>();
-    
+
     string name;
     int age;
     auto official_date = std::make_unique<Date>();
     Player* player;
     auto stocks = CreateStocks(15);
-    // vector<std::unique_ptr<Stock>> stocks = CreateStocks(15);
     Portfolio* portfolio = new Portfolio(stocks);
 
-    
     GetUserInput<std::string&>(name, "Insert player name");
     GetUserInput<int&>(age, "Insert player age");
 
     player = new Player(name, age, portfolio);
-    /*
+
     Account* account;
-    
     account = new Account(player);
-    */
-    
+
+
     while(isPlaying){
         PrintStart(game_time);
         while(isDay){
-            PrintDay(day);
+            PrintDay(day, balance);
+            PrintPortfolioDemo2(100, *player);
             while(isTrade){
                 PrintTrade();
                 std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
                 std::cin >> PAUSE;
                 std::cout << "1 Selected!\n" << endl;
                 Date::AddGameTime(*(game_time));
-                PrintPortfolioDemo();
+                PrintPortfolioDemo2(100, *player);
                 if(game_time->GetHour() == 9)
                     isTrade = false;
             }
@@ -60,6 +58,11 @@ int main(){
         }
         isPlaying = false;
     }
+
+    delete player;
+    delete portfolio;
+    player = NULL;
+    portfolio = NULL;
 
     return 0;
 }
@@ -111,8 +114,7 @@ void PrintDay(int day, double balance){
     std::cout << "\n" << std::endl;
     std::cout << "\t\t\t\t\t| Day " << day << " |" << std::endl;
     std::cout << "\n"<< std::endl;
-    std::cout << "\tYou have $ " << balance  << "in your account.\n" << std::endl;
-    PrintPortfolioDemo();
+    std::cout << "\tYou have $" << balance  << " in your account.\n" << std::endl;
 }
 void PrintTrade(){
     std::cout << "\n" << std::endl;
@@ -133,12 +135,12 @@ void PrintPortfolioDemo(){
     std::cout << "=============================" << std::endl;
 }
 
-// /*
-// void PrintPortfolioDemo2(double balance){
-//     std::cout << "\n" << player.GetName() << \'s Portfolio:\n" << std::endl;
-//     std::cout << "=============================" << std::endl;
-//     std::cout << "Balance: " << balance << std::endl;
-//     std::cout << "\nGain: " << std::endl;
-//     std::cout << "\nLoss: " << std::endl;
-//     std::cout << "=============================" << std::endl;
-// }
+
+void PrintPortfolioDemo2(double balance, Player& player){
+    std::cout << "\n" << player.GetName() << "'s Portfolio:\n" << std::endl;
+    std::cout << "=============================" << std::endl;
+    std::cout << "Balance: " << balance << std::endl;
+    std::cout << "\nGain: " << std::endl;
+    std::cout << "\nLoss: " << std::endl;
+    std::cout << "=============================" << std::endl;
+}
