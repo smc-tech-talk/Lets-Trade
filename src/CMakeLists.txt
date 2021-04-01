@@ -5,3 +5,5 @@ project(lets-trade-test)
 set(SOURCE_FILES main.cpp)
 
 add_executable(lets-trade ${SOURCE_FILES})
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")

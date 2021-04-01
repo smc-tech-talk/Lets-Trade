@@ -9,7 +9,6 @@ Account::Account(Player* a_player) {
 
 }
 
-
 Account::Account(Player* player, string account_number, double balance)
 	:player(player),
 	account_number(account_number),
@@ -40,32 +39,25 @@ void Account::create_account_number(){
  
 }
 
+void Account::bal_change(Transaction t){
+	if(t.GetTransactionType()=="Buy Stock"||"Bank Account Withraw"){
+		balance -= t.GetAmount();
+	}
+	else if (t.GetTransactionType() == "Sell Stock"||"Bank Account Deposit"){
+		balance += t.GetAmount();
+	}
+}
+
+string Account::create_log(Transaction t, Date* d){
+	string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",	Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
+	return tmp;
+}
+
 void Account::input_record(Transaction t, Date* d){
 
-	if (t.GetTransactionType() == "Buy Stock"){
-
-		balance -= t.GetAmount();
-		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
+		bal_change(t);
+		string tmp = create_log(t,d);
 		log.push_back(tmp);
-	}
-	if (t.GetTransactionType() == "Sell Stock"){
-
-		balance += t.GetAmount();
-		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
-		log.push_back(tmp);
-	}
-	if (t.GetTransactionType() == "Bank Account Deposit"){
-
-		balance += t.GetAmount();
-		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
-		log.push_back(tmp);
-	}
-	if (t.GetTransactionType() == "Bank Account Withraw"){
-
-		balance -= t.GetAmount();
-		string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",		Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
-		log.push_back(tmp);
-	}
 
 }
 
