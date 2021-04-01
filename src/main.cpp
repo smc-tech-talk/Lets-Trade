@@ -46,8 +46,11 @@ int main(){
         while(isDay){
             PrintDay(day, *account);
             PrintPortfolio(*account, *player);
+
             while(isTrade){
+                int userInput = 0;
                 PrintTrade();
+                GetUserInput(userInput, "Enter Your Option");
                 std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
                 std::cin >> PAUSE;
                 std::cout << "1 Selected!\n" << endl;
