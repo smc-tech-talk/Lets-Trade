@@ -16,6 +16,7 @@ char codebook[] = { 'a','A','b','B','c','C','d','D','e',
 Account::Account(Player* a_player) {
 
 	player = a_player;
+	set_balance(100);
 	bank_name = list_bank[rand()%9];
 	create_account_number();
 	initialize_balance();
