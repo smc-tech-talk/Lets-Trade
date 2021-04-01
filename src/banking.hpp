@@ -37,7 +37,6 @@ public:
 	void info_Account();
 	void add_balance(double balance);
 	double get_previous_balance();
-	//void display_daychange();
 
 
 

@@ -16,6 +16,7 @@ void PrintDay(int day, Account& account);
 void PrintTrade();
 void PrintPortfolioDemo();
 void PrintPortfolio(Account& account, Player& player);
+void PrintDayChange(Account& account);
 
 // main
 int main(){
@@ -40,6 +41,7 @@ int main(){
     player = new Player(name, age, portfolio);
     Account* account;
     account = new Account(player);
+    account->add_balance(0);
 
     while(isPlaying){
         PrintStart(game_time);
@@ -182,7 +184,19 @@ void PrintPortfolio(Account& account, Player& player){
     std::cout << "\n" << player.GetName() << "'s Portfolio:\n" << std::endl;
     std::cout << "=============================" << std::endl;
     std::cout << "Balance: " << account.get_balance() << std::endl;
-    std::cout << "\nGain: " << std::endl;
-    std::cout << "\nLoss: " << std::endl;
-    std::cout << "=============================" << std::endl;
+    std::cout << "\nDay Change: "  << std::endl;
+    PrintDayChange(account);
+    std::cout << "\n=============================" << std::endl;
+}
+
+void PrintDayChange(Account& account){
+    double dayChange = 0;
+    double dayChangePercentage = 0;
+    dayChange = account.get_balance() - account.get_previous_balance();
+    dayChangePercentage = account.get_balance() / account.get_previous_balance();
+    std::cout << dayChange;
+    if(!isinf(dayChangePercentage))
+        std::cout << "(" << dayChangePercentage << "%)" << std::endl;
+    else
+        std::cout << "(-%)" << std::endl;
 }
