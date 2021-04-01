@@ -15,6 +15,8 @@ void PrintDay(int day, double balance = 0.00);
 void PrintTrade();
 void PrintPortfolioDemo();
 void PrintPortfolioDemo2(Account& account, Player& player);
+
+// main
 int main(){
 
     int PAUSE;
@@ -34,15 +36,13 @@ int main(){
     GetUserInput<int&>(age, "Insert player age");
 
     player = new Player(name, age, portfolio);
-
     Account* account;
     account = new Account(player);
-
 
     while(isPlaying){
         PrintStart(game_time);
         while(isDay){
-            //PrintDay(day, balance);
+            PrintDay(day, account->get_balance());
             //PrintPortfolioDemo2(100, *player);
             while(isTrade){
                 PrintTrade();
@@ -116,7 +116,7 @@ void PrintDay(int day, double balance){
     std::cout << "\n" << std::endl;
     std::cout << "\t\t\t\t\t| Day " << day << " |" << std::endl;
     std::cout << "\n"<< std::endl;
-    std::cout << "\tYou have $" << balance  << " in your account.\n" << std::endl;
+    std::cout << "\tYour Balance: $" << balance << std::endl;
 }
 void PrintTrade(){
     std::cout << "\n" << std::endl;
