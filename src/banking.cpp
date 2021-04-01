@@ -38,6 +38,11 @@ double Account::get_balance(){
 	return balance;
 }
 
+void Account::set_balance(double balance){
+
+	this->balance = balance;
+}
+
 void Account::create_account_number(){
 
 	char address[8];

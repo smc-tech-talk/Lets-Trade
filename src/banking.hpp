@@ -29,6 +29,7 @@ public:
 	void initialize_balance();
 	void bal_change(Transaction t);
 	double get_balance();
+	void set_balance(double balance);
 	void create_account_number();
 	string create_log(Transaction t, Date* d);
 	void print_record();
