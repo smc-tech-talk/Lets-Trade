@@ -50,7 +50,7 @@ int main(){
             while(isTrade){
                 int userInput = 0;
                 PrintTrade();
-                GetUserInput(userInput, "Enter Your Option");
+                GetUserInput(userInput, "Enter Your Choice");
                 std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
                 std::cin >> PAUSE;
                 std::cout << "1 Selected!\n" << endl;
@@ -93,7 +93,7 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
 
 
 void DisplayMessage(const std::string msg){
-    cout << msg << ": \n";
+    cout << msg << " \n";
 }
 
 template <typename T>
