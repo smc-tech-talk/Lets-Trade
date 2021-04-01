@@ -105,3 +105,7 @@ void Account::info_Account(){
 	print_record();
 
 }
+
+void Account::add_balance(double balance){
+	this->balance_records.push_back(balance);
+}

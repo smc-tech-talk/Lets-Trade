@@ -35,6 +35,7 @@ public:
 	void print_record();
 	void input_record(Transaction t, Date* d);
 	void info_Account();
+	void add_balance(double balance);
 
 
 
@@ -43,5 +44,5 @@ private:
 	string account_number;
 	double balance;
 	string bank_name;
-
+	std::vector<double> balance_records;
 };
