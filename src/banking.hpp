@@ -29,11 +29,15 @@ public:
 	void initialize_balance();
 	void bal_change(Transaction t);
 	double get_balance();
+	void set_balance(double balance);
 	void create_account_number();
 	string create_log(Transaction t, Date* d);
 	void print_record();
 	void input_record(Transaction t, Date* d);
 	void info_Account();
+	void add_balance(double balance);
+	double get_previous_balance();
+
 
 
 private:
@@ -41,4 +45,5 @@ private:
 	string account_number;
 	double balance;
 	string bank_name;
+	std::vector<double> balance_records;
 };
