@@ -13,6 +13,8 @@ void GetUserInput(T &arg, const std::string msg);
 vector< std::unique_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]); // Should return vecotr<Stock*> later
 void InitializeStockPrice(double stockPrice[], const int quantity);
 double GetRandomPrice(int rand);
+double GetRandomPrice(double price);
+void UpdateStockPrice(const vector<std::unique_ptr<Stock>>& stocks);
 void PrintStart(const std::unique_ptr<Date>& date);
 void PrintDay(int day, Account& account);
 void PrintTrade();
@@ -60,7 +62,7 @@ int main(){
                 int userInput = 0;
                 PrintTrade();
                 GetUserInput(userInput, "Enter Your Choice");
-
+                //PrintStockLists(stocks);
                 switch(userInput){
                     case 1:{
                         PrintStockLists(stocks);
@@ -95,9 +97,13 @@ int main(){
                         break;
                     }
                 }
+                if(userInput == 2 || userInput == 3)
+                {
+                    Date::AddGameTime(*(game_time));
+                    UpdateStockPrice(stocks);
+                }
                 std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
-                Date::AddGameTime(*(game_time));
-                if(game_time->GetHour() == 9)
+                if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
                     isTrade = false;
             }
             isDay = false;
@@ -129,11 +135,19 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany, double stockPrice[]){
     return stocks;
 }
 
+/* Stock Price Functions */
 void InitializeStockPrice(double stockPrice[], const int quantity){
     for(int i = 0; i < quantity; i++){
         stockPrice[i] = GetRandomPrice(100);
         std::cout << "INITIALIZED" << stockPrice[i] << std::endl;
     }
+}
+
+void UpdateStockPrice(const vector<std::unique_ptr<Stock>>& stocks){
+    for(auto& s : stocks){
+        s.get()->UpdateStockPrice(GetRandomPrice(s.get()->GetCurrentPrice()));
+    }
+    std::cout << "Ctock Price Updated" << std::endl;
 }
 
 template <typename T>
@@ -142,7 +156,11 @@ void GetUserInput(T& arg, const std::string msg){
     cin >> arg;
 }
 
+/* Random Functions */
 double GetRandomPrice(int randNum){ return (rand() % randNum); };
+double GetRandomPrice(double price){
+    return ((GetRandomPrice(100) * 0.01) * GetRandomPrice(100) * 0.01) * 100;
+};
 
 void DisplayMessage(const std::string msg){
     cout << msg << " \n";
@@ -206,7 +224,6 @@ void PrintPortfolio(Account& account, Player& player){
         std::cout << "Symbol: " << s.GetStock().GetSymbol() << "\tPosition: " << s.GetPosition() << std::endl;
 }
 
-
 void PrintDayChange(Account& account){
     double dayChange = 0;
     double dayChangePercentage = 0;
@@ -223,7 +240,7 @@ void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks){
     int i = 1;
     std::cout << "Which stock would you like to purchase?\n" << std::endl;
     for(auto& s: stocks){
-        std::cout << "\t" << i << ". " << s.get()->GetSymbol() << std::endl;
+        std::cout << "\t" << i << ". " << s.get()->GetSymbol() << ":" << " $" << s.get()->GetCurrentPrice() << std::endl;
         i++;
     }
 }
