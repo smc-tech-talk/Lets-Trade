@@ -185,14 +185,6 @@ void PrintTrade(const std::unique_ptr<Date>& date){
     std::cout << "\t=============================" << std::endl;
     std::cout << "\n"<< std::endl;
 }
-void PrintPortfolioDemo(){
-    std::cout << "\nThis is portfolio demo version\n" << std::endl;
-    std::cout << "=============================" << std::endl;
-    std::cout << "Income: " << std::endl;
-    std::cout << "\nLoss: " << std::endl;
-    std::cout << "\nBalance: " << std::endl;
-    std::cout << "=============================" << std::endl;
-}
 
 
 void PrintPortfolio(Account& account, Player& player){
