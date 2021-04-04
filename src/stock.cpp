@@ -67,6 +67,11 @@ void Stock::UpdateStockPrice(){
     this->stockCurrentPrice = newStockPrice;
     this->UpdateChangedPercentage();
 };
+void Stock::UpdateStockPrice(double newStockPrice){
+    this->stockPrevPrice = this->stockCurrentPrice;
+    this->stockCurrentPrice = newStockPrice;
+    this->UpdateChangedPercentage();
+};
 int Stock::GetRandomNumber(int num){ return (rand() % num); };
 
 // In Progress

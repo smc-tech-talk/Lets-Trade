@@ -10,7 +10,11 @@
 void DisplayMessage(const std::string msg);
 template<typename T>
 void GetUserInput(T &arg, const std::string msg);
-vector< std::unique_ptr<Stock> > CreateStocks(int howMany); // Should return vecotr<Stock*> later
+vector< std::unique_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]); // Should return vecotr<Stock*> later
+void InitializeStockPrice(double stockPrice[], const int quantity);
+double GetRandomPrice(int rand);
+double GetRandomPrice(double price);
+void UpdateStockPrice(const vector<std::unique_ptr<Stock>>& stocks);
 void PrintStart(const std::unique_ptr<Date>& date);
 void PrintDay(int day, const std::unique_ptr<Date>& date, Account& account);
 void PrintTradeMenu(const std::unique_ptr<Date>& date);
@@ -25,6 +29,8 @@ void NoPassTime(const std::unique_ptr<Date>& date);
 int main(){
 
     int PAUSE;
+    const int STOCK_QUANTITY = 15;
+    double stockPrice[STOCK_QUANTITY];
     srand(time(NULL));
     static int day = 1;
     bool isPlaying = true, isDay = true, isTrade = true;
@@ -33,7 +39,8 @@ int main(){
     string name;
     int age;
     auto official_date = std::make_unique<Date>();
-    auto stocks = CreateStocks(15);
+    InitializeStockPrice(stockPrice, STOCK_QUANTITY);
+    auto stocks = CreateStocks(STOCK_QUANTITY, stockPrice);
 
     Player* player;
     Account* account;
@@ -47,14 +54,13 @@ int main(){
     account = new Account(player);
     account->add_balance(0);
 
-
     while(isPlaying){
         PrintStart(game_time);
         while(isDay){
             PrintDay(day, game_time, *account);
             PrintPortfolio(*account, *player);
 
-            
+
             while(isTrade){
 
                 int userInput = 0;
@@ -80,8 +86,7 @@ int main(){
                         int quantity;
                         GetUserInput(stockIndex, "Stock");
                         GetUserInput(quantity, "Quantity");
-                        portfolio->BuyShare(stocks.at(stockIndex).get(), quantity);
-                        NoPassTime(game_time);
+                        portfolio->BuyShare(stocks.at(stockIndex - 1).get(), quantity);
                         break;
                     }
                     case 3:{    // 3. Sell Stocks
@@ -104,17 +109,20 @@ int main(){
                         account->info_Account();
                         NoPassTime(game_time);
                         break;
-                    
+
                     default:{
                         std::cerr << "No time passed. Choose one from the following menu." << std::endl;
                     }
 
                     }
                 }
-                // std::cout << "\nAction executed! Press Any Key to Continue\n";
-                // 
-                // Date::AddGameTime(*(game_time));
-                if(game_time->GetHour() == 9)
+                if(userInput == 2 || userInput == 3)
+                {
+                    Date::AddGameTime(*(game_time));
+                    UpdateStockPrice(stocks);
+                }
+                std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
+                if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
                     isTrade = false;
 
                 // std::cout << "Time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
@@ -124,15 +132,13 @@ int main(){
         isPlaying = false;
     }
 
-    delete player;
     delete portfolio;
-    player = NULL;
     portfolio = NULL;
 
     return 0;
 }
 
-vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
+vector<std::unique_ptr<Stock>> CreateStocks(int howMany, double stockPrice[]){
     int count;
     vector<std::unique_ptr<Stock>> stocks;
     auto e = std::make_unique<CSVExtractor>("./companies.csv");
@@ -142,23 +148,43 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
 
     for(int i = 0; i < manyIndex.size(); i++){
         count = manyIndex.at(i);
-
         Company* c = new Company(data.at(count).at(1), data.at(count).at(2)); // This will be handled by ~Stock()
-        auto s = std::make_unique<Stock>(data.at(count).at(0), c);
+        // Use Stock::Stock(string s, double p, Company* c)
+        auto s = std::make_unique<Stock>(data.at(count).at(0), stockPrice[i], c);
         stocks.push_back(std::move(s)); // emplace_back() does not work
     }
     return stocks;
 }
 
+/* Stock Price Functions */
+void InitializeStockPrice(double stockPrice[], const int quantity){
+    for(int i = 0; i < quantity; i++){
+        stockPrice[i] = GetRandomPrice(100);
+        std::cout << "INITIALIZED" << stockPrice[i] << std::endl;
+    }
+}
 
-void DisplayMessage(const std::string msg){
-    cout << msg << " \n";
+void UpdateStockPrice(const vector<std::unique_ptr<Stock>>& stocks){
+    for(auto& s : stocks){
+        s.get()->UpdateStockPrice(GetRandomPrice(s.get()->GetCurrentPrice()));
+    }
+    std::cout << "Ctock Price Updated" << std::endl;
 }
 
 template <typename T>
 void GetUserInput(T& arg, const std::string msg){
     cout << msg << ": \n";
     cin >> arg;
+}
+
+/* Random Functions */
+double GetRandomPrice(int randNum){ return (rand() % randNum); };
+double GetRandomPrice(double price){
+    return ((GetRandomPrice(100) * 0.01) * GetRandomPrice(100) * 0.01) * 100;
+};
+
+void DisplayMessage(const std::string msg){
+    cout << msg << " \n";
 }
 
 /* All Console Printing Functions Here */
@@ -225,8 +251,11 @@ void PrintDayChange(Account& account){
 
 void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks){
     int i = 1;
-    for(auto& s: stocks)
-        std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
+    std::cout << "Which stock would you like to purchase?\n" << std::endl;
+    for(auto& s: stocks){
+        std::cout << "\t" << i << ". " << s.get()->GetSymbol() << ":" << " $" << s.get()->GetCurrentPrice() << std::endl;
+        i++;
+    }
 }
 
 
