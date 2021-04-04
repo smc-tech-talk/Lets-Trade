@@ -64,6 +64,7 @@ int main(){
                 switch(userInput){
 
                     case 1:{    // 1. Display Stock Lists
+                        // causes segmentation error
                         int i = 1;
                         for(auto& s: stocks)
                             std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
@@ -89,10 +90,12 @@ int main(){
                         GetUserInput(stockIndex, "Stock");
                         GetUserInput(quantity, "Quantity");
                         portfolio->SellShare(stocks.at(stockIndex).get(), quantity);
+                        PassTime(game_time);
                         break;
                     }
                     case 4:{    // 4. Print portfolio
-                        void PrintPortfolio(Account& account, Player& player);
+                        // segmentation error
+                        PrintPortfolio(*account, *player);
                         std::cout << "\nAction executed! Press Any Key to Continue\n";
                         int PAUSE;
                         std::cin >> PAUSE;
@@ -105,6 +108,10 @@ int main(){
                         int PAUSE;
                         std::cin >> PAUSE;
                         break;
+                    
+                    default:{
+                        std::cerr << "Choose one from the following menu." << std::endl;
+                    }
 
                     }
                 }
@@ -202,9 +209,9 @@ void PrintPortfolio(Account& account, Player& player){
     std::cout << "\t\t\t   Balance: " << account.get_balance() << " || " << "Day Change: ";
     PrintDayChange(account);
     std::cout << "\n\t\t----------------------------------------------------------" << std::endl;
-    std::cout << "\t\t\tSymbol" << "\t\t\t" << "Position" << std::endl;
+    std::cout << "\t\t\t   Symbol" << "\t\t" << "Position" << std::endl;
     for(auto& s : player.GetPortfolio().GetShares()){
-        std::cout << "\t\t\t" << s.GetStock().GetSymbol() << "\t\t\t   " << s.GetPosition() << std::endl;
+        std::cout << "\t\t\t   " << s.GetStock().GetSymbol() << "\t\t\t   " << s.GetPosition() << std::endl;
     }
     std::cout << "\t\t==========================================================\n" << std::endl;
 }
