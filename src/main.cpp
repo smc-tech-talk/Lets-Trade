@@ -10,19 +10,21 @@
 void DisplayMessage(const std::string msg);
 template<typename T>
 void GetUserInput(T &arg, const std::string msg);
-vector< std::unique_ptr<Stock> > CreateStocks(int howMany); // Should return vecotr<Stock*> later
+vector< std::unique_ptr<Stock> > CreateStocks(int howMany, int stockPrice[]); // Should return vecotr<Stock*> later
 void PrintStart(const std::unique_ptr<Date>& date);
 void PrintDay(int day, Account& account);
 void PrintTrade();
 void PrintPortfolioDemo();
 void PrintPortfolio(Account& account, Player& player);
 void PrintDayChange(Account& account);
-void PrintStockLists(const std::unique_ptr<Stock>& stocks);
+void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks);
 
 // main
 int main(){
 
     int PAUSE;
+    const int STOCK_QUANTITY = 15;
+    int stockPrice[STOCK_QUANTITY];
     srand(time(NULL));
     static int day = 1;
     bool isPlaying = true, isDay = true, isTrade = true;
@@ -31,7 +33,7 @@ int main(){
     string name;
     int age;
     auto official_date = std::make_unique<Date>();
-    auto stocks = CreateStocks(15);
+    auto stocks = CreateStocks(STOCK_QUANTITY, stockPrice);
 
     Player* player;
     Account* account;
@@ -45,7 +47,6 @@ int main(){
     account = new Account(player);
     account->add_balance(0);
 
-
     while(isPlaying){
         PrintStart(game_time);
         while(isDay){
@@ -56,12 +57,10 @@ int main(){
                 int userInput = 0;
                 PrintTrade();
                 GetUserInput(userInput, "Enter Your Choice");
+
                 switch(userInput){
                     case 1:{
-                        //PrintStockLists(stocks);
-                        int i = 1;
-                        for(auto& s: stocks)
-                            std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
+                        PrintStockLists(stocks);
                         break;
                     }
                     case 2:{
@@ -91,8 +90,6 @@ int main(){
                     }
                 }
                 std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
-                std::cin >> PAUSE;
-                std::cout << "1 Selected!\n" << endl;
                 Date::AddGameTime(*(game_time));
                 //PrintPortfolioDemo2(100, *player);
                 if(game_time->GetHour() == 9)
@@ -111,7 +108,7 @@ int main(){
     return 0;
 }
 
-vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
+vector<std::unique_ptr<Stock>> CreateStocks(int howMany, int stockPrice[]){
     int count;
     vector<std::unique_ptr<Stock>> stocks;
     auto e = std::make_unique<CSVExtractor>("./companies.csv");
@@ -121,9 +118,9 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
 
     for(int i = 0; i < manyIndex.size(); i++){
         count = manyIndex.at(i);
-
         Company* c = new Company(data.at(count).at(1), data.at(count).at(2)); // This will be handled by ~Stock()
-        auto s = std::make_unique<Stock>(data.at(count).at(0), c);
+        // Use Stock::Stock(string s, double p, Company* c)
+        auto s = std::make_unique<Stock>(data.at(count).at(0), stockPrice[i], c);
         stocks.push_back(std::move(s)); // emplace_back() does not work
     }
     return stocks;
@@ -193,6 +190,7 @@ void PrintPortfolio(Account& account, Player& player){
     std::cout << "\nDay Change: "  << std::endl;
     PrintDayChange(account);
     std::cout << "\n=============================" << std::endl;
+    std::cout << "\t\t\tShares" << std::endl;
     for(auto& s : player.GetPortfolio().GetShares())
         std::cout << "Symbol: " << s.GetStock().GetSymbol() << std::endl;
 }
@@ -211,6 +209,9 @@ void PrintDayChange(Account& account){
 
 void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks){
     int i = 1;
-    for(auto& s: stocks)
-        std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
+    std::cout << "Which stock would you like to purchase?\n" << std::endl;
+    for(auto& s: stocks){
+        std::cout << "\t" << i << ". " << s.get()->GetSymbol() << std::endl;
+        i++;
+    }
 }
