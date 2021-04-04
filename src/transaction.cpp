@@ -131,8 +131,9 @@ string GetMonth()
     { return "MONTH"; };
 
 // __str__
+// Day? Monday Tuesday etc ...
 ostream& operator<<(ostream& strm, Date& d) {
-    return strm << "\n\nYear:\t\t\t" << d.GetYear() << "\n\nMonth:\t\t\t" << d.GetMonth() << "\n\nDay:\t\t\t" << d.GetDay() << "\n\nHour:\t\t\t" << d.GetHour() << "\n\n";
+    return strm << d.GetHour() << ":00 / " << d.GetMonth() <<  " / " << d.GetDay() << " / " << d.GetYear() << "\n";
 };
 ostream& operator<<(ostream& strm, Transaction& t) {
     Date d = t.date;
