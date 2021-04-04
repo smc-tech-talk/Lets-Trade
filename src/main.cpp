@@ -26,18 +26,17 @@ int main(){
     string name;
     int age;
     auto official_date = std::make_unique<Date>();
-    Player* player;
     auto stocks = CreateStocks(15);
+
+    Player* player;
+    Account* account;
     Portfolio* portfolio = new Portfolio(stocks);
 
     GetUserInput<std::string&>(name, "Insert player name");
     GetUserInput<int&>(age, "Insert player age");
 
     player = new Player(name, age, portfolio);
-
-    Account* account;
     account = new Account(player);
-
 
     while(isPlaying){
         PrintStart(game_time);
@@ -66,7 +65,6 @@ int main(){
 
     return 0;
 }
-
 
 vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
     int count;
