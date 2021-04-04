@@ -13,7 +13,7 @@ void GetUserInput(T &arg, const std::string msg);
 vector< std::unique_ptr<Stock> > CreateStocks(int howMany); // Should return vecotr<Stock*> later
 void PrintStart(const std::unique_ptr<Date>& date);
 void PrintDay(int day, Account& account);
-void PrintTrade();
+void PrintTrade(const std::unique_ptr<Date>& date);
 void PrintPortfolioDemo();
 void PrintPortfolio(Account& account, Player& player);
 void PrintDayChange(Account& account);
@@ -56,7 +56,7 @@ int main(){
             while(isTrade){
 
                 int userInput = 0;
-                PrintTrade();
+                PrintTrade(game_time);
                 GetUserInput(userInput, "Enter Your Choice");
 
                 // Trade Menu
@@ -174,13 +174,14 @@ void PrintDay(int day, Account& account){
     std::cout << "\n"<< std::endl;
     std::cout << "\tYour Balance: $" << account.get_balance() << std::endl;
 }
-void PrintTrade(){
-    std::cout << "\n\t==========Main Menu=========== \n" << endl;
-    std::cout << "\t1. Display Stock Lists" << endl;
-    std::cout << "\t2. Buy Stocks" << endl;
-    std::cout << "\t3. Sell Stocks" << endl;
-    std::cout << "\t4. Check Portfolio" << endl;
-    std::cout << "\t5. Check Bank Account" << endl;
+void PrintTrade(const std::unique_ptr<Date>& date){
+    std::cout << "\n\t==========Main Menu=========== " << endl;
+    std::cout << "\t    Current Game Time: " << date->GetHour() << ":00\n" << std::endl;
+    std::cout << "\t 1. Display Stock Lists" << endl;
+    std::cout << "\t 2. Buy Stocks" << endl;
+    std::cout << "\t 3. Sell Stocks" << endl;
+    std::cout << "\t 4. Check Portfolio" << endl;
+    std::cout << "\t 5. Check Bank Account" << endl;
     std::cout << "\t=============================" << std::endl;
     std::cout << "\n"<< std::endl;
 }
