@@ -17,6 +17,7 @@ void PrintTrade();
 void PrintPortfolioDemo();
 void PrintPortfolio(Account& account, Player& player);
 void PrintDayChange(Account& account);
+void PrintStockLists(const std::unique_ptr<Stock>& stocks);
 
 // main
 int main(){
@@ -30,8 +31,10 @@ int main(){
     string name;
     int age;
     auto official_date = std::make_unique<Date>();
-    Player* player;
     auto stocks = CreateStocks(15);
+
+    Player* player;
+    Account* account;
     Portfolio* portfolio = new Portfolio(stocks);
 
     DisplayMessage("Welcome, Enter Player Info to Start");
@@ -39,9 +42,9 @@ int main(){
     GetUserInput<int&>(age, "Enter Your Age");
 
     player = new Player(name, age, portfolio);
-    Account* account;
     account = new Account(player);
     account->add_balance(0);
+
 
     while(isPlaying){
         PrintStart(game_time);
@@ -54,31 +57,35 @@ int main(){
                 PrintTrade();
                 GetUserInput(userInput, "Enter Your Choice");
                 switch(userInput){
-                    case 1:{
-                        //Stock::PrintStockLists();
-                        break;
-                    }
-                    case 2:{
-                        Stock* symbol;
-                        int quantity;
-                        // read stock symbol input here
+                    case 1:{    // 1. Display Stock Lists
+                        int i = 1;
+                        for(auto& s: stocks)
+                            std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
 
+                        // will be rewritten as PrintStockLists(stocks);
+                        break;
+                    }
+                    case 2:{    // 2. Buy Stocks
+                        int stockIndex;
+                        int quantity;
+                        GetUserInput(stockIndex, "Stock");
                         GetUserInput(quantity, "Quantity");
-                        portfolio->BuyShare(symbol, quantity);
+                        portfolio->BuyShare(stocks.at(stockIndex).get(), quantity);
                         break;
                     }
-                    case 3:{
-                        // Stock* symbol;
-                        // int quantity;
-                        // GetUserInput(quantity, "Quantity");
-                        // portfolio->SellShare(symbol, quantity);
+                    case 3:{    // 3. Sell Stocks
+                        int stockIndex;
+                        int quantity;
+                        GetUserInput(stockIndex, "Stock");
+                        GetUserInput(quantity, "Quantity");
+                        portfolio->SellShare(stocks.at(stockIndex).get(), quantity);
                         break;
                     }
-                    case 4:{
+                    case 4:{    // 4. Check Bank Accoun
                         //Portfolio::PrintPortfolio(userInput);
                         break;
                     }
-                    case 5:{
+                    case 5:{    // 5. Check Bank Account
                         account->info_Account();
                         break;
                     }
@@ -103,7 +110,6 @@ int main(){
 
     return 0;
 }
-
 
 vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
     int count;
@@ -187,6 +193,8 @@ void PrintPortfolio(Account& account, Player& player){
     std::cout << "\nDay Change: "  << std::endl;
     PrintDayChange(account);
     std::cout << "\n=============================" << std::endl;
+    for(auto& s : player.GetPortfolio().GetShares())
+        std::cout << "Symbol: " << s.GetStock().GetSymbol() << std::endl;
 }
 
 void PrintDayChange(Account& account){
@@ -195,8 +203,14 @@ void PrintDayChange(Account& account){
     dayChange = account.get_balance() - account.get_previous_balance();
     dayChangePercentage = account.get_balance() / account.get_previous_balance();
     std::cout << dayChange;
-    if(!isinf(dayChangePercentage))
+    /*if(!isinf(dayChangePercentage))
         std::cout << "(" << dayChangePercentage << "%)" << std::endl;
     else
-        std::cout << "(-%)" << std::endl;
+        std::cout << "(-%)" << std::endl;*/
+}
+
+void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks){
+    int i = 1;
+    for(auto& s: stocks)
+        std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
 }

@@ -43,7 +43,7 @@ Share Portfolio::GetShareByIndex(int index)
 };
 Share Portfolio::GetShareByStock(Stock* stock)
 {
-    Share share;
+    Share share; //temp
     try {
         for(auto& s : this->shares){
             // Decide which to use. vector.find() or just loop
