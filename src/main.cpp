@@ -19,6 +19,7 @@ void PrintPortfolio(Account& account, Player& player);
 void PrintDayChange(Account& account);
 void PrintStockLists(const std::unique_ptr<Stock>& stocks);
 void PassTime(const std::unique_ptr<Date>& date);
+void NoPassTime(const std::unique_ptr<Date>& date);
 
 // main
 int main(){
@@ -60,19 +61,18 @@ int main(){
                 PrintTradeMenu(game_time);
                 GetUserInput(userInput, "Enter Your Choice");
 
+                // ***Segmentation error at 15:00***
+
                 // Trade Menu
                 switch(userInput){
 
                     case 1:{    // 1. Display Stock Lists
-                        // causes segmentation error
                         int i = 1;
                         for(auto& s: stocks)
                             std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
 
                         // will be rewritten as PrintStockLists(stocks);
-                        std::cout << "\nAction executed! Press Any Key to Continue\n";
-                        int PAUSE;
-                        std::cin >> PAUSE;
+                        PassTime(game_time);
                         break;
                     }
                     case 2:{    // 2. Buy Stocks
@@ -81,7 +81,7 @@ int main(){
                         GetUserInput(stockIndex, "Stock");
                         GetUserInput(quantity, "Quantity");
                         portfolio->BuyShare(stocks.at(stockIndex).get(), quantity);
-                        PassTime(game_time);
+                        NoPassTime(game_time);
                         break;
                     }
                     case 3:{    // 3. Sell Stocks
@@ -94,23 +94,19 @@ int main(){
                         break;
                     }
                     case 4:{    // 4. Print portfolio
-                        // segmentation error
+                        // ***segmentation error***
                         PrintPortfolio(*account, *player);
-                        std::cout << "\nAction executed! Press Any Key to Continue\n";
-                        int PAUSE;
-                        std::cin >> PAUSE;
+                        NoPassTime(game_time);
                         break;
                     }
                     case 5:{    // 5. Check Bank Account
 
                         account->info_Account();
-                        std::cout << "\nAction executed! Press Any Key to Continue\n";
-                        int PAUSE;
-                        std::cin >> PAUSE;
+                        NoPassTime(game_time);
                         break;
                     
                     default:{
-                        std::cerr << "Choose one from the following menu." << std::endl;
+                        std::cerr << "No time passed. Choose one from the following menu." << std::endl;
                     }
 
                     }
@@ -118,7 +114,6 @@ int main(){
                 // std::cout << "\nAction executed! Press Any Key to Continue\n";
                 // 
                 // Date::AddGameTime(*(game_time));
-                std::cout << "No error";
                 if(game_time->GetHour() == 9)
                     isTrade = false;
 
@@ -241,4 +236,12 @@ void PassTime(const std::unique_ptr<Date>& game_time){
     std::cin >> PAUSE;
     Date::AddGameTime(*(game_time));
     std::cout << "Time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
+}
+
+void NoPassTime(const std::unique_ptr<Date>& game_time){
+    std::cout << "\nAction executed! Press Any Key to Continue\n";
+    int PAUSE;
+    std::cin >> PAUSE;
+    Date::AddGameTime(*(game_time));
+    std::cout << "No time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
 }
