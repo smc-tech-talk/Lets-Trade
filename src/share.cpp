@@ -10,7 +10,6 @@ void Share::IncreaseAmount(int a)
 {
     double current = ( this->stock )->GetCurrentPrice();
     Stock* s = this->stock;
-    cout << *s << endl;
     this->position += a;
     SetValue(current * this->position);
 };
@@ -20,8 +19,8 @@ void Share::DecreaseAmount(int a)
     if(this->position > 0)
         this->position -= a;
     SetValue(current * this->position);
-    Transaction newTransaction = Transaction(STOCK_SELL);
-    Transaction::AddTransaction(this->transactionHistory, newTransaction);
+    //Transaction newTransaction = Transaction(STOCK_SELL);
+    //Transaction::AddTransaction(this->transactionHistory, newTransaction);
 };
 
 // Getter

@@ -10,7 +10,9 @@
 void DisplayMessage(const std::string msg);
 template<typename T>
 void GetUserInput(T &arg, const std::string msg);
-vector< std::unique_ptr<Stock> > CreateStocks(int howMany, int stockPrice[]); // Should return vecotr<Stock*> later
+vector< std::unique_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]); // Should return vecotr<Stock*> later
+void InitializeStockPrice(double stockPrice[], const int quantity);
+double GetRandomPrice(int rand);
 void PrintStart(const std::unique_ptr<Date>& date);
 void PrintDay(int day, Account& account);
 void PrintTrade();
@@ -24,7 +26,7 @@ int main(){
 
     int PAUSE;
     const int STOCK_QUANTITY = 15;
-    int stockPrice[STOCK_QUANTITY];
+    double stockPrice[STOCK_QUANTITY];
     srand(time(NULL));
     static int day = 1;
     bool isPlaying = true, isDay = true, isTrade = true;
@@ -33,6 +35,7 @@ int main(){
     string name;
     int age;
     auto official_date = std::make_unique<Date>();
+    InitializeStockPrice(stockPrice, STOCK_QUANTITY);
     auto stocks = CreateStocks(STOCK_QUANTITY, stockPrice);
 
     Player* player;
@@ -70,7 +73,7 @@ int main(){
 
                         GetUserInput(stockIndex, "Stock");
                         GetUserInput(quantity, "Quantity");
-                        portfolio->BuyShare(stocks.at(stockIndex).get(), quantity);
+                        portfolio->BuyShare(stocks.at(stockIndex - 1).get(), quantity);
                         break;
                     }
                     case 3:{
@@ -81,7 +84,10 @@ int main(){
                         break;
                     }
                     case 4:{
-                        //Portfolio::PrintPortfolio(userInput);
+                        //PrintPortfolio(*account, *player);
+                        for(auto& s : player->GetPortfolio().GetShares()){
+                            std::cout << s.GetStockPtr()->GetSymbol() << ":" << "\tPosition: " << s.GetPosition() << std::endl;
+                        }
                         break;
                     }
                     case 5:{
@@ -91,7 +97,6 @@ int main(){
                 }
                 std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
                 Date::AddGameTime(*(game_time));
-                //PrintPortfolioDemo2(100, *player);
                 if(game_time->GetHour() == 9)
                     isTrade = false;
             }
@@ -100,15 +105,13 @@ int main(){
         isPlaying = false;
     }
 
-    delete player;
     delete portfolio;
-    player = NULL;
     portfolio = NULL;
 
     return 0;
 }
 
-vector<std::unique_ptr<Stock>> CreateStocks(int howMany, int stockPrice[]){
+vector<std::unique_ptr<Stock>> CreateStocks(int howMany, double stockPrice[]){
     int count;
     vector<std::unique_ptr<Stock>> stocks;
     auto e = std::make_unique<CSVExtractor>("./companies.csv");
@@ -126,15 +129,23 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany, int stockPrice[]){
     return stocks;
 }
 
-
-void DisplayMessage(const std::string msg){
-    cout << msg << " \n";
+void InitializeStockPrice(double stockPrice[], const int quantity){
+    for(int i = 0; i < quantity; i++){
+        stockPrice[i] = GetRandomPrice(100);
+        std::cout << "INITIALIZED" << stockPrice[i] << std::endl;
+    }
 }
 
 template <typename T>
 void GetUserInput(T& arg, const std::string msg){
     cout << msg << ": \n";
     cin >> arg;
+}
+
+double GetRandomPrice(int randNum){ return (rand() % randNum); };
+
+void DisplayMessage(const std::string msg){
+    cout << msg << " \n";
 }
 
 /* All Console Printing Functions Here */
@@ -192,8 +203,9 @@ void PrintPortfolio(Account& account, Player& player){
     std::cout << "\n=============================" << std::endl;
     std::cout << "\t\t\tShares" << std::endl;
     for(auto& s : player.GetPortfolio().GetShares())
-        std::cout << "Symbol: " << s.GetStock().GetSymbol() << std::endl;
+        std::cout << "Symbol: " << s.GetStock().GetSymbol() << "\tPosition: " << s.GetPosition() << std::endl;
 }
+
 
 void PrintDayChange(Account& account){
     double dayChange = 0;
