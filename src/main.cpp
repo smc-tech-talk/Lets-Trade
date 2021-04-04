@@ -12,12 +12,13 @@ template<typename T>
 void GetUserInput(T &arg, const std::string msg);
 vector< std::unique_ptr<Stock> > CreateStocks(int howMany); // Should return vecotr<Stock*> later
 void PrintStart(const std::unique_ptr<Date>& date);
-void PrintDay(int day, Account& account);
+void PrintDay(int day, const std::unique_ptr<Date>& date, Account& account);
 void PrintTradeMenu(const std::unique_ptr<Date>& date);
 void PrintPortfolioDemo();
 void PrintPortfolio(Account& account, Player& player);
 void PrintDayChange(Account& account);
 void PrintStockLists(const std::unique_ptr<Stock>& stocks);
+void PassTime(const std::unique_ptr<Date>& date);
 
 // main
 int main(){
@@ -49,7 +50,7 @@ int main(){
     while(isPlaying){
         PrintStart(game_time);
         while(isDay){
-            PrintDay(day, *account);
+            PrintDay(day, game_time, *account);
             PrintPortfolio(*account, *player);
 
             
@@ -68,6 +69,7 @@ int main(){
                             std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
 
                         // will be rewritten as PrintStockLists(stocks);
+                        
                         break;
                     }
                     case 2:{    // 2. Buy Stocks
@@ -76,6 +78,7 @@ int main(){
                         GetUserInput(stockIndex, "Stock");
                         GetUserInput(quantity, "Quantity");
                         portfolio->BuyShare(stocks.at(stockIndex).get(), quantity);
+                        PassTime(game_time);
                         break;
                     }
                     case 3:{    // 3. Sell Stocks
@@ -98,13 +101,13 @@ int main(){
 
                     }
                 }
-                std::cout << "\nAction executed! Press Any Key to Continue\n";
+                // std::cout << "\nAction executed! Press Any Key to Continue\n";
                 std::cin >> PAUSE;
-                Date::AddGameTime(*(game_time));
+                // Date::AddGameTime(*(game_time));
                 if(game_time->GetHour() == 9)
                     isTrade = false;
 
-                std::cout << "Time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
+                // std::cout << "Time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
             }
             isDay = false;
         }
@@ -166,9 +169,9 @@ void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
 }
-void PrintDay(int day, Account& account){
+void PrintDay(int day, const std::unique_ptr<Date>& date, Account& account){
     std::cout << "\n――――――――――――――――――――――――――――――――――――――――| Day " << day << " |――――――――――――――――――――――――――――――――――――――――――\n" << std::endl;
-    // std::cout << "\n\t\t\t  Current Game Time: " << *date << std::endl;
+    std::cout << "\t\t\t  Current Game Time: " << *date << std::endl;
     // add day(Monday etc)
     // std::cout << "\nBalance: $" << account.get_balance() << std::endl;
 }
@@ -214,4 +217,13 @@ void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks){
     int i = 1;
     for(auto& s: stocks)
         std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
+}
+
+
+void PassTime(const std::unique_ptr<Date>& game_time){
+    std::cout << "\nAction executed! Press Any Key to Continue\n";
+    int PAUSE;
+    std::cin >> PAUSE;
+    Date::AddGameTime(*(game_time));
+    std::cout << "Time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
 }
