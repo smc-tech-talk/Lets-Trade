@@ -69,7 +69,9 @@ int main(){
                             std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
 
                         // will be rewritten as PrintStockLists(stocks);
-                        
+                        std::cout << "\nAction executed! Press Any Key to Continue\n";
+                        int PAUSE;
+                        std::cin >> PAUSE;
                         break;
                     }
                     case 2:{    // 2. Buy Stocks
@@ -91,19 +93,25 @@ int main(){
                     }
                     case 4:{    // 4. Print portfolio
                         void PrintPortfolio(Account& account, Player& player);
+                        std::cout << "\nAction executed! Press Any Key to Continue\n";
+                        int PAUSE;
+                        std::cin >> PAUSE;
                         break;
-
                     }
                     case 5:{    // 5. Check Bank Account
 
                         account->info_Account();
+                        std::cout << "\nAction executed! Press Any Key to Continue\n";
+                        int PAUSE;
+                        std::cin >> PAUSE;
                         break;
 
                     }
                 }
                 // std::cout << "\nAction executed! Press Any Key to Continue\n";
-                std::cin >> PAUSE;
+                // 
                 // Date::AddGameTime(*(game_time));
+                std::cout << "No error";
                 if(game_time->GetHour() == 9)
                     isTrade = false;
 
