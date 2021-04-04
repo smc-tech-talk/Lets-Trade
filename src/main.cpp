@@ -194,8 +194,11 @@ void PrintPortfolio(Account& account, Player& player){
     std::cout << "Day Change: ";
     PrintDayChange(account);
     std::cout << "\n=============================" << std::endl;
-    for(auto& s : player.GetPortfolio().GetShares())
-        std::cout << s.GetStock().GetSymbol() << std::endl;
+    std::cout << "Symbol" << "\t" << "Position" << std::endl;
+    for(auto& s : player.GetPortfolio().GetShares()){
+        std::cout << s.GetStock().GetSymbol() << "\t" << s.GetPosition() << std::endl;
+    }
+        
         
 }
 
