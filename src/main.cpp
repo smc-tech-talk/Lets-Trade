@@ -52,11 +52,16 @@ int main(){
             PrintDay(day, *account);
             PrintPortfolio(*account, *player);
 
+            
             while(isTrade){
+
                 int userInput = 0;
                 PrintTrade();
                 GetUserInput(userInput, "Enter Your Choice");
+
+                // Trade Menu
                 switch(userInput){
+
                     case 1:{    // 1. Display Stock Lists
                         int i = 1;
                         for(auto& s: stocks)
@@ -82,12 +87,16 @@ int main(){
                         break;
                     }
                     case 4:{    // 4. Check Bank Accoun
+                    
                         //Portfolio::PrintPortfolio(userInput);
                         break;
+
                     }
                     case 5:{    // 5. Check Bank Account
+
                         account->info_Account();
                         break;
+
                     }
                 }
                 std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
