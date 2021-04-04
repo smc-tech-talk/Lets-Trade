@@ -13,7 +13,7 @@ void GetUserInput(T &arg, const std::string msg);
 vector< std::unique_ptr<Stock> > CreateStocks(int howMany); // Should return vecotr<Stock*> later
 void PrintStart(const std::unique_ptr<Date>& date);
 void PrintDay(int day, Account& account);
-void PrintTrade(const std::unique_ptr<Date>& date);
+void PrintTradeMenu(const std::unique_ptr<Date>& date);
 void PrintPortfolioDemo();
 void PrintPortfolio(Account& account, Player& player);
 void PrintDayChange(Account& account);
@@ -56,7 +56,7 @@ int main(){
             while(isTrade){
 
                 int userInput = 0;
-                PrintTrade(game_time);
+                PrintTradeMenu(game_time);
                 GetUserInput(userInput, "Enter Your Choice");
 
                 // Trade Menu
@@ -169,12 +169,11 @@ void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "\n\t\t\t  Current Game Time: " << *date << std::endl;
 }
 void PrintDay(int day, Account& account){
-    std::cout << "\n" << std::endl;
-    std::cout << "\t\t\t\t\t| Day " << day << " |" << std::endl;
-    std::cout << "\n"<< std::endl;
-    std::cout << "\tYour Balance: $" << account.get_balance() << std::endl;
+    std::cout << "\n\t| Day " << day << " |" << std::endl;
+    // add day(Monday etc)
+    std::cout << "\nBalance: $" << account.get_balance() << std::endl;
 }
-void PrintTrade(const std::unique_ptr<Date>& date){
+void PrintTradeMenu(const std::unique_ptr<Date>& date){
     std::cout << "\n\t==========Main Menu=========== " << endl;
     std::cout << "\t    Current Game Time: " << date->GetHour() << ":00\n" << std::endl;
     std::cout << "\t 1. Display Stock Lists" << endl;
@@ -188,14 +187,16 @@ void PrintTrade(const std::unique_ptr<Date>& date){
 
 
 void PrintPortfolio(Account& account, Player& player){
-    std::cout << "\n" << player.GetName() << "'s Portfolio:\n" << std::endl;
     std::cout << "=============================" << std::endl;
-    std::cout << "Balance: " << account.get_balance() << std::endl;
-    std::cout << "\nDay Change: "  << std::endl;
+    std::cout << player.GetName() << "'s Portfolio:" << std::endl;
+    std::cout << "=============================" << std::endl;
+    std::cout << "Balance: " << account.get_balance() << " || " << std::endl;
+    std::cout << "Day Change: ";
     PrintDayChange(account);
     std::cout << "\n=============================" << std::endl;
     for(auto& s : player.GetPortfolio().GetShares())
-        std::cout << "Symbol: " << s.GetStock().GetSymbol() << std::endl;
+        std::cout << s.GetStock().GetSymbol() << std::endl;
+        
 }
 
 void PrintDayChange(Account& account){
