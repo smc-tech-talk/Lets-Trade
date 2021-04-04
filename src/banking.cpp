@@ -16,6 +16,7 @@ char codebook[] = { 'a','A','b','B','c','C','d','D','e',
 Account::Account(Player* a_player) {
 
 	player = a_player;
+	set_balance(100);
 	bank_name = list_bank[rand()%9];
 	create_account_number();
 	initialize_balance();
@@ -36,6 +37,11 @@ void Account::initialize_balance(){
 double Account::get_balance(){
 
 	return balance;
+}
+
+void Account::set_balance(double balance){
+
+	this->balance = balance;
 }
 
 void Account::create_account_number(){
@@ -98,4 +104,12 @@ void Account::info_Account(){
 	cout << "Current balance : " << get_balance() << endl;
 	print_record();
 
+}
+
+void Account::add_balance(double balance){
+	this->balance_records.push_back(balance);
+}
+
+double Account::get_previous_balance(){
+	return this->balance_records.back();
 }
