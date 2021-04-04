@@ -166,8 +166,7 @@ void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "\n\t\t\t\tPowered by SMC Tech Talk Team 2021" << std::endl;
     std::cout << "" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
-    std::cout << "\n\t\t\tCurrent Time: " << std::endl;
-    std::cout << "\t\t\t" << *date << std::endl;
+    std::cout << "\n\t\t\t  Current Game Time: " << *date << std::endl;
 }
 void PrintDay(int day, Account& account){
     std::cout << "\n" << std::endl;

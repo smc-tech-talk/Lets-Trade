@@ -131,6 +131,7 @@ string GetMonth()
     { return "MONTH"; };
 
 // __str__
+// Day? Monday Tuesday etc ...
 ostream& operator<<(ostream& strm, Date& d) {
     return strm << d.GetHour() << ":00 / " << d.GetMonth() <<  " / " << d.GetDay() << " / " << d.GetYear() << "\n";
 };
