@@ -33,7 +33,8 @@ int main(){
     double stockPrice[STOCK_QUANTITY];
     srand(time(NULL));
     static int day = 1;
-    bool isPlaying = true, isDay = true, isTrade = true;
+    bool isPlaying = true, isDay = true;
+    //isTrade = true;
     auto game_time = std::make_unique<Date>();
 
     string name;
@@ -56,92 +57,89 @@ int main(){
 
     while(isPlaying){
         PrintStart(game_time);
+
+
         while(isDay){
             PrintDay(day, game_time, *account);
             PrintPortfolio(*account, *player);
+            int userInput = 0;
+            PrintTradeMenu(game_time);
+            GetUserInput(userInput, "Enter Your Choice");
 
+            // Trade Menu
+            switch(userInput){
+                case 1:{    // 1. Display Stock Lists
+                    int i = 1;
+                    for(auto& s: stocks)
+                        std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
 
-            while(isTrade){
-
-                int userInput = 0;
-                PrintTradeMenu(game_time);
-                GetUserInput(userInput, "Enter Your Choice");
-
-                // ***Segmentation error at 15:00***
-
-                // Trade Menu
-                switch(userInput){
-
-                    case 1:{    // 1. Display Stock Lists
-                        int i = 1;
-                        for(auto& s: stocks)
-                            std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
-
-                        // will be rewritten as PrintStockLists(stocks);
-                        // PassTime(game_time);
-                        break;
-                    }
-                    case 2:{    // 2. Buy Stocks
-                        int stockIndex;
-                        int quantity;
-                        GetUserInput(stockIndex, "Stock");
-                        GetUserInput(quantity, "Quantity");
-                        portfolio->BuyShare(stocks.at(stockIndex - 1).get(), quantity);
-                        break;
-                    }
-                    case 3:{    // 3. Sell Stocks
-                        int stockIndex;
-                        int quantity;
-                        GetUserInput(stockIndex, "Stock");
-                        GetUserInput(quantity, "Quantity");
-                        portfolio->SellShare(stocks.at(stockIndex).get(), quantity);
-                        // PassTime(game_time);
-                        break;
-                    }
-                    case 4:{    // 4. Print portfolio
-                        // ***segmentation error***
-                        PrintPortfolio(*account, *player);
-                        // NoPassTime(game_time);
-                        break;
-                    }
-                    case 5:{    // 5. Check Bank Account
-
-                        account->info_Account();
-                        // NoPassTime(game_time);
-                        break;
-
-                    case 6:{    // 6. Quit the Game
-                        // GameOver();
-                    }
-
-                    default:{
-                        std::cerr << "No time passed. Choose one from the following menu." << std::endl;
-                    }
-
-                    }
+                    // will be rewritten as PrintStockLists(stocks);
+                    // PassTime(game_time);
+                    break;
                 }
-                if(userInput == 2 || userInput == 3)
-                {
-                    // Date::AddGameTime(*(game_time));
-                    PassTime(game_time);
-                    UpdateStockPrice(stocks);
+                case 2:{    // 2. Buy Stocks
+                    int stockIndex;
+                    int quantity;
+                    GetUserInput(stockIndex, "Stock");
+                    GetUserInput(quantity, "Quantity");
+                    portfolio->BuyShare(stocks.at(stockIndex - 1).get(), quantity);
+                    break;
                 }
-                else{
-                    NoPassTime(game_time);
+                case 3:{    // 3. Sell Stocks
+                    int stockIndex;
+                    int quantity;
+                    GetUserInput(stockIndex, "Stock");
+                    GetUserInput(quantity, "Quantity");
+                    portfolio->SellShare(stocks.at(stockIndex).get(), quantity);
+                    // PassTime(game_time);
+                    break;
+                }
+                case 4:{    // 4. Print portfolio
+                    // ***segmentation error***
+                    PrintPortfolio(*account, *player);
+                    // NoPassTime(game_time);
+                    break;
+                }
+                case 5:{    // 5. Check Bank Account
+
+                    account->info_Account();
+                    // NoPassTime(game_time);
+                    break;
+
+                case 6:{    // 6. Quit the Game
+                    // GameOver();
                 }
 
-
-                // if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
-                //     isTrade = false;
-                if(game_time->GetHour() >= 15){
-                    isTrade = false;
-                    game_time->AddDay();
+                default:{
+                    std::cerr << "No time passed. Choose one from the following menu." << std::endl;
                 }
-                    
 
+                }
             }
-            isDay = false;
-        }
+            if(userInput == 2 || userInput == 3)
+            {
+                // Date::AddGameTime(*(game_time));
+                PassTime(game_time);
+                UpdateStockPrice(stocks);
+            }
+            else{
+                NoPassTime(game_time);
+            }
+
+            // if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
+            //     isTrade = false;
+
+            if(game_time->GetHour() >= 15){
+                std::cout << "Day is over" << std::endl;
+                isDay = false;
+                game_time->AddDay();
+                std::cout << "Starting Day " << game_time->GetDay() << std::endl;
+            }
+        }// end of isDay
+
+        if(game_time->GetDay()==7)
+            std::cout << "Game is over";
+        
         isPlaying = false;
     }
 
