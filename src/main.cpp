@@ -110,6 +110,10 @@ int main(){
                         NoPassTime(game_time);
                         break;
 
+                    case 6:{    // 6. Quit the Game
+                        // GameOver();
+                    }
+
                     default:{
                         std::cerr << "No time passed. Choose one from the following menu." << std::endl;
                     }
@@ -219,6 +223,7 @@ void PrintTradeMenu(const std::unique_ptr<Date>& date){
     std::cout << " 3. Sell Stocks" << endl;
     std::cout << " 4. Check Portfolio" << endl;
     std::cout << " 5. Check Bank Account" << endl;
+    std::cout << " 6. Quit the Game" << endl;
     std::cout << "=============================" << std::endl;
     std::cout << "\n"<< std::endl;
 }
