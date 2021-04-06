@@ -24,6 +24,7 @@ void PrintDayChange(Account& account);
 void PrintStockLists(const std::unique_ptr<Stock>& stocks);
 void PassTime(const std::unique_ptr<Date>& date);
 void NoPassTime(const std::unique_ptr<Date>& date);
+void DeveloperCredits();
 
 // main
 int main(){
@@ -149,7 +150,7 @@ int main(){
             std::cout << "Week is over! Game is now over!" << std::endl;
             // GameScore();
             isPlaying = false;
-            // DeveloperCredits();
+            DeveloperCredits();
         }
         
         
@@ -297,4 +298,9 @@ void NoPassTime(const std::unique_ptr<Date>& game_time){
     std::cin >> PAUSE;
     Date::AddGameTime(*(game_time));
     std::cout << "No time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
+}
+
+
+void DeveloperCredits(){
+
 }
