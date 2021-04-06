@@ -55,13 +55,15 @@ int main(){
     account = new Account(player);
     account->add_balance(0);
 
-    while(isPlaying){
-        PrintStart(game_time);
+    PrintStart(game_time);
 
+    while(isPlaying){
+        isDay = true;
+        PrintDay(day, game_time, *account);
+        PrintPortfolio(*account, *player);
 
         while(isDay){
-            PrintDay(day, game_time, *account);
-            PrintPortfolio(*account, *player);
+            
             int userInput = 0;
             PrintTradeMenu(game_time);
             GetUserInput(userInput, "Enter Your Choice");
@@ -131,16 +133,18 @@ int main(){
 
             if(game_time->GetHour() >= 15){
                 std::cout << "Day is over" << std::endl;
+                game_time->InitializeDay();
+                day++;
                 isDay = false;
-                game_time->AddDay();
-                std::cout << "Starting Day " << game_time->GetDay() << std::endl;
             }
         }// end of isDay
 
-        if(game_time->GetDay()==7)
+        if(day > 7){
             std::cout << "Game is over";
+            isPlaying = false;
+        }
         
-        isPlaying = false;
+        
     }
 
     delete portfolio;

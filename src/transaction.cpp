@@ -58,6 +58,12 @@ void Date::AddHour(){ // 9am to 3pm
     //     this->hour = 9;
     // }
 };
+
+void Date::InitializeDay(){
+    std::cout << "Starting Day " << day << std::endl;
+    this->AddDay();
+    this->hour = 9;
+};
 void Date::AddGameTime(Date& gameDate){ // static
     gameDate.AddHour();
 };
