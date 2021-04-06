@@ -21,7 +21,7 @@ void PrintTradeMenu(const std::unique_ptr<Date>& date);
 void PrintPortfolioDemo();
 void PrintPortfolio(Account& account, Player& player);
 void PrintDayChange(Account& account);
-void PrintStockLists(const std::unique_ptr<Stock>& stocks);
+void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks);
 void PassTime(const std::unique_ptr<Date>& date);
 void NoPassTime(const std::unique_ptr<Date>& date);
 void DeveloperCredits();
@@ -67,7 +67,7 @@ int main(){
         PrintPortfolio(*account, *player);
 
         while(isDay){
-            
+
             int userInput = 0;
             PrintTradeMenu(game_time);
             GetUserInput(userInput, "Enter Your Choice");
@@ -75,12 +75,7 @@ int main(){
             // Trade Menu
             switch(userInput){
                 case 1:{    // 1. Display Stock Lists
-                    int i = 1;
-                    for(auto& s: stocks)
-                        std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
-
-                    // will be rewritten as PrintStockLists(stocks);
-                    // PassTime(game_time);
+                    PrintStockLists(stocks);
                     break;
                 }
                 case 2:{    // 2. Buy Stocks
@@ -101,7 +96,6 @@ int main(){
                     break;
                 }
                 case 4:{    // 4. Print portfolio
-                    // ***segmentation error***
                     PrintPortfolio(*account, *player);
                     // NoPassTime(game_time);
                     break;
@@ -111,7 +105,7 @@ int main(){
                     account->info_Account();
                     // NoPassTime(game_time);
                     break;
-
+                }
                 case 6:{    // 6. Quit the Game
                     std::cout << "Quitting the game...";
                     isPlaying = false;
@@ -120,17 +114,12 @@ int main(){
                 default:{
                     std::cerr << "No time passed. Choose one from the following menu." << std::endl;
                 }
+            } //Swith ends
 
-                }
-            }
             if(userInput == 2 || userInput == 3)
             {
-                // Date::AddGameTime(*(game_time));
-                PassTime(game_time);
+                game_time->AddHour();
                 UpdateStockPrice(stocks);
-            }
-            else{
-                NoPassTime(game_time);
             }
 
             // if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
@@ -138,7 +127,7 @@ int main(){
 
             // day end condition
             if(game_time->GetHour() >= 15){
-                
+
                 std::cout << "Day " << game_day << " is over. ";
                 game_day++;
                 if(game_day != 8)
@@ -155,8 +144,8 @@ int main(){
             isPlaying = false;
             DeveloperCredits();
         }
-        
-        
+
+
     }// end of isPlaying
 
     delete portfolio;
@@ -187,7 +176,7 @@ vector<std::unique_ptr<Stock>> CreateStocks(int howMany, double stockPrice[]){
 void InitializeStockPrice(double stockPrice[], const int quantity){
     for(int i = 0; i < quantity; i++){
         stockPrice[i] = GetRandomPrice(100);
-        std::cout << "INITIALIZED" << stockPrice[i] << std::endl;
+        //std::cout << "INITIALIZED" << stockPrice[i] << std::endl;
     }
 }
 
@@ -257,12 +246,12 @@ void PrintPortfolio(Account& account, Player& player){
     std::cout << "\t\t\t   ≣≣≣≣≣≣≣≣≣≣" << player.GetName() << "'s Portfolio:" << "≣≣≣≣≣≣≣≣≣≣" << std::endl;
     std::cout << "\t\t\t   Balance: " << account.get_balance() << " || " << "Day Change: ";
     PrintDayChange(account);
-    std::cout << "\n\t\t----------------------------------------------------------" << std::endl;
-    std::cout << "\t\t\t   Symbol" << "\t\t" << "Position" << std::endl;
+    std::cout << "\n\t\t--------------------------------------------------------------------------------------------------------------------" << std::endl;
+    std::cout << "\t\t\t   Symbol" << "\t\tPosition" << "\t\tValue" << "\t\t\tValue Percentage" << "\t\t\tPrevious Price" << "\t\t\tCurrent Price" << std::endl;
     for(auto& s : player.GetPortfolio().GetShares()){
-        std::cout << "\t\t\t   " << s.GetStockPtr()->GetSymbol() << "\t\t\t   " << s.GetPosition() << std::endl;
+        std::cout << "\t\t\t   " << s.GetStockPtr()->GetSymbol() << "\t\t\t   " << s.GetPosition() << "\t\t\t   $" << s.GetValue() << "\t\t\t\t" << ( (s.GetPercentage() > 0) ? "+" : "") << s.GetPercentage() << "%" << "\t\t\t\t$" << s.GetPrevPrice() << "\t\t\t\t$" << s.GetCurrentPrice() << std::endl;
     }
-    std::cout << "\t\t==========================================================\n" << std::endl;
+    std::cout << "\t\t====================================================================================================================\n" << std::endl;
 }
 
 void PrintDayChange(Account& account){
@@ -315,8 +304,8 @@ void DeveloperCredits(){
     std::cout << "╚══════╝╚═╝     ╚═╝ ╚═════╝       ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═╝       ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝"<< std::endl;
     std::cout << "\n\n\t\t\t   Programmers\t\t\tPortfolio\n" << std::endl;
     std::cout << "\t\t\tBen Kweon\t\t default-ben.tistory.com" << std::endl;
-    std::cout << "\t\t\tKatsuya Wakabayashi\t\tkatsuya.me" << std::endl;        
-    std::cout << "\t\t\tJongoo Park " << std::endl;                                               
+    std::cout << "\t\t\tKatsuya Wakabayashi\t\tkatsuya.me" << std::endl;
+    std::cout << "\t\t\tJongoo Park " << std::endl;
     std::cout << "\n\n\t\t\tThank You for Playing! We Hope You Enjoyed!\n\n" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
 }

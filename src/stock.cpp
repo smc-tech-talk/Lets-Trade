@@ -55,9 +55,9 @@ void Stock::SetStockIssuer(Company* c)
 // Methods
 void Stock::UpdateChangedPercentage(){
     if(this->stockPrevPrice == INITIAL_STOCK_PRICE)
-        this->stockChangedPercentage = 0.00;
+        this->stockChangedPercentage = 100;
     else
-         this->stockChangedPercentage = ( 100 * (this->stockPrevPrice - this->stockCurrentPrice) ) / this->stockCurrentPrice;
+         this->stockChangedPercentage = ( (this->stockCurrentPrice  - this->stockPrevPrice) / this->stockPrevPrice) *100;
 };
 void Stock::UpdateStockPrice(){
     double newStockPrice;
