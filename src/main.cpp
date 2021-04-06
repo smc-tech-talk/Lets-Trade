@@ -32,7 +32,7 @@ int main(){
     const int STOCK_QUANTITY = 15;
     double stockPrice[STOCK_QUANTITY];
     srand(time(NULL));
-    static int day = 1;
+    static int game_day = 1;
     bool isPlaying = true, isDay = true;
     //isTrade = true;
     auto game_time = std::make_unique<Date>();
@@ -59,7 +59,7 @@ int main(){
 
     while(isPlaying){
         isDay = true;
-        PrintDay(day, game_time, *account);
+        PrintDay(game_day, game_time, *account);
         PrintPortfolio(*account, *player);
 
         while(isDay){
@@ -134,12 +134,12 @@ int main(){
             if(game_time->GetHour() >= 15){
                 std::cout << "Day is over" << std::endl;
                 game_time->InitializeDay();
-                day++;
+                game_day++;
                 isDay = false;
             }
         }// end of isDay
 
-        if(day > 7){
+        if(game_day > 7){
             std::cout << "Game is over";
             isPlaying = false;
         }
@@ -220,8 +220,8 @@ void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
 }
-void PrintDay(int day, const std::unique_ptr<Date>& date, Account& account){
-    std::cout << "\n――――――――――――――――――――――――――――――――――――――――| Day " << day << " |――――――――――――――――――――――――――――――――――――――――――\n" << std::endl;
+void PrintDay(int game_day, const std::unique_ptr<Date>& date, Account& account){
+    std::cout << "\n――――――――――――――――――――――――――――――――――――――――| Day " << game_day << " |――――――――――――――――――――――――――――――――――――――――――\n" << std::endl;
     std::cout << "\t\t\t  Current Game Time: " << *date << std::endl;
     // add day(Monday etc)
     // std::cout << "\nBalance: $" << account.get_balance() << std::endl;
