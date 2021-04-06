@@ -135,9 +135,10 @@ int main(){
             // day end condition
             if(game_time->GetHour() >= 15){
                 
-                std::cout << "Day " << game_day << "is over. ";
+                std::cout << "Day " << game_day << " is over. ";
                 game_day++;
-                std::cout << "Starting Day " << game_day << "!" << std::endl;
+                if(game_day != 8)
+                    std::cout << "Starting Day " << game_day << "!" << std::endl;
                 game_time->InitializeDay();
                 isDay = false;
             }
@@ -145,8 +146,10 @@ int main(){
 
         // game end condition
         if(game_day > 7){
-            std::cout << "Week is over!";
+            std::cout << "Week is over! Game is now over!" << std::endl;
+            // GameScore();
             isPlaying = false;
+            // DeveloperCredits();
         }
         
         
