@@ -24,6 +24,7 @@ void PrintDayChange(Account& account);
 void PrintStockLists(const std::unique_ptr<Stock>& stocks);
 void PassTime(const std::unique_ptr<Date>& date);
 void NoPassTime(const std::unique_ptr<Date>& date);
+void DeveloperCredits();
 
 // main
 int main(){
@@ -32,8 +33,9 @@ int main(){
     const int STOCK_QUANTITY = 15;
     double stockPrice[STOCK_QUANTITY];
     srand(time(NULL));
-    static int day = 1;
-    bool isPlaying = true, isDay = true, isTrade = true;
+    static int game_day = 1;
+    bool isPlaying = true, isDay = true;
+    //isTrade = true;
     auto game_time = std::make_unique<Date>();
 
     string name;
@@ -54,83 +56,108 @@ int main(){
     account = new Account(player);
     account->add_balance(0);
 
+    PrintStart(game_time);
+
+    std::cout << "Demo credits" << std::endl;
+    DeveloperCredits();
+
     while(isPlaying){
-        PrintStart(game_time);
+        isDay = true;
+        PrintDay(game_day, game_time, *account);
+        PrintPortfolio(*account, *player);
+
         while(isDay){
-            PrintDay(day, game_time, *account);
-            PrintPortfolio(*account, *player);
+            
+            int userInput = 0;
+            PrintTradeMenu(game_time);
+            GetUserInput(userInput, "Enter Your Choice");
 
+            // Trade Menu
+            switch(userInput){
+                case 1:{    // 1. Display Stock Lists
+                    int i = 1;
+                    for(auto& s: stocks)
+                        std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
 
-            while(isTrade){
-
-                int userInput = 0;
-                PrintTradeMenu(game_time);
-                GetUserInput(userInput, "Enter Your Choice");
-
-                // ***Segmentation error at 15:00***
-
-                // Trade Menu
-                switch(userInput){
-
-                    case 1:{    // 1. Display Stock Lists
-                        int i = 1;
-                        for(auto& s: stocks)
-                            std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
-
-                        // will be rewritten as PrintStockLists(stocks);
-                        PassTime(game_time);
-                        break;
-                    }
-                    case 2:{    // 2. Buy Stocks
-                        int stockIndex;
-                        int quantity;
-                        GetUserInput(stockIndex, "Stock");
-                        GetUserInput(quantity, "Quantity");
-                        portfolio->BuyShare(stocks.at(stockIndex - 1).get(), quantity);
-                        break;
-                    }
-                    case 3:{    // 3. Sell Stocks
-                        int stockIndex;
-                        int quantity;
-                        GetUserInput(stockIndex, "Stock");
-                        GetUserInput(quantity, "Quantity");
-                        portfolio->SellShare(stocks.at(stockIndex).get(), quantity);
-                        PassTime(game_time);
-                        break;
-                    }
-                    case 4:{    // 4. Print portfolio
-                        // ***segmentation error***
-                        PrintPortfolio(*account, *player);
-                        NoPassTime(game_time);
-                        break;
-                    }
-                    case 5:{    // 5. Check Bank Account
-
-                        account->info_Account();
-                        NoPassTime(game_time);
-                        break;
-
-                    default:{
-                        std::cerr << "No time passed. Choose one from the following menu." << std::endl;
-                    }
-
-                    }
+                    // will be rewritten as PrintStockLists(stocks);
+                    // PassTime(game_time);
+                    break;
                 }
-                if(userInput == 2 || userInput == 3)
-                {
-                    Date::AddGameTime(*(game_time));
-                    UpdateStockPrice(stocks);
+                case 2:{    // 2. Buy Stocks
+                    int stockIndex;
+                    int quantity;
+                    GetUserInput(stockIndex, "Stock");
+                    GetUserInput(quantity, "Quantity");
+                    portfolio->BuyShare(stocks.at(stockIndex - 1).get(), quantity);
+                    break;
                 }
-                std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
-                if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
-                    isTrade = false;
+                case 3:{    // 3. Sell Stocks
+                    int stockIndex;
+                    int quantity;
+                    GetUserInput(stockIndex, "Stock");
+                    GetUserInput(quantity, "Quantity");
+                    portfolio->SellShare(stocks.at(stockIndex).get(), quantity);
+                    // PassTime(game_time);
+                    break;
+                }
+                case 4:{    // 4. Print portfolio
+                    // ***segmentation error***
+                    PrintPortfolio(*account, *player);
+                    // NoPassTime(game_time);
+                    break;
+                }
+                case 5:{    // 5. Check Bank Account
 
-                std::cout << "Time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
+                    account->info_Account();
+                    // NoPassTime(game_time);
+                    break;
+
+                case 6:{    // 6. Quit the Game
+                    std::cout << "Quitting the game...";
+                    isPlaying = false;
+                }
+
+                default:{
+                    std::cerr << "No time passed. Choose one from the following menu." << std::endl;
+                }
+
+                }
             }
-            isDay = false;
+            if(userInput == 2 || userInput == 3)
+            {
+                // Date::AddGameTime(*(game_time));
+                PassTime(game_time);
+                UpdateStockPrice(stocks);
+            }
+            else{
+                NoPassTime(game_time);
+            }
+
+            // if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
+            //     isTrade = false;
+
+            // day end condition
+            if(game_time->GetHour() >= 15){
+                
+                std::cout << "Day " << game_day << " is over. ";
+                game_day++;
+                if(game_day != 8)
+                    std::cout << "Starting Day " << game_day << "!" << std::endl;
+                game_time->InitializeDay();
+                isDay = false;
+            }
+        }// end of isDay
+
+        // game end condition
+        if(game_day > 7){
+            std::cout << "Week is over! Game is now over!" << std::endl;
+            // GameScore();
+            isPlaying = false;
+            DeveloperCredits();
         }
-        isPlaying = false;
-    }
+        
+        
+    }// end of isPlaying
 
     delete portfolio;
     portfolio = NULL;
@@ -191,7 +218,7 @@ void DisplayMessage(const std::string msg){
 void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "\n" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
-    std::cout << "\t\t\t\t\tWelcome to" << std::endl;
+    std::cout << "\t\t\t\t\tWelcome to\n" << std::endl;
     std::cout << " __                  __   __                 ________                         __           " << std::endl;
     std::cout << "|  \\                |  \\ |  \\               |        \\                       |  \\          " << std::endl;
     std::cout << "| $$       ______  _| $$_| $$ _______        \\$$$$$$$$______   ______    ____| $$  ______  " << std::endl;
@@ -201,12 +228,12 @@ void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "| $$_____| $$$$$$$$ | $$|  \\ _\\$$$$$$\\         | $$ | $$     |  $$$$$$$| $$__| $$| $$$$$$$$" << std::endl;
     std::cout << "| $$     \\\\$$    \\  \\$$  $$|       $$          | $$ | $$      \\$$    $$ \\$$    $$ \\$$     \\" << std::endl;
     std::cout << " \\$$$$$$$$ \\$$$$$$$   \\$$$$  \\$$$$$$$           \\$$  \\$        \\$$$$$$$  \\$$$$$$$  \\$$$$$$$" << std::endl;
-    std::cout << "\n\t\t\t\tPowered by SMC Tech Talk Team 2021" << std::endl;
+    std::cout << "\n\t\t\t  Powered by SMC Tech Talk Team 2021" << std::endl;
     std::cout << "" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
 }
-void PrintDay(int day, const std::unique_ptr<Date>& date, Account& account){
-    std::cout << "\n――――――――――――――――――――――――――――――――――――――――| Day " << day << " |――――――――――――――――――――――――――――――――――――――――――\n" << std::endl;
+void PrintDay(int game_day, const std::unique_ptr<Date>& date, Account& account){
+    std::cout << "\n――――――――――――――――――――――――――――――――――――――――| Day " << game_day << " |――――――――――――――――――――――――――――――――――――――――――\n" << std::endl;
     std::cout << "\t\t\t  Current Game Time: " << *date << std::endl;
     // add day(Monday etc)
     // std::cout << "\nBalance: $" << account.get_balance() << std::endl;
@@ -219,6 +246,7 @@ void PrintTradeMenu(const std::unique_ptr<Date>& date){
     std::cout << " 3. Sell Stocks" << endl;
     std::cout << " 4. Check Portfolio" << endl;
     std::cout << " 5. Check Bank Account" << endl;
+    std::cout << " 6. Quit the Game" << endl;
     std::cout << "=============================" << std::endl;
     std::cout << "\n"<< std::endl;
 }
@@ -273,4 +301,22 @@ void NoPassTime(const std::unique_ptr<Date>& game_time){
     std::cin >> PAUSE;
     Date::AddGameTime(*(game_time));
     std::cout << "No time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
+}
+
+
+void DeveloperCredits(){
+    std::cout << "\n\t\t\t********************************************\n" << std::endl;
+    std::cout << "\t\t\t\t\tDeveloped By\n" << std::endl;
+    std::cout << "███████╗███╗   ███╗ ██████╗    ████████╗███████╗ ██████╗██╗  ██╗    ████████╗ █████╗ ██╗     ██╗  ██╗"<< std::endl;
+    std::cout << "██╔════╝████╗ ████║██╔════╝    ╚══██╔══╝██╔════╝██╔════╝██║  ██║    ╚══██╔══╝██╔══██╗██║     ██║ ██╔╝"<< std::endl;
+    std::cout << "███████╗██╔████╔██║██║            ██║   █████╗  ██║     ███████║       ██║   ███████║██║     █████╔╝ "<< std::endl;
+    std::cout << "╚════██║██║╚██╔╝██║██║            ██║   ██╔══╝  ██║     ██╔══██║       ██║   ██╔══██║██║     ██╔═██╗ "<< std::endl;
+    std::cout << "███████║██║ ╚═╝ ██║╚██████╗       ██║   ███████╗╚██████╗██║  ██║       ██║   ██║  ██║███████╗██║  ██╗"<< std::endl;
+    std::cout << "╚══════╝╚═╝     ╚═╝ ╚═════╝       ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═╝       ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝"<< std::endl;
+    std::cout << "\n\n\t\t\t   Programmers\t\t\tPortfolio\n" << std::endl;
+    std::cout << "\t\t\tBen Kweon\t\t default-ben.tistory.com" << std::endl;
+    std::cout << "\t\t\tKatsuya Wakabayashi\t\tkatsuya.me" << std::endl;        
+    std::cout << "\t\t\tJongoo Park " << std::endl;                                               
+    std::cout << "\n\n\t\t\tThank You for Playing! We Hope You Enjoyed!\n\n" << std::endl;
+    std::cout << "\t\t\t********************************************" << std::endl;
 }

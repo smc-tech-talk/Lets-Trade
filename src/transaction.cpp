@@ -53,10 +53,15 @@ void Date::AddDay(){
 };
 void Date::AddHour(){ // 9am to 3pm
     this->hour += 1;
-    if(this->hour >= 15){
-        this->AddDay();
-        this->hour = 9;
-    }
+    // if(this->hour >= 15){
+    //     this->AddDay();
+    //     this->hour = 9;
+    // }
+};
+
+void Date::InitializeDay(){
+    this->AddDay();
+    this->hour = 9;
 };
 void Date::AddGameTime(Date& gameDate){ // static
     gameDate.AddHour();
