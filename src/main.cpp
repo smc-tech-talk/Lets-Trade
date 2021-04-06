@@ -125,7 +125,7 @@ int main(){
                 if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
                     isTrade = false;
 
-                // std::cout << "Time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
+                std::cout << "Time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
             }
             isDay = false;
         }
@@ -168,7 +168,7 @@ void UpdateStockPrice(const vector<std::unique_ptr<Stock>>& stocks){
     for(auto& s : stocks){
         s.get()->UpdateStockPrice(GetRandomPrice(s.get()->GetCurrentPrice()));
     }
-    std::cout << "Ctock Price Updated" << std::endl;
+    std::cout << "Stock Price Updated" << std::endl;
 }
 
 template <typename T>
@@ -232,7 +232,7 @@ void PrintPortfolio(Account& account, Player& player){
     std::cout << "\n\t\t----------------------------------------------------------" << std::endl;
     std::cout << "\t\t\t   Symbol" << "\t\t" << "Position" << std::endl;
     for(auto& s : player.GetPortfolio().GetShares()){
-        std::cout << "\t\t\t   " << s.GetStock().GetSymbol() << "\t\t\t   " << s.GetPosition() << std::endl;
+        std::cout << "\t\t\t   " << s.GetStockPtr()->GetSymbol() << "\t\t\t   " << s.GetPosition() << std::endl;
     }
     std::cout << "\t\t==========================================================\n" << std::endl;
 }
