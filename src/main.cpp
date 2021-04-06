@@ -131,10 +131,11 @@ int main(){
             // if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
             //     isTrade = false;
 
+            // day end condition
             if(game_time->GetHour() >= 15){
-                std::cout << "Day is over" << std::endl;
-                game_time->InitializeDay();
                 game_day++;
+                std::cout << "Day is over. Starting Day " << game_day << std::endl;
+                game_time->InitializeDay();
                 isDay = false;
             }
         }// end of isDay

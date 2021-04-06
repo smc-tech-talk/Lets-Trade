@@ -60,7 +60,6 @@ void Date::AddHour(){ // 9am to 3pm
 };
 
 void Date::InitializeDay(){
-    std::cout << "Starting Day " << day << std::endl;
     this->AddDay();
     this->hour = 9;
 };
