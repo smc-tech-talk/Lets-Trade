@@ -57,6 +57,7 @@ int main(){
     account->add_balance(0);
 
     PrintStart(game_time);
+    DeveloperCredits();
 
     while(isPlaying){
         isDay = true;
@@ -215,7 +216,7 @@ void DisplayMessage(const std::string msg){
 void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "\n" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
-    std::cout << "\t\t\t\t\tWelcome to" << std::endl;
+    std::cout << "\t\t\t\t\tWelcome to\n" << std::endl;
     std::cout << " __                  __   __                 ________                         __           " << std::endl;
     std::cout << "|  \\                |  \\ |  \\               |        \\                       |  \\          " << std::endl;
     std::cout << "| $$       ______  _| $$_| $$ _______        \\$$$$$$$$______   ______    ____| $$  ______  " << std::endl;
@@ -225,7 +226,7 @@ void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "| $$_____| $$$$$$$$ | $$|  \\ _\\$$$$$$\\         | $$ | $$     |  $$$$$$$| $$__| $$| $$$$$$$$" << std::endl;
     std::cout << "| $$     \\\\$$    \\  \\$$  $$|       $$          | $$ | $$      \\$$    $$ \\$$    $$ \\$$     \\" << std::endl;
     std::cout << " \\$$$$$$$$ \\$$$$$$$   \\$$$$  \\$$$$$$$           \\$$  \\$        \\$$$$$$$  \\$$$$$$$  \\$$$$$$$" << std::endl;
-    std::cout << "\n\t\t\t\tPowered by SMC Tech Talk Team 2021" << std::endl;
+    std::cout << "\n\t\t\t  Powered by SMC Tech Talk Team 2021" << std::endl;
     std::cout << "" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
 }
@@ -302,5 +303,18 @@ void NoPassTime(const std::unique_ptr<Date>& game_time){
 
 
 void DeveloperCredits(){
-
+    std::cout << "\n\t\t\t********************************************\n" << std::endl;
+    std::cout << "\t\t\t\t\tDeveloped By\n" << std::endl;
+    std::cout << "███████╗███╗   ███╗ ██████╗    ████████╗███████╗ ██████╗██╗  ██╗    ████████╗ █████╗ ██╗     ██╗  ██╗"<< std::endl;
+    std::cout << "██╔════╝████╗ ████║██╔════╝    ╚══██╔══╝██╔════╝██╔════╝██║  ██║    ╚══██╔══╝██╔══██╗██║     ██║ ██╔╝"<< std::endl;
+    std::cout << "███████╗██╔████╔██║██║            ██║   █████╗  ██║     ███████║       ██║   ███████║██║     █████╔╝ "<< std::endl;
+    std::cout << "╚════██║██║╚██╔╝██║██║            ██║   ██╔══╝  ██║     ██╔══██║       ██║   ██╔══██║██║     ██╔═██╗ "<< std::endl;
+    std::cout << "███████║██║ ╚═╝ ██║╚██████╗       ██║   ███████╗╚██████╗██║  ██║       ██║   ██║  ██║███████╗██║  ██╗"<< std::endl;
+    std::cout << "╚══════╝╚═╝     ╚═╝ ╚═════╝       ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═╝       ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝"<< std::endl;
+    std::cout << "\n\n\t\t\t   Programmers\t\t      Portfolio\n" << std::endl;
+    std::cout << "\t\t\tBen Kweon\t\t default-ben.tistory.com" << std::endl;
+    std::cout << "\t\t\tKatsuya Wakabayashi\t\t katsuya.me" << std::endl;        
+    std::cout << "\t\t\tJongoo Park " << std::endl;                                               
+    std::cout << "\n\n\t\t\tThank You for Playing! We Hope You Enjoyed!\n\n" << std::endl;
+    std::cout << "\t\t\t********************************************" << std::endl;
 }
