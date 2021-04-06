@@ -57,6 +57,8 @@ int main(){
     account->add_balance(0);
 
     PrintStart(game_time);
+
+    std::cout << "Demo credits" << std::endl;
     DeveloperCredits();
 
     while(isPlaying){
@@ -311,9 +313,9 @@ void DeveloperCredits(){
     std::cout << "╚════██║██║╚██╔╝██║██║            ██║   ██╔══╝  ██║     ██╔══██║       ██║   ██╔══██║██║     ██╔═██╗ "<< std::endl;
     std::cout << "███████║██║ ╚═╝ ██║╚██████╗       ██║   ███████╗╚██████╗██║  ██║       ██║   ██║  ██║███████╗██║  ██╗"<< std::endl;
     std::cout << "╚══════╝╚═╝     ╚═╝ ╚═════╝       ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═╝       ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝"<< std::endl;
-    std::cout << "\n\n\t\t\t   Programmers\t\t      Portfolio\n" << std::endl;
+    std::cout << "\n\n\t\t\t   Programmers\t\t\tPortfolio\n" << std::endl;
     std::cout << "\t\t\tBen Kweon\t\t default-ben.tistory.com" << std::endl;
-    std::cout << "\t\t\tKatsuya Wakabayashi\t\t katsuya.me" << std::endl;        
+    std::cout << "\t\t\tKatsuya Wakabayashi\t\tkatsuya.me" << std::endl;        
     std::cout << "\t\t\tJongoo Park " << std::endl;                                               
     std::cout << "\n\n\t\t\tThank You for Playing! We Hope You Enjoyed!\n\n" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
