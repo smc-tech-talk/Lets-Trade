@@ -78,7 +78,7 @@ int main(){
                             std::cout << i << ". " << s.get()->GetSymbol() << std::endl;
 
                         // will be rewritten as PrintStockLists(stocks);
-                        PassTime(game_time);
+                        // PassTime(game_time);
                         break;
                     }
                     case 2:{    // 2. Buy Stocks
@@ -95,19 +95,19 @@ int main(){
                         GetUserInput(stockIndex, "Stock");
                         GetUserInput(quantity, "Quantity");
                         portfolio->SellShare(stocks.at(stockIndex).get(), quantity);
-                        PassTime(game_time);
+                        // PassTime(game_time);
                         break;
                     }
                     case 4:{    // 4. Print portfolio
                         // ***segmentation error***
                         PrintPortfolio(*account, *player);
-                        NoPassTime(game_time);
+                        // NoPassTime(game_time);
                         break;
                     }
                     case 5:{    // 5. Check Bank Account
 
                         account->info_Account();
-                        NoPassTime(game_time);
+                        // NoPassTime(game_time);
                         break;
 
                     case 6:{    // 6. Quit the Game
@@ -122,14 +122,23 @@ int main(){
                 }
                 if(userInput == 2 || userInput == 3)
                 {
-                    Date::AddGameTime(*(game_time));
+                    // Date::AddGameTime(*(game_time));
+                    PassTime(game_time);
                     UpdateStockPrice(stocks);
                 }
-                std::cout << "Current Hour: "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
-                if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
-                    isTrade = false;
+                else{
+                    NoPassTime(game_time);
+                }
 
-                std::cout << "Time passed! Current time is "<< game_time->GetHour() << ":00 " << ((game_time->GetHour() < 12) ? "AM" : "PM") << std::endl;
+
+                // if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
+                //     isTrade = false;
+                if(game_time->GetHour() >= 15){
+                    isTrade = false;
+                    game_time->AddDay();
+                }
+                    
+
             }
             isDay = false;
         }
