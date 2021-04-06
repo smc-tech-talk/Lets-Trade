@@ -109,7 +109,8 @@ int main(){
                     break;
 
                 case 6:{    // 6. Quit the Game
-                    // GameOver();
+                    std::cout << "Quitting the game...";
+                    isPlaying = false;
                 }
 
                 default:{
@@ -136,19 +137,20 @@ int main(){
                 
                 std::cout << "Day " << game_day << "is over. ";
                 game_day++;
-                std::cout << "Starting Day " << game_day << "." << std::endl;
+                std::cout << "Starting Day " << game_day << "!" << std::endl;
                 game_time->InitializeDay();
                 isDay = false;
             }
         }// end of isDay
 
+        // game end condition
         if(game_day > 7){
-            std::cout << "Game is over";
+            std::cout << "Week is over!";
             isPlaying = false;
         }
         
         
-    }
+    }// end of isPlaying
 
     delete portfolio;
     portfolio = NULL;
