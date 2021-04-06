@@ -133,8 +133,10 @@ int main(){
 
             // day end condition
             if(game_time->GetHour() >= 15){
+                
+                std::cout << "Day " << game_day << "is over. ";
                 game_day++;
-                std::cout << "Day is over. Starting Day " << game_day << std::endl;
+                std::cout << "Starting Day " << game_day << "." << std::endl;
                 game_time->InitializeDay();
                 isDay = false;
             }
