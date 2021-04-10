@@ -9,7 +9,7 @@
 
 class Share {
 public:
-    Share();
+    Share() = default;
     Share(Stock*, int);
 
     // Methods

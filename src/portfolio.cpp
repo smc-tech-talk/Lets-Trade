@@ -3,7 +3,7 @@
 /* Portfolio */
 Portfolio::Portfolio(){};
 
-Portfolio::Portfolio(const vector<std::unique_ptr<Stock>>& stocks){
+Portfolio::Portfolio(const vector<std::shared_ptr<Stock>>& stocks){
     //InitializeEmptyShares(stocks);
 };
 void Portfolio::BuyShare(Stock* stock, int a){
@@ -16,11 +16,11 @@ void Portfolio::SellShare(Stock* stock, int a){ // In progress
 };
 
 // Methods
-void Portfolio::InitializeEmptyShares(const vector<std::unique_ptr<Stock>>& stocks){
+void Portfolio::InitializeEmptyShares(const vector<std::shared_ptr<Stock>>& stocks){
     try{
-        for(auto& s : stocks){
-            Share share = Share(s.get(), 0);
-            this->shares.push_back(share);
+        for(const auto& s : stocks){
+            Stock* stock = s.get();
+            this->shares.push_back({ stock,0 });
         }
     } catch(const char* errMessage){
         exit(1);

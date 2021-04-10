@@ -10,7 +10,7 @@
 
 template<typename T>
 void GetUserInput(T &arg, const std::string msg);
-vector< std::unique_ptr<Stock> > CreateStocks(int howMany);  // Should return vecotr<Stock*> later
+vector< std::shared_ptr<Stock> > CreateStocks(int howMany);  // Should return vecotr<Stock*> later
 int main(){
 
     /* Initializing Data */
@@ -20,7 +20,7 @@ int main(){
     Player* player;
     string name;
     int age;
-    vector<std::unique_ptr<Stock>> stocks = CreateStocks(15);
+    vector<std::shared_ptr<Stock>> stocks = CreateStocks(15);
     Portfolio* portfolio = new Portfolio(stocks);
 
     /* Create Stocks */
@@ -76,9 +76,9 @@ int main(){
     return 0;
 }
 
-vector<std::unique_ptr<Stock>> CreateStocks(int howMany){
+vector<std::shared_ptr<Stock>> CreateStocks(int howMany){
     int count;
-    vector<std::unique_ptr<Stock>> stocks;
+    vector<std::shared_ptr<Stock>> stocks;
     auto e = std::make_unique<CSVExtractor>("./companies.csv");
     auto r = std::make_unique<RandomNumberGenerator>(1, 400, howMany);
     auto data = e->GetResult();

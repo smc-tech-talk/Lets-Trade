@@ -1,6 +1,5 @@
 #include "share.hpp"
 
-Share::Share(){};
 Share::Share(Stock* s, int a)
     :stock(s),
     position(a){};
