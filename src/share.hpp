@@ -20,9 +20,14 @@ public:
     Stock GetStock();
     Stock* GetStockPtr();
     int GetPosition();
+    double GetValue();
+    double GetPercentage();
+    double GetPrevPrice();
+    double GetCurrentPrice();
     std::vector<Transaction> GetTransactionHistory();
 
     // Setter
+    void RenewValue();
     void SetValue(double);
 
 private:

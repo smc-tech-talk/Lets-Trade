@@ -3,16 +3,17 @@
 /* Portfolio */
 Portfolio::Portfolio(){};
 
+
 Portfolio::Portfolio(const vector<std::shared_ptr<Stock>>& stocks){
-    //InitializeEmptyShares(stocks);
+    InitializeEmptyShares(stocks);
 };
 void Portfolio::BuyShare(Stock* stock, int a){
-    Share s = GetShareByStock(stock);
-    s.IncreaseAmount(a);
+    Share* s = GetShareByStock(stock);
+    s->IncreaseAmount(a);
 };
 void Portfolio::SellShare(Stock* stock, int a){ // In progress
-    Share s = GetShareByStock(stock);
-    s.DecreaseAmount(a);
+    Share* s = GetShareByStock(stock);
+    s->DecreaseAmount(a);
 };
 
 // Methods
@@ -23,6 +24,7 @@ void Portfolio::InitializeEmptyShares(const vector<std::shared_ptr<Stock>>& stoc
             this->shares.push_back({ stock,0 });
         }
     } catch(const char* errMessage){
+        std::cout << errMessage << std::endl;
         exit(1);
     }
 };
@@ -30,25 +32,27 @@ void Portfolio::InitializeEmptyShares(const vector<std::shared_ptr<Stock>>& stoc
 // Getter
 std::vector<Share> Portfolio::GetShares()
     { return this->shares; };
-Share Portfolio::GetShareByIndex(int index)
+Share* Portfolio::GetShareByIndex(int index)
 {
-    Share s;
+    Share* s;
     try {
-        s = ( this->shares ).at(index);
+        s = &( (this->shares).at(index) );
         throw "Out of index error";
     } catch(const char* errMessage){
         cout << "Portfolio::Error::" << errMessage << endl;
     }
     return s;
 };
-Share Portfolio::GetShareByStock(Stock* stock)
+Share* Portfolio::GetShareByStock(Stock* stock)
 {
-    Share share;
+    Share* share; //temp
     try {
         for(auto& s : this->shares){
             // Decide which to use. vector.find() or just loop
-            if( stock == s.GetStockPtr() )
-                share = s;
+            if( stock == s.GetStockPtr() ){
+                share = &s;
+                break;
+            }
         }
     } catch(const char* errMessage){
         cout << "Portfolio::Error::" << errMessage << endl;

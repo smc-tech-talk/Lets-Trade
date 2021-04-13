@@ -14,8 +14,8 @@ public:
 
     // Getter
     std::vector<Share> GetShares();
-    Share GetShareByIndex(int);
-    Share GetShareByStock(Stock*);
+    Share* GetShareByIndex(int);
+    Share* GetShareByStock(Stock*);
 
     // Methods
     void InitializeEmptyShares(const vector<std::shared_ptr<Stock>>&);
