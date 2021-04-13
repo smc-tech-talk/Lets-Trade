@@ -10,7 +10,7 @@ class Portfolio {
 public:
     // Constructors
     Portfolio();
-    Portfolio(const vector<std::unique_ptr<Stock>>&);
+    Portfolio(const vector<std::shared_ptr<Stock>>&);
 
     // Getter
     std::vector<Share> GetShares();
@@ -18,7 +18,7 @@ public:
     Share* GetShareByStock(Stock*);
 
     // Methods
-    void InitializeEmptyShares(const vector<std::unique_ptr<Stock>>&);
+    void InitializeEmptyShares(const vector<std::shared_ptr<Stock>>&);
     void BuyShare(Stock*, int);
     void SellShare(Stock*, int);
 private:

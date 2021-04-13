@@ -10,7 +10,8 @@
 void DisplayMessage(const std::string msg);
 template<typename T>
 void GetUserInput(T &arg, const std::string msg);
-vector< std::unique_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]); // Should return vecotr<Stock*> later
+
+vector< std::shared_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]);  // Should return vecotr<Stock*> later
 void InitializeStockPrice(double stockPrice[], const int quantity);
 double GetRandomPrice(int rand);
 double GetRandomPrice(double price);
@@ -40,12 +41,16 @@ int main(){
 
     string name;
     int age;
+
+    vector<std::shared_ptr<Stock>> stocks = CreateStocks(15);
+
     auto official_date = std::make_unique<Date>();
     InitializeStockPrice(stockPrice, STOCK_QUANTITY);
     auto stocks = CreateStocks(STOCK_QUANTITY, stockPrice);
 
     Player* player;
     Account* account;
+
     Portfolio* portfolio = new Portfolio(stocks);
 
     DisplayMessage("Welcome, Enter Player Info to Start");
@@ -154,9 +159,11 @@ int main(){
     return 0;
 }
 
-vector<std::unique_ptr<Stock>> CreateStocks(int howMany, double stockPrice[]){
+
+vector<std::shared_ptr<Stock>> CreateStocks(int howMany){
+
     int count;
-    vector<std::unique_ptr<Stock>> stocks;
+    vector<std::shared_ptr<Stock>> stocks;
     auto e = std::make_unique<CSVExtractor>("./companies.csv");
     auto r = std::make_unique<RandomNumberGenerator>(1, 400, howMany);
     auto data = e->GetResult();
