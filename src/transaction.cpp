@@ -46,17 +46,22 @@ void Date::AddMonth(){
 void Date::AddDay(){
     DAYS_OF_MONTH dom = this->GetMaxDate();
     this->day += 1;
-    if (this->day >= dom){
+    if (this->day % dom == 1){
         this->AddMonth();
-        this->day = 0;
+        this->day = 1;
     }
 };
 void Date::AddHour(){ // 9am to 3pm
     this->hour += 1;
-    if(this->hour >= 15){
-        this->AddDay();
-        this->hour = 9;
-    }
+    // if(this->hour >= 15){
+    //     this->AddDay();
+    //     this->hour = 9;
+    // }
+};
+
+void Date::InitializeDay(){
+    this->AddDay();
+    this->hour = 9;
 };
 void Date::AddGameTime(Date& gameDate){ // static
     gameDate.AddHour();
@@ -126,13 +131,11 @@ void Transaction::AddTransaction(vector<Transaction>&v, Transaction& t){
     v.push_back(t);
 };
 
-// In progress
-string GetMonth()
-    { return "MONTH"; };
-
 // __str__
+// Day? Monday Tuesday etc ...
+
 ostream& operator<<(ostream& strm, Date& d) {
-    return strm << "\n\nYear:\t\t\t" << d.GetYear() << "\n\nMonth:\t\t\t" << d.GetMonth() << "\n\nDay:\t\t\t" << d.GetDay() << "\n\nHour:\t\t\t" << d.GetHour() << "\n\n";
+    return strm << d.GetHour() << ":00 / " << d.GetMonth() + 1 <<  " / " << d.GetDay() << " / " << d.GetYear() << "\n";
 };
 ostream& operator<<(ostream& strm, Transaction& t) {
     Date d = t.date;

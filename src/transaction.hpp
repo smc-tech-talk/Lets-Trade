@@ -30,6 +30,7 @@ public:
     void AddMonth(); // Only adding one month is possible
     void AddDay();   // Only adding one day is possible
     void AddHour();  // Only adding one day is possible
+    void InitializeDay();
     static void AddGameTime(Date&);
     DAYS_OF_MONTH GetMaxDate();
 

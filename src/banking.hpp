@@ -9,20 +9,6 @@
 using namespace std;
 
 
-string list_bank[9]{
-	"CIT Bank", "Bank of The West", "WELLS FARGO",
-	"Washington Federal Savings and Loan", "Umpqua Bank",
-	"Golden1 Credit Union", "EASTWEST BANK", "Charles Schwab", "CHASE"
-};
-
-char codebook[] = { 'a','A','b','B','c','C','d','D','e',
-					'E','f','F','g','G','h','H','i','I','j','J','k','K',
-					'l','L','m','M','n','N','o','O','p','P','q','Q','r',
-					'R','s','S','t','T','u','U','v','V','w','W','x','X',
-					'y','Y','z','Z','0','1','2','3','4','5','6','7','8','9',
-					'!','@','#','$','%','&','*' };
-
-
 class Account {
 
 public:
@@ -36,21 +22,28 @@ public:
 	// Account(Player* p, string accountName, Bank* b); => A constructor using 'Bank' class
 	//~Account();
 
-	
+
 	vector <string> log;
 
 
 	void initialize_balance();
+	void bal_change(Transaction t);
 	double get_balance();
+	void set_balance(double balance);
 	void create_account_number();
+	string create_log(Transaction t, Date* d);
 	void print_record();
 	void input_record(Transaction t, Date* d);
 	void info_Account();
-	
+	void add_balance(double balance);
+	double get_previous_balance();
+
+
 
 private:
 	Player* player;
 	string account_number;
 	double balance;
 	string bank_name;
+	std::vector<double> balance_records;
 };
