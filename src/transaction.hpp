@@ -30,7 +30,8 @@ public:
     void AddMonth(); // Only adding one month is possible
     void AddDay();   // Only adding one day is possible
     void AddHour();  // Only adding one day is possible
-    static void AddGameTime(Date*);
+    void InitializeDay();
+    static void AddGameTime(Date&);
     DAYS_OF_MONTH GetMaxDate();
 
     friend std::ostream& operator<<(std::ostream& strm, Date& d);

@@ -42,6 +42,7 @@ public:
     // Methods
     void UpdateChangedPercentage();
     void UpdateStockPrice();
+    void UpdateStockPrice(double newStockPrice);
     int GetRandomNumber(int);
 
 

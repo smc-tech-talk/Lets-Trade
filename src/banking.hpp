@@ -1,19 +1,13 @@
 #pragma once
-#include <cstdlib>
-#include <ctime>
+#include "player.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
-//#include "player.hpp"
+#include <cstdlib>
+#include <ctime>
+#include <stdlib.h>
 using namespace std;
 
-/*
-class Bank {
-	string bankName;
-	string bankBalance;
-
-};
-*/
 
 class Account {
 
@@ -21,35 +15,35 @@ public:
 
 	Account();
 
-	Account(string uname, int index_bankarr);
+	Account(Player* a_player);
 
 	Account(Player* player, string account_number, double balance);
 
 	// Account(Player* p, string accountName, Bank* b); => A constructor using 'Bank' class
 	//~Account();
 
-	double bal_account;
-	string username; // => Should be Player now.
-	string bank_name;
+
 	vector <string> log;
 
-	string time_stamp();
 
-	void record_Account(string rec);
-	void info_Account(Account a);
-	void decreased_bal(double dprice);
-	void increased_bal(double iprice);
-	void transfer_Account(Account toAccount, double tmoney);
+	void initialize_balance();
+	void bal_change(Transaction t);
+	double get_balance();
+	void set_balance(double balance);
+	void create_account_number();
+	string create_log(Transaction t, Date* d);
+	void print_record();
+	void input_record(Transaction t, Date* d);
+	void info_Account();
+	void add_balance(double balance);
+	double get_previous_balance();
+
+
 
 private:
 	Player* player;
 	string account_number;
 	double balance;
-};
-
-
-class Bank_user {
-
-
-
+	string bank_name;
+	std::vector<double> balance_records;
 };
