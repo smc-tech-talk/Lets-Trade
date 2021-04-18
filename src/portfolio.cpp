@@ -1,4 +1,5 @@
 #include "portfolio.hpp"
+#include "banking.hpp"
 
 /* Portfolio */
 Portfolio::Portfolio(){};
@@ -9,11 +10,16 @@ Portfolio::Portfolio(const vector<std::shared_ptr<Stock>>& stocks){
 };
 void Portfolio::BuyShare(Stock* stock, int a){
     Share* s = GetShareByStock(stock);
+    // BankBalance
+    // If user has less than zero amount of balance | cannot afford it, reject it
+    // If user is buying less than equal to zero amount, then reject it.
     s->IncreaseAmount(a);
 };
-void Portfolio::SellShare(Stock* stock, int a){ // In progress
+void Portfolio::SellShare(Stock* stock, int a){
     Share* s = GetShareByStock(stock);
     s->DecreaseAmount(a);
+    // If the position of share is zero, then reject.
+
 };
 
 // Methods

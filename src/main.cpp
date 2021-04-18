@@ -12,20 +12,26 @@ void DisplayMessage(const std::string msg);
 template<typename T>
 void GetUserInput(T &arg, const std::string msg);
 
-vector< std::shared_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]);  // Should return vecotr<Stock*> later
+vector< std::shared_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]);
+//vector< std::unique_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]);
 void InitializeStockPrice(double stockPrice[], const int quantity);
 double GetRandomPrice(int rand);
 double GetRandomPrice(double price);
 void UpdateStockPrice(const vector<std::unique_ptr<Stock>>& stocks);
+void UpdateStockPrice(const vector<std::shared_ptr<Stock>>& stocks);
 void PrintStart(const std::unique_ptr<Date>& date);
+void PrintStart(const std::shared_ptr<Date>& date);
 void PrintDay(int day, const std::unique_ptr<Date>& date, Account& account);
+void PrintDay(int day, const std::shared_ptr<Date>& date, Account& account);
 void PrintTradeMenu(const std::unique_ptr<Date>& date);
+void PrintTradeMenu(const std::shared_ptr<Date>& date);
 void PrintPortfolioDemo();
 void PrintPortfolio(Account& account, Player& player);
 void PrintDayChange(Account& account);
 void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks);
-void PassTime(const std::unique_ptr<Date>& date);
-void NoPassTime(const std::unique_ptr<Date>& date);
+void PrintStockLists(const vector<std::shared_ptr<Stock>>& stocks);
+//void PassTime(const std::unique_ptr<Date>& date);
+//void NoPassTime(const std::unique_ptr<Date>& date);
 void DeveloperCredits();
 
 // main
@@ -37,21 +43,16 @@ int main(){
     srand(time(NULL));
     static int game_day = 1;
     bool isPlaying = true, isDay = true;
-    //isTrade = true;
     auto game_time = std::make_unique<Date>();
 
     string name;
     int age;
 
-    vector<std::shared_ptr<Stock>> stocks = CreateStocks(15);
-
-    auto official_date = std::make_unique<Date>();
     InitializeStockPrice(stockPrice, STOCK_QUANTITY);
     auto stocks = CreateStocks(STOCK_QUANTITY, stockPrice);
 
     Player* player;
     Account* account;
-
     Portfolio* portfolio = new Portfolio(stocks);
 
     DisplayMessage("Welcome, Enter Player Info to Start");
@@ -63,7 +64,7 @@ int main(){
     account->add_balance(0);
 
     PrintStart(game_time);
-
+    UpdateStockPrice(stocks);
 
     while(isPlaying){
         isDay = true;
@@ -87,7 +88,8 @@ int main(){
                     int quantity;
                     GetUserInput(stockIndex, "Stock");
                     GetUserInput(quantity, "Quantity");
-                    portfolio->BuyShare(stocks.at(stockIndex - 1).get(), quantity);
+                    // Validator() => while
+                    portfolio->BuyShare(stocks.at(stockIndex - 1).get(), quantity);\
                     break;
                 }
                 case 3:{    // 3. Sell Stocks
@@ -95,6 +97,7 @@ int main(){
                     int quantity;
                     GetUserInput(stockIndex, "Stock");
                     GetUserInput(quantity, "Quantity");
+                    // Validator()
                     portfolio->SellShare(stocks.at(stockIndex).get(), quantity);
                     // PassTime(game_time);
                     break;
@@ -120,14 +123,13 @@ int main(){
                 }
             } //Swith ends
 
+
+            // If user buy or sell
             if(userInput == 2 || userInput == 3)
             {
                 game_time->AddHour();
                 UpdateStockPrice(stocks);
             }
-
-            // if((game_time->GetHour() == 9) && (userInput == 2 || userInput == 3))
-            //     isTrade = false;
 
             // day end condition
             if(game_time->GetHour() >= 15){
@@ -149,7 +151,6 @@ int main(){
             DeveloperCredits();
         }
 
-
     }// end of isPlaying
 
     delete portfolio;
@@ -158,13 +159,11 @@ int main(){
     return 0;
 }
 
-
-vector<std::shared_ptr<Stock>> CreateStocks(int howMany){
-
+vector<std::shared_ptr<Stock>> CreateStocks(int howMany, double stockPrice[]){
     int count;
     vector<std::shared_ptr<Stock>> stocks;
-    auto e = std::make_unique<CSVExtractor>("./companies.csv");
-    auto r = std::make_unique<RandomNumberGenerator>(1, 400, howMany);
+    auto e = std::make_shared<CSVExtractor>("./companies.csv");
+    auto r = std::make_shared<RandomNumberGenerator>(1, 400, howMany);
     auto data = e->GetResult();
     auto manyIndex = r->GetNumbers();
 
@@ -172,8 +171,8 @@ vector<std::shared_ptr<Stock>> CreateStocks(int howMany){
         count = manyIndex.at(i);
         Company* c = new Company(data.at(count).at(1), data.at(count).at(2)); // This will be handled by ~Stock()
         // Use Stock::Stock(string s, double p, Company* c)
-        auto s = std::make_unique<Stock>(data.at(count).at(0), stockPrice[i], c);
-        stocks.push_back(std::move(s)); // emplace_back() does not work
+        auto s = std::make_shared<Stock>(data.at(count).at(0), stockPrice[i], c);
+        stocks.emplace_back(s);
     }
     return stocks;
 }
@@ -186,8 +185,9 @@ void InitializeStockPrice(double stockPrice[], const int quantity){
     }
 }
 
-void UpdateStockPrice(const vector<std::unique_ptr<Stock>>& stocks){
+void UpdateStockPrice(const vector<std::shared_ptr<Stock>>& stocks){
     for(auto& s : stocks){
+        cout << s.get()->GetCurrentPrice() << endl;
         s.get()->UpdateStockPrice(GetRandomPrice(s.get()->GetCurrentPrice()));
     }
     std::cout << "Stock Price Updated" << std::endl;
@@ -210,7 +210,7 @@ void DisplayMessage(const std::string msg){
 }
 
 /* All Console Printing Functions Here */
-void PrintStart(const std::unique_ptr<Date>& date){
+void PrintStart(const std::shared_ptr<Date>& date){
     std::cout << "\n" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
     std::cout << "\t\t\t\t\tWelcome to\n" << std::endl;
@@ -227,13 +227,11 @@ void PrintStart(const std::unique_ptr<Date>& date){
     std::cout << "" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
 }
-void PrintDay(int game_day, const std::unique_ptr<Date>& date, Account& account){
+void PrintDay(int game_day, const std::shared_ptr<Date>& date, Account& account){
     std::cout << "\n――――――――――――――――――――――――――――――――――――――――| Day " << game_day << " |――――――――――――――――――――――――――――――――――――――――――\n" << std::endl;
     std::cout << "\t\t\t  Current Game Time: " << *date << std::endl;
-    // add day(Monday etc)
-    // std::cout << "\nBalance: $" << account.get_balance() << std::endl;
 }
-void PrintTradeMenu(const std::unique_ptr<Date>& date){
+void PrintTradeMenu(const std::shared_ptr<Date>& date){
     std::cout << "\n==========Main Menu=========== " << endl;
     std::cout << "Current Game Time: " << date->GetHour() << ":00\n" << std::endl;
     std::cout << " 1. Display Stock Lists" << endl;
@@ -247,19 +245,20 @@ void PrintTradeMenu(const std::unique_ptr<Date>& date){
 }
 
 
+
 void PrintPortfolio(Account& account, Player& player){
     std::cout << "\t\t==========================================================" << std::endl;
     std::cout << "\t\t\t   ≣≣≣≣≣≣≣≣≣≣" << player.GetName() << "'s Portfolio:" << "≣≣≣≣≣≣≣≣≣≣" << std::endl;
     std::cout << "\t\t\t   Balance: " << account.get_balance() << " || " << "Day Change: ";
     PrintDayChange(account);
     std::cout << "\n-------------------------------------------------------------------------------------------" << std::endl;
-    std::cout   << std::setfill(' ') << std::setw(20) << "Symbol" << std::setfill(' ') << std::setw(12) << "Position" << std::setfill(' ') 
-                << std::setw(13) << "Price/Share" << std::setfill(' ') << std::setw(12) << "Change(%)" << std::setfill(' ') <<  std::setw(11) << "Previous" 
+    std::cout   << std::setfill(' ') << std::setw(20) << "Symbol" << std::setfill(' ') << std::setw(12) << "Position" << std::setfill(' ')
+                << std::setw(13) << "Price/Share" << std::setfill(' ') << std::setw(12) << "Change(%)" << std::setfill(' ') <<  std::setw(11) << "Previous"
                 << std::setfill(' ') << std::setw(14) << "Current" << std::endl;
     for(auto& s : player.GetPortfolio().GetShares()){
-    std::cout   << std::setfill(' ') << std::setw(20) << s.GetStockPtr()->GetSymbol() << std::setfill(' ') << std::setw(10) << s.GetPosition() 
-                << std::setfill(' ') << setw(10) << "$" << s.GetValue()  << std::setfill(' ') << std::setw(10) << ( (s.GetPercentage() > 0) ? "+" : "") 
-                << s.GetPercentage() << "%"<< std::setfill(' ')  << std::setw(10) << "$" << s.GetPrevPrice() << std::setfill(' ') << std::setw(10) 
+    std::cout   << std::setfill(' ') << std::setw(20) << s.GetStockPtr()->GetSymbol() << std::setfill(' ') << std::setw(10) << s.GetPosition()
+                << std::setfill(' ') << setw(10) << "$" << s.GetValue()  << std::setfill(' ') << std::setw(10) << ( (s.GetPercentage() > 0) ? "+" : "")
+                << s.GetPercentage() << "%"<< std::setfill(' ')  << std::setw(10) << "$" << s.GetPrevPrice() << std::setfill(' ') << std::setw(10)
                 << "$" << s.GetCurrentPrice() << std::endl;
     }
     std::cout << "--------------------------------------------------------------------------------------------\n" << std::endl;
@@ -277,7 +276,7 @@ void PrintDayChange(Account& account){
         std::cout << "(-%)" << std::endl;*/
 }
 
-void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks){
+void PrintStockLists(const vector<std::shared_ptr<Stock>>& stocks){
     int i = 1;
     std::cout << "Which stock would you like to purchase?\n" << std::endl;
     for(auto& s: stocks){

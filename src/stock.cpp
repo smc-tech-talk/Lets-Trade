@@ -1,5 +1,6 @@
 /* Include */
 #include "stock.hpp"
+
 //time_t NOW = time(0); // current system date/time
 double INITIAL_STOCK_PRICE = -10000;
 
@@ -54,10 +55,7 @@ void Stock::SetStockIssuer(Company* c)
 
 // Methods
 void Stock::UpdateChangedPercentage(){
-    if(this->stockPrevPrice == INITIAL_STOCK_PRICE)
-        this->stockChangedPercentage = 100;
-    else
-         this->stockChangedPercentage = ( (this->stockCurrentPrice  - this->stockPrevPrice) / this->stockPrevPrice) *100;
+    this->stockChangedPercentage = ((this->stockCurrentPrice  - this->stockPrevPrice) / this->stockPrevPrice) * 100;
 };
 void Stock::UpdateStockPrice(){
     double newStockPrice;
