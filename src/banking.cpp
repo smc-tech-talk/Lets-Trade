@@ -67,6 +67,10 @@ void Account::bal_change(Transaction t){
 	}
 }
 
+// void increase_bal
+
+// void decrease_bal
+
 string Account::create_log(Transaction t, Date* d){
 	string tmp = account_number+to_string(d->GetMonth())+":"+to_string(d->GetDay())+":"+to_string(d->GetYear())+",	Description:"+t.GetTransactionType()+", Amount:"+to_string(t.GetAmount())+", current balance:"+ to_string(balance);
 	return tmp;
