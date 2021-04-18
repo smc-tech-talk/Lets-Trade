@@ -13,22 +13,16 @@ template<typename T>
 void GetUserInput(T &arg, const std::string msg);
 
 vector< std::shared_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]);
-//vector< std::unique_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]);
 void InitializeStockPrice(double stockPrice[], const int quantity);
 double GetRandomPrice(int rand);
 double GetRandomPrice(double price);
-void UpdateStockPrice(const vector<std::unique_ptr<Stock>>& stocks);
 void UpdateStockPrice(const vector<std::shared_ptr<Stock>>& stocks);
-void PrintStart(const std::unique_ptr<Date>& date);
 void PrintStart(const std::shared_ptr<Date>& date);
-void PrintDay(int day, const std::unique_ptr<Date>& date, Account& account);
 void PrintDay(int day, const std::shared_ptr<Date>& date, Account& account);
-void PrintTradeMenu(const std::unique_ptr<Date>& date);
 void PrintTradeMenu(const std::shared_ptr<Date>& date);
 void PrintPortfolioDemo();
 void PrintPortfolio(Account& account, Player& player);
 void PrintDayChange(Account& account);
-void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks);
 void PrintStockLists(const vector<std::shared_ptr<Stock>>& stocks);
 //void PassTime(const std::unique_ptr<Date>& date);
 //void NoPassTime(const std::unique_ptr<Date>& date);
@@ -43,7 +37,7 @@ int main(){
     srand(time(NULL));
     static int game_day = 1;
     bool isPlaying = true, isDay = true;
-    auto game_time = std::make_unique<Date>();
+    auto game_time = std::make_shared<Date>();
 
     string name;
     int age;
