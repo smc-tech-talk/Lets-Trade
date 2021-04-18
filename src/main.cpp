@@ -64,7 +64,7 @@ int main(){
     account->add_balance(0);
 
     PrintStart(game_time);
-
+    UpdateStockPrice(stocks);
 
     while(isPlaying){
         isDay = true;
@@ -213,6 +213,7 @@ void UpdateStockPrice(const vector<std::unique_ptr<Stock>>& stocks){
 
 void UpdateStockPrice(const vector<std::shared_ptr<Stock>>& stocks){
     for(auto& s : stocks){
+        cout << s.get()->GetCurrentPrice() << endl;
         s.get()->UpdateStockPrice(GetRandomPrice(s.get()->GetCurrentPrice()));
     }
     std::cout << "Stock Price Updated" << std::endl;
