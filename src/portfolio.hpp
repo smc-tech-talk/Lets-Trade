@@ -23,6 +23,7 @@ public:
     void SellShare(Stock*, int);
 private:
     std::vector<Share> shares;
+    
 };
 
 #endif

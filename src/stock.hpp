@@ -1,5 +1,6 @@
 #pragma once
 #include <time.h>
+#include <math.h>
 #include <ctime>
 #include <vector>
 #include "transaction.hpp" // has public header
