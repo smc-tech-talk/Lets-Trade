@@ -159,25 +159,6 @@ int main(){
     return 0;
 }
 
-/*
-vector<std::unique_ptr<Stock>> CreateStocks(int howMany, double stockPrice[]){
-    int count;
-    vector<std::unique_ptr<Stock>> stocks;
-    auto e = std::make_unique<CSVExtractor>("./companies.csv");
-    auto r = std::make_unique<RandomNumberGenerator>(1, 400, howMany);
-    auto data = e->GetResult();
-    auto manyIndex = r->GetNumbers();
-
-    for(int i = 0; i < manyIndex.size(); i++){
-        count = manyIndex.at(i);
-        Company* c = new Company(data.at(count).at(1), data.at(count).at(2)); // This will be handled by ~Stock()
-        // Use Stock::Stock(string s, double p, Company* c)
-        auto s = std::make_unique<Stock>(data.at(count).at(0), stockPrice[i], c);
-        stocks.push_back(std::move(s)); // emplace_back() does not work
-    }
-    return stocks;
-} */
-
 vector<std::shared_ptr<Stock>> CreateStocks(int howMany, double stockPrice[]){
     int count;
     vector<std::shared_ptr<Stock>> stocks;
@@ -202,13 +183,6 @@ void InitializeStockPrice(double stockPrice[], const int quantity){
         stockPrice[i] = GetRandomPrice(100);
         //std::cout << "INITIALIZED" << stockPrice[i] << std::endl;
     }
-}
-
-void UpdateStockPrice(const vector<std::unique_ptr<Stock>>& stocks){
-    for(auto& s : stocks){
-        s.get()->UpdateStockPrice(GetRandomPrice(s.get()->GetCurrentPrice()));
-    }
-    std::cout << "Stock Price Updated" << std::endl;
 }
 
 void UpdateStockPrice(const vector<std::shared_ptr<Stock>>& stocks){
@@ -236,23 +210,6 @@ void DisplayMessage(const std::string msg){
 }
 
 /* All Console Printing Functions Here */
-void PrintStart(const std::unique_ptr<Date>& date){
-    std::cout << "\n" << std::endl;
-    std::cout << "\t\t\t********************************************" << std::endl;
-    std::cout << "\t\t\t\t\tWelcome to\n" << std::endl;
-    std::cout << " __                  __   __                 ________                         __           " << std::endl;
-    std::cout << "|  \\                |  \\ |  \\               |        \\                       |  \\          " << std::endl;
-    std::cout << "| $$       ______  _| $$_| $$ _______        \\$$$$$$$$______   ______    ____| $$  ______  " << std::endl;
-    std::cout << "| $$      /      \\|   $$ \\$ /       \\         | $$  /      \\ |      \\  /      $$ /      \\ " << std::endl;
-    std::cout << "| $$     |  $$$$$$\\\\$$$$$$  |  $$$$$$$         | $$ |  $$$$$$\\ \\$$$$$$\\|  $$$$$$$|  $$$$$$\\" << std::endl;
-    std::cout << "| $$     | $$    $$ | $$ __  \\$$    \\          | $$ | $$   \\$$/      $$| $$  | $$| $$    $$" << std::endl;
-    std::cout << "| $$_____| $$$$$$$$ | $$|  \\ _\\$$$$$$\\         | $$ | $$     |  $$$$$$$| $$__| $$| $$$$$$$$" << std::endl;
-    std::cout << "| $$     \\\\$$    \\  \\$$  $$|       $$          | $$ | $$      \\$$    $$ \\$$    $$ \\$$     \\" << std::endl;
-    std::cout << " \\$$$$$$$$ \\$$$$$$$   \\$$$$  \\$$$$$$$           \\$$  \\$        \\$$$$$$$  \\$$$$$$$  \\$$$$$$$" << std::endl;
-    std::cout << "\n\t\t\t  Powered by SMC Tech Talk Team 2021" << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "\t\t\t********************************************" << std::endl;
-}
 void PrintStart(const std::shared_ptr<Date>& date){
     std::cout << "\n" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
@@ -270,27 +227,9 @@ void PrintStart(const std::shared_ptr<Date>& date){
     std::cout << "" << std::endl;
     std::cout << "\t\t\t********************************************" << std::endl;
 }
-void PrintDay(int game_day, const std::unique_ptr<Date>& date, Account& account){
-    std::cout << "\n――――――――――――――――――――――――――――――――――――――――| Day " << game_day << " |――――――――――――――――――――――――――――――――――――――――――\n" << std::endl;
-    std::cout << "\t\t\t  Current Game Time: " << *date << std::endl;
-    // add day(Monday etc)
-    // std::cout << "\nBalance: $" << account.get_balance() << std::endl;
-}
 void PrintDay(int game_day, const std::shared_ptr<Date>& date, Account& account){
     std::cout << "\n――――――――――――――――――――――――――――――――――――――――| Day " << game_day << " |――――――――――――――――――――――――――――――――――――――――――\n" << std::endl;
     std::cout << "\t\t\t  Current Game Time: " << *date << std::endl;
-}
-void PrintTradeMenu(const std::unique_ptr<Date>& date){
-    std::cout << "\n==========Main Menu=========== " << endl;
-    std::cout << "Current Game Time: " << date->GetHour() << ":00\n" << std::endl;
-    std::cout << " 1. Display Stock Lists" << endl;
-    std::cout << " 2. Buy Stocks" << endl;
-    std::cout << " 3. Sell Stocks" << endl;
-    std::cout << " 4. Check Portfolio" << endl;
-    std::cout << " 5. Check Bank Account" << endl;
-    std::cout << " 6. Quit the Game" << endl;
-    std::cout << "=============================" << std::endl;
-    std::cout << "\n"<< std::endl;
 }
 void PrintTradeMenu(const std::shared_ptr<Date>& date){
     std::cout << "\n==========Main Menu=========== " << endl;
@@ -337,14 +276,6 @@ void PrintDayChange(Account& account){
         std::cout << "(-%)" << std::endl;*/
 }
 
-void PrintStockLists(const vector<std::unique_ptr<Stock>>& stocks){
-    int i = 1;
-    std::cout << "Which stock would you like to purchase?\n" << std::endl;
-    for(auto& s: stocks){
-        std::cout << "\t" << i << ". " << s.get()->GetSymbol() << ":" << " $" << s.get()->GetCurrentPrice() << std::endl;
-        i++;
-    }
-}
 void PrintStockLists(const vector<std::shared_ptr<Stock>>& stocks){
     int i = 1;
     std::cout << "Which stock would you like to purchase?\n" << std::endl;
