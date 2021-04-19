@@ -25,27 +25,8 @@ void PrintPortfolio(Account &account, Player &player);
 void PrintDayChange(Account &account);
 void PrintStockLists(const vector<std::shared_ptr<Stock>> &stocks);
 vector<std::shared_ptr<Stock>> CreateStocks(int howMany, double stockPrice[]);
-//vector< std::unique_ptr<Stock> > CreateStocks(int howMany, double stockPrice[]);
-void InitializeStockPrice(double stockPrice[], const int quantity);
-double GetRandomPrice(int rand);
-double GetRandomPrice(double price);
-void UpdateStockPrice(const vector<std::unique_ptr<Stock>> &stocks);
-void UpdateStockPrice(const vector<std::shared_ptr<Stock>> &stocks);
-void PrintStart(const std::unique_ptr<Date> &date);
-void PrintStart(const std::shared_ptr<Date> &date);
-void PrintDay(int day, const std::unique_ptr<Date> &date, Account &account);
-void PrintDay(int day, const std::shared_ptr<Date> &date, Account &account);
-void PrintTradeMenu(const std::unique_ptr<Date> &date);
-void PrintTradeMenu(const std::shared_ptr<Date> &date);
-void PrintPortfolioDemo();
-void PrintPortfolio(Account &account, Player &player);
-void PrintDayChange(Account &account);
-void PrintStockLists(const vector<std::unique_ptr<Stock>> &stocks);
 void PrintStockLists(const vector<std::shared_ptr<Stock>> &stocks);
-
-//void PassTime(const std::unique_ptr<Date>& date);
-//void NoPassTime(const std::unique_ptr<Date>& date);
-bool isValidate(const vector<std::shared_ptr<Stock>> &stocks, int stockIndex, int quantity);
+bool isValidate(const vector<std::shared_ptr<Stock>> &stocks, int stockIndex, int quantity, Account &account);
 void DeveloperCredits();
 
 // main
@@ -106,21 +87,30 @@ int main()
             { // 2. Buy Stocks
                 int stockIndex;
                 int quantity;
-                GetUserInput(stockIndex, "Stock");
-                GetUserInput(quantity, "Quantity");
-                // Validator() => while
+
+                // Validator
+                do{
+                    GetUserInput(stockIndex, "Stock");
+                    GetUserInput(quantity, "Quantity");
+                }while(!isValidate(stocks, stockIndex, quantity, *account));
+
                 portfolio->BuyShare(stocks.at(stockIndex - 1).get(), quantity);
+                // => account.decrease_bal(money);
                 break;
             }
             case 3:
             { // 3. Sell Stocks
                 int stockIndex;
                 int quantity;
-                GetUserInput(stockIndex, "Stock");
-                GetUserInput(quantity, "Quantity");
-                // Validator()
-                portfolio->SellShare(stocks.at(stockIndex).get(), quantity);
-                // PassTime(game_time);
+
+                // Validator
+                do{
+                    GetUserInput(stockIndex, "Stock");
+                    GetUserInput(quantity, "Quantity");
+                }while(quantity <= 0);
+
+                portfolio->SellShare(stocks.at(stockIndex - 1).get(), quantity);
+                // => account.increase_bal(money);
                 break;
             }
             case 4:
@@ -362,7 +352,7 @@ bool isValidate(const vector<std::shared_ptr<Stock>> &stocks, int stockIndex, in
     double orderPrice = stockPrice * quantity;
 
     // returns false if cannot afford it
-    if (orderPrice >= account.get_previous_balance())
+    if (orderPrice >= account.get_balance())
         return false;
 
     return true;
